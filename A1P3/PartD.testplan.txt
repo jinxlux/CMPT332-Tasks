@@ -1,0 +1,41 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+	group: 25
+*/
+
+We found that makefile of xv6 make the system run with 3 CPUs. So we divide
+our test into 2 parts:
+1. test with 3 CPUs
+2. test with 1 CPU by altering the makefile document
+
+In test_numprocs.c, we change the value of n to create different 
+processes once each time.
+For example, when n = 5, there should be 5 processes running.
+Thus, we can change the value of n to test our program more times.
+
+For the first part, we test with 3 CPUs. 
+We test with n = 12, 5, 20 separately.
+Start the program by "make qemu, type "test_numprocs" to run the test with n=12;
+When get result, quit, make clean, and we change the n-value in test_numprocs.c,
+repeat above steps.
+When n = 12, 2 processes will stuck in the 2 CPU, so we should only
+have "Have 10 RUNNABLE" printed out
+When n = 5, 2 processes will stuck in the 2 CPU, so we should only
+have "Have 3 RUNNABLE" printed out
+When n = 20, 2 processes will stuck in the 2 CPU, so we should only
+have "Have 18 RUNNABLE" printed out
+
+For the second part, we test with only 1 CPU by change makefile of xv6. 
+We test with n = 12, 5, 20 separately.
+When n = 12, we should have "Have 12 RUNNABLE" printed out
+When n = 5,  we should have "Have 5 RUNNABLE" printed out
+When n = 20, we should have "Have 20 RUNNABLE" printed out
+

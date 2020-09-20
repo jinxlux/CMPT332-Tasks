@@ -1,0 +1,29 @@
+#  NAME: Xudong Li
+#  NSID:xul395
+#  Student Number:11206927
+
+
+# 	NAME:Tong Wang   
+#   NSID: tow087 
+#   Student Number: 11201222
+#   CMPT 332 Term 1 2019
+
+#   group25
+
+PartB bash script is an interactive shell script that executes Parts A.1, A.2,
+A.3 or A.4 (bonus) according to the user's instructions.
+Get the version information as the first command line args partaVersion
+and use that to check which part we need run.
+Also, use "uname -o" to check the OS system.
+For A.1, the opreating system should equal to "Msys"
+For A.2, A.3 A.4 the opreating system should equal to "GNU/Linux"
+Use while loop and readline to keep reading the input arguments line by line
+Also check each line input,The input should be 3 positive integer divided 
+by space and the order is threadNumber deadlineTime sizeNumber. 
+Using command line to get each argument should like that:
+awk '{if ((NF == 3)&&($1~/^[0-9]*$/)){print $1} else{print "NULL"}}'
+Use different way to make sure erery argument is validate.Then 
+run the code using these three arguments.If any input or system are not
+legal input, will print correct error messages.
+Also, this part accept txt file as input file.
+Enter 0 0 0 as input to quit.

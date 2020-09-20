@@ -1,0 +1,47 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+For partE, we first run our shell program. After make, you could enter 
+./partE to run our shell. The current working directory should be displayed,
+and we can continue enter command on our shell. 
+We prepare some typical commands for testing out shell:
+cd ..
+cd file
+cd /usr/bin
+cd ~
+cd fileNotExist
+ls
+ls -al
+ps
+whereis ls
+which ls
+ls file
+ps aux | wc -l
+cat Makefile | wc -l
+ls -l | head -3
+asdea  
+exit
+
+cd and exit commands are for testing our built-in commands.
+For cd, we will gave relative, absolute and error path.
+These commands should give us same result as we do in the bash shell.
+asdea is an arbitrary error command, so we should have the
+error message as we have in the bash shell.
+Other commands, Pipeline should all give us same results 
+as we use them on the bash shell.
+ps and ps aux | wc -l may give us different results from our shell and bash shell 
+because the number of running process changed when we run our program, and
+other new processes may appear during this time
+
+we will test 'exit' function, but we can not paste any result to the result
+file because exit just close the whole terminal.

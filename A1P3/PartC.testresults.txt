@@ -1,0 +1,109 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+	group: 25
+*/
+
+
+
+test ListCreate here
+Test for ListCreate did not report any errors 
+test ListAdd: keep adding item after the end; In this case, current->next == NULL
+extra credit: memory reallocation should report below when adding items
+Space is not enough. double the space
+oldSize: 5
+newSize: 10
+test ListAdd: test size and items in the list after adding items
+test ListAdd: test Successfully, no errors reported
+try to use ListNext to go beyond the end of list
+test ListNext successfully
+test ListAdd: add item between current and current->next & current->next != NULL)
+Space is not enough. double the space
+oldSize: 10
+newSize: 20
+test ListAdd: test successfully
+test ListInsert: insert when current is the first Item
+test ListInsert successfully
+test ListInsert: insert when current is the last Item (current->prev != NULL)
+test ListInsert successfully
+test ListAppend
+test ListAppend: test whether current,size,last,prev..are all corrent
+test successfully
+test ListPrepend
+test ListPrepend: test whether current,size,first,next..are all corrent
+test ListPrepend successfully
+test ListConcat
+test ListConcat when list1&list2 are non-empty lists
+test ListConcat: ListConcat(newList1,newList6) when newList6 is empty
+test ListConcat: ListConcat(newList4,newList1) when newList4 is empty
+test ListConcat successfully
+test reallocate list pool: realloc message should reported below
+Lists Space is not enough. double the space
+oldSize: 5
+newSize: 10
+test reallocate node pool of ListInsert: realloc message should reported below
+Space is not enough. double the space
+oldSize: 20
+newSize: 40
+test reallocate node pool of ListAppend: realloc message should reported below
+Space is not enough. double the space
+oldSize: 40
+newSize: 80
+test reallocate node pool of ListPrepend: realloc message should reported below
+Space is not enough. double the space
+oldSize: 80
+newSize: 160
+
+test search below
+test when current item is what we are looking for
+ListSearch: Found Item; current item is the item
+test when current item is not we are looking for (the item is in the list, but not current item)
+ListSearch: Found Item by continually moving next
+test when we are looking for is not in the lismake
+test search successfully
+
+test ListRemove below
+test ListRemove: test delete when current item is the first one
+removed successfully in ListRemove
+test ListRemove: test delete when current item is the middle one
+removed successfully in ListRemove
+test ListRemove: test delete when current item is the last one
+removed successfully in ListRemove
+test for ListRemove successfully
+
+test ListTrim function
+Got to procedure ListTrim 
+removed successfully in ListTrim
+test for ListTrim successfully
+
+test ListFree function
+Free successfully 
+test ListFree function successfully
+
+Test Errors of routines below: Error message should be printed out
+
+Error in ListCount : invalid parameter list = NULL 
+Error in ListFirst : invalid parameter list = NULL 
+Error in ListLast : invalid parameter list = NULL 
+Error in ListNext : invalid parameter list = NULL 
+Error in ListPrev : invalid parameter list = NULL 
+Error in ListCurr : invalid parameter list = NULL 
+Error in ListAdd : invalid parameter list = NULL 
+Error in ListInsert : invalid parameter list = NULL 
+Error in ListAppend : invalid parameter list = NULL 
+Error in ListPrepend : invalid parameter list = NULL 
+Error in ListRemove : invalid parameter list = NULL 
+Error in ListConcat : invalid parameter list = NULL 
+Error in ListFree : invalid parameter list = NULL 
+Got to procedure ListTrim 
+Error in ListTrim : invalid parameter list = NULL 
+Error in ListSearch : invalid parameter list = NULL 
+
+End Test

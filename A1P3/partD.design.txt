@@ -1,0 +1,76 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+NPROC is the maximum number of processes which is defined in param.h
+
+ declare new function numprocs in defs.h
+Your new system call will get the current number of RUNNABLE processes 
+and return it to the user program
+
+Need to modify files as follow:
+
+syscall.c	
+syscall.h
+sysproc.c	
+user.h	
+usys.pl
+defs.h
+proc.c
+
+Need add files as follow:
+
+test_numprocs.c
+
+In syscall.c, we add extern the function for utc time and array pointer 
+for that function.
+The index of the array pointer should have same name in syscall.h file.
+Extern the function: extern uint64 sys_numprocs(void);
+Add new pointer [SYS_numprocs]   
+sys_numprocs in to array pointer tatic uint64 (*syscalls[])(void).
+
+In syscall.h, Add a new line for System call numbers 
+define SYS_numprocs  22.
+
+In sysproc.c, we add new function uint64 sys_numprocs(void), 
+it calls numprocs inside, and it returns how many 
+numbers of runnable processes currently.
+
+In user.h, we add new system calls int numprocs(void).
+
+In usys.pl, we add entry("numprocs").
+
+In defs.h, we declare new function int numprocs(void), it is the help 
+function for sys_numprocs.
+
+In proc.c, we implement numprocs here. 
+Get access to process table.
+Check process state equals to RUNNABLE.
+count the runnable processes, and return the count.
+
+Our program mostly learn from the implementation of following function:
+
+allocproc(void)
+{
+  struct proc *p;
+
+  for(p = proc; p < &proc[NPROC]; p++) {
+    acquire(&p->lock);
+    if(p->state == UNUSED) {
+      goto found;
+    } else {
+      release(&p->lock);
+    }
+  }
+  return 0;
+}
+

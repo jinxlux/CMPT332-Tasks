@@ -1,0 +1,144 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+	group: 25
+*/
+
+
+We are going to test all routines. Some routines will be tested together;for 
+example, I can test ListAdd first, and then use ListLast, ListLast and 
+ListCurr to check the items added in the list correctly. Most routines except 
+ListSearch in the list_movers.c will be tested together with routines in 
+list_adders.c and list_removers.c. They will not be tested specifically.
+
+First, we are going to test routines in list_adders.c.
+We decide to create an array for saving items to be added to lists.
+We will use int as our item's type because it is easy to show and compare.
+We are going to test the ListCreate() because we need list for next tests.
+we randomly create 4 lists at first, and test whether the 4 lists created 
+are marked as 'used'. If they are all 'used', successful message should show;
+otherwise, error message should show, and the program end.
+After creating lists, we continually add 10 ints to one list by using 
+ListAdd; Message "Space is not enough. double the space" should be reported
+since we only allocated 5 nodes space at first time (we do the extra credit).
+Then, we check the size, first item, last item, and all items inside of the
+list by moving 'current' pointer. If every item is saved properly, 
+"test ListAdd: test successfully" should show up, error message otherwise.
+Since we use ListNext() to move the 'current' pointer, and we have moved 
+the pointer to the end of the list in testing ListAdd(), we are easy to
+test whether ListNext() will return NULL when it go beyond the end.
+"test ListNext successfully" should show up if it returns NULL, error message
+show up otherwise. 
+Since we used ListAdd to add items from the end of list above 
+(list->current->next == NULL), we will use ListAdd() to add items
+under list->current->next != NULL condition. After adding ints under 
+this condition, check whether size, 'current' pointer, list->current->prev,
+list->current->next, the next pointer of the previous item and the
+prev pointer of the next item are all correct. If they are all correct,
+successful message should print out; otherwise, we will have error message, and
+the program end.
+For testing the ListInsert, we have almost the same step as ListAdd(). We
+insert item separately from the start and end of the list. Then we check the
+correctness of pointers(first,current,next,prev..) and size.
+If they are all correct, successful message should print out; 
+otherwise, we will have error message, and the program end. 
+For testing the ListAppend, we append an item to the end of the list,and
+we check pointers(current, last, current->prev,current->prev->next) and size
+of the list. If they are all correct, successful message should print out; 
+otherwise, we will have error message, and the program end. 
+For testing the ListPrepend, we append an item to the front of the list,and
+we check pointers(current, first, current->next,current->next->prev) and size
+of the list. If they are all correct, successful message should print out; 
+otherwise, we will have error message, and the program end. 
+For testing the ListConcat(list1, list2), we have 3 conditions:
+list1 is empty, lit2 is not;
+list2 is empty, list1 is not;
+list1 and list2 are all non-empty.
+(the condition that they are all empty is actually same as list2 is empty:
+we only need to keep list1 exists)
+we test all pointers, size under these 3 conditions. Also, since the list2 
+is delete, the space of list2 should now be pointed by nextFreeNode. 
+We will create a new list, and the new list should have the same address as 
+the list2. 
+If everything above is correct, successful message should print out; 
+otherwise, we will have error message, and the program end.
+Since we do the extra credit, we keep adding items to a list by the listInset,
+listAppend and listPrepend. They all should report meesage as 
+"Space is not enough. double the space".
+
+For routines in list_movers.c, we only test ListSearch specifically. Other
+routines in that file will be tested together with routines in other 2 files.
+For testing ListSearch, we write a routine called 
+comparator(Item item1, Item item2), and it returns ((*item1)==(*item1)).
+we will use the pointer of it as the argument for ListSearch to do
+the compare for us.
+We have 3 conditions for testing ListSearch:
+Current item is what we are looking for;
+Current item is not what we are looking for, but the item we want is in the 
+list;
+The item we want is not in the list;
+For the first condition, we set the current item(first item) as what we want,
+and then we test the pointer returned by ListSearch, and we
+compare it with the current pointer, which is the pointer of first item.
+If they are the same, we should have no error report, and a statement
+"ListSearch: Found Item; current item is the item" should print out.
+For the second condition, we set the item we would like to search be
+the item next to the current item. We compare the returned value of
+ListSearch with the pointer of the item after the current item.
+If they are the same, we should have no error report, and a statement
+"ListSearch: Found Item by continually moving next" should print out.
+For the third condition, we set the item we would like to search be
+the item which is not in out list. We compare the returned value of
+ListSearch with NULL. If they are the same, we should have no error 
+report. We also need to check the current item in the list, and it 
+should be the last item in the list. If it is the last item, no errors
+will report.
+
+Finally, we are going to test routines in list_removers.c.
+First, we will test ListRemove. We also have 3 conditions for testing it.
+First item is the current item;
+Current item is the item which is after the first item but before the last 
+item;
+Current item is the last item.
+For the first condition, we use the ListRemove, and then we will check whether
+the returned pointer is the pointer of first item, which we just deleted from 
+list. Then, we will check size, first item, current item and item before 
+the first item (should be NULL now). If they are all correct after removing 
+the first item, no errors will report, and the successful message will print 
+out. Also, we will check whether our NextFreeNode get the node we just removed,
+so we use the ListPrepend, and we compare the pointer of the removed node 
+and new prepended node. If they are same, out test is successful. Otherwise,
+error message will print out.
+For the second condition, we almost check the same features as the first one,
+and the only difference is that we need to check the next pointer of
+the node before removed node, and the prev pointer of the node after the 
+removed node. If the next pointer point to the next node after removed one
+, and the prev pointer point to the prev node before the removed one, we
+can claim the test is successful. Otherwise, errors will report.
+For the last condition, the only difference with the first one is that we will
+check the last item and the item after the last item (should be NULL) 
+instead of the first item and the item before it.
+After checking the ListRemove, we can check the ListTrim. 
+It is same as we check the last condition of the ListRemove. Nothing changed.
+Finally, we are going to test the ListFree. We will implement a new routine 
+called itemFree for testing the ListFree. itemFree here just simply set 
+corresponding int of the array to zero, so we can be easy to check.
+We will create one new list, and
+we add 3 elements to it. We free the new list we created, and we can check 
+whether current, first and last pointer are set to NULL. We also check the
+used and size of the freed list; they should all be zero. Then, we check 
+whether all items in the list are 'freed'(set to zero) by itemFree. Finally,
+we create a new list again, and append 3 items to it. The adress of new list
+and new nodes added should be the same as the freed list, and 3 nodes of
+freed list. If everything goes wrong, error message will report; otherwise,
+successful message will print out.
+
+Finally, we give inappropriate arguments(NULL) to all routines, error message 
+should all report.
