@@ -1,0 +1,17 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git://github.com/mit-pdos/xv6-riscv-fall19.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "xv6-riscv-fall19"]
+	remote = origin
+	merge = refs/heads/xv6-riscv-fall19
+[branch "util"]
+	remote = origin
+	merge = refs/heads/util
+[branch "fs"]
+	remote = origin
+	merge = refs/heads/fs

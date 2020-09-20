@@ -1,0 +1,15 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+
+xv6 kernel is booting
+
+virtio disk init 0
+init: starting sh
+$ ./symlinksimpletest
+Start: simply test symlinks
+ 'a' and 'b' should be printed out below
+Target:b
+Path:a

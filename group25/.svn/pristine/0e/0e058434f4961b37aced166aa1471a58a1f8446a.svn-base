@@ -1,0 +1,84 @@
+# Tong Wang tow087 11201222
+
+At first, This part we have 4 different version(A1 and A2 are mandatory, 
+A3 and A4 are bonus). 
+
+As a result, we should have a "square" function and it should work with all 
+4 version of partA. 
+This function is a recursion function, which will return the square of its argument. 
+Besides that, we should get the current thread id, utilize the threadInfo 
+pointer to update the square count. Square function should looks like that:
+int Square(int number){
+    details
+    
+}
+In order to get the current thread id in square function, 
+we should have a "getID" function.
+This function is different for differnt parts It should looks like
+that:
+int getID(){
+    details
+}
+Also, we have 3 parameters for each version. They are number of 
+children "childrenNumber", sleep time "deadLine" and how many sizes 
+we calculate in square function "sizeNumber".
+We should check the arguments are integer or not in every version 
+Above are the general things for all 4 version of partA.
+
+PartA1: 
+we want to run in Windows system and we should initialize 
+a boolean golbal variable named keepRunning as TRUE to let 
+program keep running. 
+We have three arguments, childrenNumber, deadLine and sizeNumber.
+Write a loop which will execute childrenNumber times to 
+create childrenNumber child.
+childrenNumber is the first argument and how many child thread we have to create. 
+which represents the number of child threads.
+We need to use the CreateThread() function to create 
+a child thread each time the loop executed. 
+CreateThread() has six parameter.
+CreateThread(default security attributes,
+	     default stack size,
+	     thread function named ThreadFunction() which contains square(),
+	     argument to thread function the size n let square() calculate,
+	     creation flags
+	     return thread identifier)
+After that we should use sleep() function let parent thread sleep.
+Its sleep time should be the second of main deadLine.
+If the parent suspend time over (deadline) before all children completed, 
+the program will assign keepRunning false, and then suspend children threads. 
+Otherwise children threads will keep running until they are completed.
+No matter whether they are completed, they will provide the information: 
+	1. When the child thread began
+    2. When the child thread finished
+	2. how many times the square() procedure are called from the start 
+        (finish the calculation or be interrupted due to deadline)
+As a result, inside the thread function ThreadFunction(), we should use
+GetSystemTime() and Square() to calculate the infofmation we need to provide
+
+PartA2:
+Firstly, The thread calls synatx are different from PartA1.
+Secondly, if the timer expires before children threads are finished,
+we don't needto check keepRunning variable like PartA1, once the parent 
+thread wakes, it will kill all running child threads. 
+Thirdly, we should provide all the information in parent thread 
+not in children thread(PartA1).
+Other than these three parts, the design is very similar to PartA1.
+
+PartA3
+It's very similar to A2, but we don't need the running flag,
+thread_cancel can return error while there are no children to kill.
+That is same to have a running flag.
+
+PartA4
+It is involving process, child notify parent by signal when time passed
+or child thread finished. As a result, we should implement a SIGALRM handler
+for child process. When tiem expires, parent send signals to all children.
+Then print the information like square result and 
+elapsed real time since the child began.
+The new thing in that part is to svae child pid and then use the
+time process send the SIGALRM signal to parent and children
+
+
+These design is not the final version, it need to be updated in the future. 
+Espically for the PartA2, PartA3 and PartA4

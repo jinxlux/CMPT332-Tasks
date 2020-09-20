@@ -1,0 +1,48 @@
+# xudong li, xul395, 11206927
+
+UNAME := $(shell uname)
+UNAMES := $(shell uname -s)
+UNAMEM := $(shell uname -m)
+LIBRARY_PATH := /student/cmpt332/pthreads/lib/$(UNAMES)$(UNAMEM)
+HEADER_PATH := /student/cmpt332/pthreads
+CROSS_COMPILE=arm-linux-gnueabi-s
+CC = gcc
+CFLAGS = -g
+CPPFLAGS = -std=gnu90 -Wall -pedantic
+
+.PHONEY: all clean
+
+ifneq (,$(findstring MINGW, $(UNAME)))
+all: allA
+allA: wthread.exe 
+wthread.o: wthread.c
+	$(CC) -o wthread.o -c $(CFLAGS) $(CPPFLAGS) wthread.c
+thread_windows.o: thread.c
+	$(CC) -o thread_windows.o -c $(CFLAGS) $(CPPFLAGS) thread.c
+wthread.exe: wthread.o thread_windows.o
+	$(CC) -o wthread.exe $(CFLAGS) $(CPPFLAGS) wthread.o thread_windows.o	
+endif
+
+ifeq ($(UNAME), Linux)
+all: allB 
+allB: sample-linux app
+sample-linux.o: sample-linux.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $^ -I.
+linux-lib.o: linux-lib.c
+	$(CC) -o linux-lib.o -c $(CFLAGS) $(CPPFLAGS) linux-lib.c -I.
+liblin.a: linux-lib.o
+	ar rcs liblin.a linux-lib.o
+sample-linux: sample-linux.o liblin.a
+	$(CC) -o sample-linux $(CFLAGS) $(CPPFLAGS) sample-linux.o -L. -llin 
+app.o: app.c 
+	$(CC) -o app.o -c $(CFLAGS) $(CPPFLAGS) app.c -I$(HEADER_PATH) 
+app: app.o 
+	$(CC) -o app  $(CFLAGS) $(CPPFLAGS) app.o -lpthreads -L$(LIBRARY_PATH)
+
+endif
+
+clean:
+	rm -f *.o *.a sample-linux wthread.exe app 
+
+	
+

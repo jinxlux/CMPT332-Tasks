@@ -1,0 +1,59 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+
+sys_numprocs() design
+
+Your new system call will get the current number of RUNNABLE processes 
+and return it to the user program
+
+Need to modify files as follow:
+
+syscall.c	
+syscall.h
+sysproc.c	
+user.h	
+usys.S
+
+Need add files as follow:
+
+test_numprocs.c
+
+
+define function sys_numprocs() in syscall.h with numbers same like static struct proc*
+allocproc(void) in proc.c
+
+
+
+
+/* return how many clock tick interrupts have occurred */
+/* since start. */
+find uptime() in sysproc.c 
+uint64
+sys_uptime(void)
+{
+  uint xticks;
+
+  acquire(&tickslock);
+  xticks = ticks;
+  release(&tickslock);
+  return xticks;
+}
+ 
+sys_numprocs() also need implement here
+
+
+"defs.h" extern ticks
+
+
+syscall.c also need to add

@@ -1,0 +1,16 @@
+lab2
+NAME: xudong li
+NSID: xul395
+Student Number: 11206927
+
+
+I like the title "Multiple Targets in a Rule" which clearly 
+tell me what this document will do. I also like the cases 
+and examples given. I dislike the description of variable 
+"â€˜$@â€™" in the document, and I still do not know what
+characters like "â€˜" stand for. 
+The goal, cases of using the rule, and the advantage of
+using automatic variable are clear.
+I think it unfairly assumed that reader will know terms like
+"prerequisites", "recipe", and reader need to vary prerequisites
+a lot.

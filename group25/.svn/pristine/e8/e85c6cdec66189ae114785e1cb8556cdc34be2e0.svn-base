@@ -1,0 +1,51 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+/* copy the code from assignment description */
+
+
+
+
+#include "kernel/types.h"
+#include "user/user.h"
+
+int
+main(int argc, char *argv[])
+{
+  int current_runnable, pid, n;
+  print("sys_numprocs test\n");
+
+  for(n=0; n<10; n++){
+    pid = fork();
+    if(pid < 0)
+      break;
+    if(pid == 0)
+      exit();
+  }
+
+  if(n == 10){
+    print("fork claimed to work 10 times!\n");
+    exit();
+  }
+
+
+  
+
+  current_runnable = numprocs();
+  if (current_runnable < 0){
+    printf("2", "numprocs failed\n");
+    exit();
+  }
+  print("sys_numprocs test OK\n");
+
+  exit();
+}

@@ -1,0 +1,149 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+xul395@tux7:~/cmpt332A1/group25/lab6> ./sim 3 1
+process_1 is running. (priority 1)
+process_1 is running. (priority 1)
+process_1 is start block.
+process_2 is running. (priority 2)
+process_1 is done blocking.
+process_1 is running. (priority 1)
+process_1 is running. (priority 1)
+process_1 is running. (priority 1)
+process_1 is start block.
+process_1 is done blocking.
+process_1 is running. (priority 1)
+process_1 is running. (priority 1)
+process_1 is start block.
+process_2 is running. (priority 2)
+process_1 is done blocking.
+process_1 is running. (priority 1)
+process_1 is running. (priority 1)
+process_1 is start block.
+process_1 is done blocking.
+process_1 is start block.
+process_1 is done blocking.
+process_1 is start block.
+process_2 is running. (priority 2)
+process_1 is done blocking.
+process_1 is running. (priority 1)
+process_1 is start block.
+process_1 is done blocking.
+process_1 is running. (priority 1)
+^C
+
+
+xul395@tux7:~/cmpt332A1/group25/lab6> ./sim 5 2
+process_3 is running. (priority 0)
+process_1 is start block.
+process_2 is running. (priority 2)
+process_3 is running. (priority 0)
+process_2 is running. (priority 2)
+process_1 is done blocking.
+process_1 is running. (priority 1)
+process_3 is start block.
+process_3 is done blocking.
+process_3 is running. (priority 0)
+process_1 is running. (priority 1)
+process_3 is start block.
+process_1 is running. (priority 1)
+process_1 is running. (priority 1)
+process_2 is running. (priority 2)
+process_3 is done blocking.
+process_3 is start block.
+process_3 is done blocking.
+process_3 is start block.
+process_1 is start block.
+process_3 is done blocking.
+process_3 is running. (priority 0)
+process_2 is running. (priority 2)
+process_3 is start block.
+process_3 is done blocking.
+process_3 is running. (priority 0)
+process_1 is done blocking.
+process_1 is running. (priority 1)
+process_3 is running. (priority 0)
+process_1 is start block.
+process_3 is running. (priority 0)
+process_1 is done blocking.
+process_1 is running. (priority 1)
+process_1 is start block.
+process_3 is running. (priority 0)
+process_1 is done blocking.
+process_1 is running. (priority 1)
+process_1 is start block.
+process_3 is start block.
+process_2 is running. (priority 2)
+process_1 is done blocking.
+process_1 is start block.
+^C
+xul395@tux7:~/cmpt332A1/group25/lab6> 
+
+
+xul395@tux7:~/cmpt332A1/group25/lab6> ./sim 10 3
+process_3 is running. (priority 0)
+process_5 is running. (priority 0)
+process_1 is running. (priority 1)
+process_5 is start block.
+process_3 is running. (priority 0)
+process_6 is running. (priority 1)
+process_9 is start block.
+process_5 is done blocking.
+process_5 is running. (priority 0)
+process_1 is running. (priority 1)
+process_3 is running. (priority 0)
+process_6 is running. (priority 1)
+process_5 is start block.
+process_9 is done blocking.
+process_9 is running. (priority 1)
+process_5 is done blocking.
+process_5 is running. (priority 0)
+process_3 is running. (priority 0)
+process_1 is start block.
+process_5 is start block.
+process_6 is running. (priority 1)
+process_3 is running. (priority 0)
+process_5 is done blocking.
+process_5 is running. (priority 0)
+process_5 is running. (priority 0)
+process_3 is running. (priority 0)
+process_9 is running. (priority 1)
+process_1 is done blocking.
+process_1 is running. (priority 1)
+process_5 is running. (priority 0)
+process_3 is start block.
+process_6 is running. (priority 1)
+process_9 is running. (priority 1)
+process_3 is done blocking.
+process_3 is running. (priority 0)
+process_5 is running. (priority 0)
+process_1 is start block.
+process_5 is start block.
+process_6 is running. (priority 1)
+process_3 is running. (priority 0)
+process_9 is start block.
+process_6 is running. (priority 1)
+process_3 is start block.
+process_5 is done blocking.
+process_5 is running. (priority 0)
+process_1 is done blocking.
+process_1 is start block.
+process_9 is done blocking.
+process_9 is running. (priority 1)
+process_6 is start block.
+process_3 is done blocking.
+process_3 is running. (priority 0)
+process_5 is running. (priority 0)
+process_5 is running. (priority 0)
+process_3 is start block.
+^C

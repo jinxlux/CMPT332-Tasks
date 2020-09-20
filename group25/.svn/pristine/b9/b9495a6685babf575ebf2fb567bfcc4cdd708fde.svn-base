@@ -1,0 +1,401 @@
+#  NAME: Xudong Li
+#  NSID:xul395
+#  Student Number:11206927
+
+
+# 	NAME:Tong Wang   
+#   NSID: tow087 
+#   Student Number: 11201222
+#   CMPT 332 Term 1 2019
+
+#   group25
+
+PartA1 is finished and the test results are:
+Test1:
+
+This is partA1. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order
+1 1 1
+We have 1 threads to run
+Number 0 thread's id is 10316 and the count of Square() is 2
+The elasped time of this thread is 0.000000 seconds
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+
+Test2:
+
+This is partA1. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order
+3 3 5000
+We have 3 threads to run
+Number 0 thread's id is 8836 and the count of Square() is 12507500
+The elasped time of this thread is 0.422000 seconds
+We have 3 threads to run
+Number 1 thread's id is 2916 and the count of Square() is 12507500
+The elasped time of this thread is 0.469000 seconds
+We have 3 threads to run
+Number 2 thread's id is 7180 and the count of Square() is 12507500
+The elasped time of this thread is 0.485000 seconds
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+
+
+Test3:
+
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+4 8 12000
+We have 4 threads to run
+Number 0 thread's id is 10640 and the count of Square() is 72018000
+The elasped time of this thread is 2.656000 seconds
+We have 4 threads to run
+Number 1 thread's id is 4372 and the count of Square() is 72018000
+The elasped time of this thread is 3.577000 seconds
+We have 4 threads to run
+Number 2 thread's id is 3908 and the count of Square() is 72018000
+The elasped time of this thread is 3.874000 seconds
+We have 4 threads to run
+Number 3 thread's id is 10932 and the count of Square() is 72018000
+The elasped time of this thread is 3.984000 seconds
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+
+Test4:
+
+This is partA1. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order
+8 8 9000
+We have 8 threads to run
+Number 0 thread's id is 7700 and the count of Square() is 40513500
+The elasped time of this thread is 3.249000 seconds
+We have 8 threads to run
+Number 3 thread's id is 2776 and the count of Square() is 40513500
+The elasped time of this thread is 3.265000 seconds
+We have 8 threads to run
+Number 4 thread's id is 4948 and the count of Square() is 40513500
+The elasped time of this thread is 3.358000 seconds
+We have 8 threads to run
+Number 1 thread's id is 6680 and the count of Square() is 40513500
+The elasped time of this thread is 3.468000 seconds
+We have 8 threads to run
+Number 2 thread's id is 6504 and the count of Square() is 40513500
+The elasped time of this thread is 3.593000 seconds
+We have 8 threads to run
+Number 5 thread's id is 1208 and the count of Square() is 40513500
+The elasped time of this thread is 3.624000 seconds
+We have 8 threads to run
+Number 6 thread's id is 3376 and the count of Square() is 40513500
+The elasped time of this thread is 3.702000 seconds
+We have 8 threads to run
+Number 7 thread's id is 1756 and the count of Square() is 40513500
+The elasped time of this thread is 3.780000 seconds
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+
+Test5:
+
+This is partA1. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order
+20 6 15
+We have 20 threads to run
+Number 0 thread's id is 10428 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 1 thread's id is 4848 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 2 thread's id is 7824 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 5 thread's id is 5304 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 6 thread's id is 9952 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 7 thread's id is 1764 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 9 thread's id is 10588 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 10 thread's id is 2552 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 12 thread's id is 2820 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 13 thread's id is 8020 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 3 thread's id is 2664 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 11 thread's id is 896 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 8 thread's id is 8972 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 17 thread's id is 6216 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 14 thread's id is 1700 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 15 thread's id is 4852 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 16 thread's id is 7180 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 4 thread's id is 7744 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 18 thread's id is 1796 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+We have 20 threads to run
+Number 19 thread's id is 8024 and the count of Square() is 135
+The elasped time of this thread is 0.000000 seconds
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+
+Test6:
+
+This is partA1. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order
+1 5 25000
+We have 1 threads to run
+Number 0 thread's id is 2352 and the count of Square() is 312537500
+The elasped time of this thread is 1.937000 seconds
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+
+Test7:
+
+This is partA1. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order
+7 3 800
+We have 7 threads to run
+Number 0 thread's id is 4132 and the count of Square() is 321200
+The elasped time of this thread is 0.047000 seconds
+We have 7 threads to run
+Number 1 thread's id is 11044 and the count of Square() is 321200
+The elasped time of this thread is 0.047000 seconds
+We have 7 threads to run
+Number 4 thread's id is 8124 and the count of Square() is 321200
+The elasped time of this thread is 0.047000 seconds
+We have 7 threads to run
+Number 2 thread's id is 7436 and the count of Square() is 321200
+The elasped time of this thread is 0.047000 seconds
+We have 7 threads to run
+Number 5 thread's id is 5320 and the count of Square() is 321200
+The elasped time of this thread is 0.047000 seconds
+We have 7 threads to run
+Number 3 thread's id is 6908 and the count of Square() is 321200
+The elasped time of this thread is 0.047000 seconds
+We have 7 threads to run
+Number 6 thread's id is 5324 and the count of Square() is 321200
+The elasped time of this thread is 0.047000 seconds
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+
+Test8:
+This is partA1. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order
+3 3 1500
+We have 3 threads to run
+Number 0 thread's id is 9280 and the count of Square() is 1127250
+The elasped time of this thread is 0.031000 seconds
+We have 3 threads to run
+Number 1 thread's id is 6240 and the count of Square() is 1127250
+The elasped time of this thread is 0.046000 seconds
+We have 3 threads to run
+Number 2 thread's id is 7692 and the count of Square() is 1127250
+The elasped time of this thread is 0.046000 seconds
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+
+PartA2: Though it is not required, I think it is finished and please give me some feedback.
+Test1:
+This is partA2. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber 
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order 
+1 1 1
+This is the number 0 thread.The thread's id is 0 and it spent time: 0 clock ticks:
+Number of square() called is 2
+ 
+exiting threads
+
+Test2:
+This is partA2. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber 
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order 
+3 3 5000
+This is the number 1 thread.The thread's id is 1 and it spent time: 16 clock ticks:
+Number of square() called is 12507500
+ This is the number 2 thread.The thread's id is 2 and it spent time: 13 clock ticks:
+Number of square() called is 12507500
+ This is the number 0 thread.The thread's id is 0 and it spent time: 25 clock ticks:
+Number of square() called is 7116484
+ 
+exiting threads
+
+Test3:
+This is partA2. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber 
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order 
+4 8 12000
+This is the number 0 thread.The thread's id is 0 and it spent time: 42 clock ticks:
+Number of square() called is 6832142
+ This is the number 1 thread.The thread's id is 1 and it spent time: 48 clock ticks:
+Number of square() called is 15079528
+ This is the number 2 thread.The thread's id is 2 and it spent time: 48 clock ticks:
+Number of square() called is 25236959
+ This is the number 3 thread.The thread's id is 3 and it spent time: 42 clock ticks:
+Number of square() called is 33452109
+ 
+exiting threads
+Please enter thre
+ 
+exiting threads
+
+Test4:
+This is partA2. Please enter the correct input.
+The input should be 3 positive integer divided by space.
+The order is threadNumber deadlineTime sizeNumber 
+Also you could have a input txt file. Every line contains those three input parameters
+The order is same with the enter order 
+8 8 9000
+This is the number 0 thread.The thread's id is 0 and it spent time: 91 clock ticks:
+Number of square() called is 7779539
+ This is the number 1 thread.The thread's id is 1 and it spent time: 122 clock ticks:
+Number of square() called is 15075548
+ This is the number 2 thread.The thread's id is 2 and it spent time: 146 clock ticks:
+Number of square() called is 26497899
+ This is the number 4 thread.The thread's id is 4 and it spent time: 136 clock ticks:
+Number of square() called is 40513500
+ This is the number 5 thread.The thread's id is 5 and it spent time: 135 clock ticks:
+Number of square() called is 40513500
+ This is the number 6 thread.The thread's id is 6 and it spent time: 134 clock ticks:
+Number of square() called is 40513500
+ This is the number 7 thread.The thread's id is 7 and it spent time: 133 clock ticks:
+Number of square() called is 40513500
+ This is the number 3 thread.The thread's id is 3 and it spent time: 157 clock ticks:
+Number of square() called is 33572095
+Test5:
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+20 6 15
+This is the number 0 thread.The thread's id is 0 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 1 thread.The thread's id is 1 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 2 thread.The thread's id is 2 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 3 thread.The thread's id is 3 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 4 thread.The thread's id is 4 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 5 thread.The thread's id is 5 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 6 thread.The thread's id is 6 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 7 thread.The thread's id is 7 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 8 thread.The thread's id is 8 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 9 thread.The thread's id is 9 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 10 thread.The thread's id is 10 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 11 thread.The thread's id is 11 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 12 thread.The thread's id is 12 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 13 thread.The thread's id is 13 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 14 thread.The thread's id is 14 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 15 thread.The thread's id is 15 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 16 thread.The thread's id is 16 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 17 thread.The thread's id is 17 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 18 thread.The thread's id is 18 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ This is the number 19 thread.The thread's id is 19 and it spent time: 0 clock ticks:
+Number of square() called is 135
+ 
+exiting threads
+
+Test6:
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+1 5 25000
+This is the number 0 thread.The thread's id is 0 and it spent time: 6 clock ticks:
+Number of square() called is 7818111
+ 
+exiting threads
+
+Test7:
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+7 3 800
+This is the number 0 thread.The thread's id is 0 and it spent time: 0 clock ticks:
+Number of square() called is 321200
+ This is the number 1 thread.The thread's id is 1 and it spent time: 0 clock ticks:
+Number of square() called is 321200
+ This is the number 2 thread.The thread's id is 2 and it spent time: 0 clock ticks:
+Number of square() called is 321200
+ This is the number 3 thread.The thread's id is 3 and it spent time: 1 clock ticks:
+Number of square() called is 321200
+ This is the number 4 thread.The thread's id is 4 and it spent time: 0 clock ticks:
+Number of square() called is 321200
+ This is the number 5 thread.The thread's id is 5 and it spent time: 0 clock ticks:
+Number of square() called is 321200
+ This is the number 6 thread.The thread's id is 6 and it spent time: 0 clock ticks:
+Number of square() called is 321200
+ 
+exiting threads
+
+Test8:
+Please enter threadNumber deadlineTime sizeNumber
+If you want to quit please enter 0 0 0
+3 3 1500
+This is the number 0 thread.The thread's id is 0 and it spent time: 0 clock ticks:
+Number of square() called is 1127250
+ This is the number 1 thread.The thread's id is 1 and it spent time: 2 clock ticks:
+Number of square() called is 1127250
+ This is the number 2 thread.The thread's id is 2 and it spent time: 0 clock ticks:
+Number of square() called is 1127250
+ 
+exiting threads

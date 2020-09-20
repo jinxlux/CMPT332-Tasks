@@ -1,0 +1,82 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+We will implement a simple chat program let people communicate.
+Currently, we only have a basic thinking of our program.
+As a result, this is a basic design and will be completed in future.
+We need many thread functions for that program:
+
+1. getMsgFromKeyboard();
+This function will read the input from keyboard and send the message
+to server. In RTT thread, it also need a return value
+
+2. printToScreen()
+This is the print thread
+It will wait a signal from the server thread and get the msg from the server.
+After that, it will print the current message to screen.
+
+code should like that:
+listen to the server;
+if(signal):
+	printf(message)
+end if
+
+3. sendOverNetwork()
+This is a sender thread
+Server get the message from keyboard, then it need a queue to store all 
+the messages. Then, it take the first message from queue and put it into
+sender thread. The sender thread will send this to the receiver thread.
+
+Code should like:
+listen to the server;
+if(get a signal):
+  push msg to Q
+  pop msg from Q
+	send the msg from the server to the receive.
+	create(socket)
+    	bind(socket)
+	Send(message, host IP, host port)
+end 
+
+4. receiveNetworkMsg()
+This is a receive thread
+This thread Will wait for message from sender thread. Once received,
+it will send to the sever to let server print the message. 
+
+listen to the remote sender.
+if(signal):
+	create(socket)
+	Recieve(message, host IP, host port)
+	Send(server, msg)
+end if
+
+5. serverThread()
+This is server thread
+This thread is server thread and. It should keep running 
+and have two functions:
+1. Create sender, receiver, and printer thread
+2. Get message information from keyboard and send to sender thread
+3. Receive message from receiver and send it to printer thread
+
+Code should looks like:
+create other 4 threads;
+while(1){
+
+	receive msg from keyboard.
+	send msg to sender.
+
+
+	receive msg from receiver.
+	send msg to printer.
+
+}

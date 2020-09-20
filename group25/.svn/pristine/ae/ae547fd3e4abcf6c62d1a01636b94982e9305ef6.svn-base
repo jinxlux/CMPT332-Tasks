@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+
+
+void *ListRemove(LIST list)
+{
+	printf("Got to procedure ListRemove \n");
+
+	return NULL;
+}
+void ListFree(LIST list, void (*itemFree)(Item))
+{
+	printf("Got to procedure ListFree \n");
+
+	
+}
+void *ListTrim(LIST list)
+{
+	printf("Got to procedure ListTrim \n");
+
+	return NULL;
+}

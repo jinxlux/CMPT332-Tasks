@@ -1,0 +1,216 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+xul395@tux6:~/cmpt332A1/group25/lab7> ./sim 10 5 100
+R  on page 9. This triggered a page fault. There was a free slot!
+RW on page 8. This triggered a page fault. There was a free slot!
+RW on page 9.
+R  on page 5. This triggered a page fault. There was a free slot!
+RW on page 5.
+RW on page 6. This triggered a page fault. There was a free slot!
+RW on page 6.
+R  on page 9.
+R  on page 7. This triggered a page fault. There was a free slot!
+R  on page 3. This triggered a page fault. The chosen victim was page 7.
+R  on page 1. This triggered a page fault. The chosen victim was page 9.
+RW on page 3.
+R  on page 3.
+RW on page 3.
+RW on page 9. This triggered a page fault. The chosen victim was page 8.
+R  on page 7. This triggered a page fault. The chosen victim was page 5.
+R  on page 7.
+RW on page 7.
+R  on page 7.
+R  on page 5. This triggered a page fault. The chosen victim was page 6.
+RW on page 7.
+RW on page 6. This triggered a page fault. The chosen victim was page 1.
+RW on page 5.
+R  on page 8. This triggered a page fault. The chosen victim was page 3.
+R  on page 2. This triggered a page fault. The chosen victim was page 9.
+R  on page 7.
+R  on page 4. This triggered a page fault. The chosen victim was page 7.
+RW on page 9. This triggered a page fault. The chosen victim was page 5.
+R  on page 2.
+RW on page 6.
+RW on page 4.
+RW on page 9.
+RW on page 5. This triggered a page fault. The chosen victim was page 8.
+RW on page 6.
+RW on page 7. This triggered a page fault. The chosen victim was page 2.
+RW on page 7.
+RW on page 6.
+RW on page 9.
+R  on page 5.
+R  on page 7.
+R  on page 8. This triggered a page fault. The chosen victim was page 4.
+R  on page 6.
+R  on page 9.
+RW on page 4. This triggered a page fault. The chosen victim was page 5.
+RW on page 5. This triggered a page fault. The chosen victim was page 7.
+R  on page 9.
+R  on page 8.
+R  on page 6.
+R  on page 6.
+RW on page 8.
+R  on page 6.
+R  on page 9.
+RW on page 3. This triggered a page fault. The chosen victim was page 9.
+R  on page 8.
+R  on page 7. This triggered a page fault. The chosen victim was page 6.
+R  on page 8.
+R  on page 6. This triggered a page fault. The chosen victim was page 4.
+RW on page 4. This triggered a page fault. The chosen victim was page 5.
+RW on page 7.
+RW on page 4.
+RW on page 3.
+RW on page 7.
+RW on page 9. This triggered a page fault. The chosen victim was page 8.
+RW on page 8. This triggered a page fault. The chosen victim was page 6.
+RW on page 8.
+R  on page 5. This triggered a page fault. The chosen victim was page 3.
+RW on page 7.
+RW on page 3. This triggered a page fault. The chosen victim was page 4.
+RW on page 3.
+R  on page 4. This triggered a page fault. The chosen victim was page 9.
+RW on page 2. This triggered a page fault. The chosen victim was page 5.
+RW on page 2.
+RW on page 4.
+R  on page 8.
+RW on page 8.
+RW on page 7.
+RW on page 3.
+RW on page 7.
+RW on page 2.
+RW on page 6. This triggered a page fault. The chosen victim was page 8.
+R  on page 7.
+R  on page 2.
+R  on page 9. This triggered a page fault. The chosen victim was page 3.
+R  on page 9.
+R  on page 9.
+R  on page 9.
+R  on page 0. This triggered a page fault. The chosen victim was page 4.
+RW on page 7.
+RW on page 4. This triggered a page fault. The chosen victim was page 2.
+R  on page 9.
+RW on page 5. This triggered a page fault. The chosen victim was page 0.
+R  on page 7.
+RW on page 8. This triggered a page fault. The chosen victim was page 6.
+RW on page 7.
+RW on page 5.
+RW on page 7.
+RW on page 8.
+R  on page 1. This triggered a page fault. The chosen victim was page 9.
+RW on page 9. This triggered a page fault. The chosen victim was page 4.
+RW on page 9.
+
+xul395@tux6:~/cmpt332A1/group25/lab7> ./sim 5 2 100
+R  on page 4. This triggered a page fault. There was a free slot!
+RW on page 4.
+RW on page 4.
+R  on page 2. This triggered a page fault. There was a free slot!
+RW on page 2.
+RW on page 3. This triggered a page fault. The chosen victim was page 4.
+RW on page 3.
+R  on page 4. This triggered a page fault. The chosen victim was page 2.
+R  on page 3.
+R  on page 1. This triggered a page fault. The chosen victim was page 4.
+R  on page 0. This triggered a page fault. The chosen victim was page 3.
+RW on page 1.
+R  on page 1.
+RW on page 1.
+RW on page 4. This triggered a page fault. The chosen victim was page 0.
+R  on page 3. This triggered a page fault. The chosen victim was page 1.
+R  on page 3.
+RW on page 3.
+R  on page 3.
+R  on page 2. This triggered a page fault. The chosen victim was page 4.
+RW on page 3.
+RW on page 3.
+RW on page 2.
+R  on page 4. This triggered a page fault. The chosen victim was page 3.
+R  on page 1. This triggered a page fault. The chosen victim was page 2.
+R  on page 3. This triggered a page fault. The chosen victim was page 4.
+R  on page 2. This triggered a page fault. The chosen victim was page 1.
+RW on page 4. This triggered a page fault. The chosen victim was page 3.
+R  on page 1. This triggered a page fault. The chosen victim was page 2.
+RW on page 3. This triggered a page fault. The chosen victim was page 1.
+RW on page 2. This triggered a page fault. The chosen victim was page 4.
+RW on page 4. This triggered a page fault. The chosen victim was page 3.
+RW on page 2.
+RW on page 3. This triggered a page fault. The chosen victim was page 2.
+RW on page 3.
+RW on page 3.
+RW on page 3.
+RW on page 4.
+R  on page 2. This triggered a page fault. The chosen victim was page 4.
+R  on page 3.
+R  on page 4. This triggered a page fault. The chosen victim was page 3.
+R  on page 3. This triggered a page fault. The chosen victim was page 2.
+R  on page 4.
+RW on page 2. This triggered a page fault. The chosen victim was page 4.
+RW on page 2.
+R  on page 4. This triggered a page fault. The chosen victim was page 3.
+R  on page 4.
+R  on page 3. This triggered a page fault. The chosen victim was page 4.
+R  on page 3.
+RW on page 4. This triggered a page fault. The chosen victim was page 2.
+R  on page 3.
+R  on page 4.
+RW on page 1. This triggered a page fault. The chosen victim was page 3.
+R  on page 4.
+R  on page 3. This triggered a page fault. The chosen victim was page 4.
+R  on page 4. This triggered a page fault. The chosen victim was page 1.
+R  on page 3.
+RW on page 2. This triggered a page fault. The chosen victim was page 3.
+RW on page 3. This triggered a page fault. The chosen victim was page 4.
+RW on page 2.
+RW on page 1. This triggered a page fault. The chosen victim was page 2.
+RW on page 3.
+RW on page 4. This triggered a page fault. The chosen victim was page 3.
+RW on page 4.
+RW on page 4.
+R  on page 2. This triggered a page fault. The chosen victim was page 1.
+RW on page 3. This triggered a page fault. The chosen victim was page 2.
+RW on page 1. This triggered a page fault. The chosen victim was page 4.
+RW on page 1.
+R  on page 2. This triggered a page fault. The chosen victim was page 3.
+RW on page 1.
+RW on page 1.
+RW on page 2.
+R  on page 4. This triggered a page fault. The chosen victim was page 1.
+RW on page 4.
+RW on page 3. This triggered a page fault. The chosen victim was page 2.
+RW on page 1. This triggered a page fault. The chosen victim was page 4.
+RW on page 3.
+RW on page 1.
+RW on page 3.
+R  on page 3.
+R  on page 1.
+R  on page 4. This triggered a page fault. The chosen victim was page 3.
+R  on page 4.
+R  on page 4.
+R  on page 4.
+R  on page 0. This triggered a page fault. The chosen victim was page 1.
+RW on page 3. This triggered a page fault. The chosen victim was page 4.
+RW on page 2. This triggered a page fault. The chosen victim was page 0.
+R  on page 4. This triggered a page fault. The chosen victim was page 3.
+RW on page 2.
+R  on page 3. This triggered a page fault. The chosen victim was page 4.
+RW on page 4. This triggered a page fault. The chosen victim was page 2.
+RW on page 3.
+RW on page 2. This triggered a page fault. The chosen victim was page 3.
+RW on page 3. This triggered a page fault. The chosen victim was page 4.
+RW on page 4. This triggered a page fault. The chosen victim was page 2.
+R  on page 0. This triggered a page fault. The chosen victim was page 3.
+RW on page 4.
+RW on page 4.

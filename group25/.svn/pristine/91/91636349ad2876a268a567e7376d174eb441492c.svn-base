@@ -1,0 +1,51 @@
+#  NAME: Xudong Li
+#  NSID:xul395
+#  Student Number:11206927
+
+
+# 	NAME:Tong Wang   
+#   NSID: tow087 
+#   Student Number: 11201222
+#   CMPT 332 Term 1 2019
+
+
+CC = gcc
+CFLAGS = -g
+CPPFLAGS = -std=gnu90 -Wall -pedantic
+
+.PHONEY: all clean
+
+#part A
+#allA: PartA_1 PartA2 #PartA3 PartA4
+ARCH = $(shell uname -sm | tr -d ' ')
+ifneq (,$(findstring MINGW,$(ARCH)))
+all: allA 
+allA: partA1
+square.o: square.c
+	$(CC) -o square.o -c $(CPPFLAGS) $(CFLAGS)  square.c
+partA1.o: partA1.c
+	$(CC) -o partA1.o -c $(CPPFLAGS) $(CFLAGS) PartA1.c
+partA1: partA1.o square.o
+	$(CC) -o partA1 $(CPPFLAGS) $(CFLAGS) partA1.o square.o
+
+else
+all: allC #$TARGET
+allC: mytestlist
+
+list_adders.o: list_adders.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $^
+list_movers.o: list_movers.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) list_movers.c
+list_removers.o: list_removers.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) list_removers.c
+liblist.a: list_movers.o list_adders.o list_removers.o
+	ar rcs liblist.a list_movers.o list_adders.o list_removers.o
+mytestlist.o: mytestlist.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) mytestlist.c
+mytestlist: mytestlist.o liblist.a
+	$(CC) -o mytestlist $(CFLAGS) $(CPPFLAGS) mytestlist.o -L. -llist
+
+endif
+clean:
+	rm -f *.o *.a mytestlist partA1.exe
+#part C

@@ -1,0 +1,41 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+
+We are going to solve Santa Claus problem.
+There are 3 conditions of the problem:
+1. the number of reindeer == 9, so the Santa wakes up to prepare sleigh
+2. the number of elves == 3, the Santa wakes up to help elves
+3. the number of reindeer == 9 and the number of elves == 3,
+Santa should wake up and prepare sleigh first, after that then help elves.
+
+We will separate code into 4 parts:
+1. semaphores and shared variables
+2. implementation of Santa Claus's work
+3. implementation of reindeer's work
+4. implementation of elves' work
+to solve the problem
+
+For the part 1 (semaphores and shared variables):
+Using UBCpthread to generate semaphores such as santaSem, reindeerSem
+elfTex and mutex.
+Also, we need global variables elves and reindeer to count the number
+of waiting reindeers and elves.
+Value of semaphore elfTex should set to 1, so the first elf can enter,
+and we can continually to decide whether let the next elf in (elves<3),
+or wait(elves==3) by if-statement and using P(elfTex) of UBCpthread.
+Value of semaphore mutex should set to 1, 
+so at least 1 thread (reindeer or elf) can reach variables at first time.
+
+
+

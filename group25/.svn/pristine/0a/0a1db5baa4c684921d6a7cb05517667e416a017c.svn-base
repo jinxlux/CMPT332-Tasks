@@ -1,0 +1,48 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<os.h>
+#include"Monitor.h"
+#include<unistd.h>
+#include<sys/time.h>
+#include<standards.h>
+
+
+
+PID MonServer(){
+        printf("go to procedure Monserver()");
+        exit(0);
+}
+
+/*first executable routine for monitor procedure */
+void MonEnter(){
+        printf("go to procedure MonEnter()");
+}
+
+/*last executable routine for monitor procedure to leave*/
+void MonLeave(){
+        printf("go to procedure MonLeave()");
+}
+
+/*let enter processes wait in some condition variables*/
+void MonWait(int cv){
+        printf("go to procedure MonWait()");
+}
+
+/*reactive the process top of the queue*/
+void MonSignal(int cv){
+        printf("go to procedure MonSignal()");
+        tempPid = Create((void(*)()) MonServer, 16000, "R1", (void *) 1000, NORM, USR );
+}

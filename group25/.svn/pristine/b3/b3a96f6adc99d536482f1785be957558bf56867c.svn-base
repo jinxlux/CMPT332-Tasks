@@ -1,0 +1,111 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+
+We are going to solve Santa Claus problem.
+There are 3 conditions of the problem:
+1. the number of reindeer == 9, so the Santa wakes up to prepare sleigh
+2. the number of elves == 3, the Santa wakes up to help elves
+3. the number of reindeer == 9 and the number of elves == 3,
+Santa should wake up and prepare sleigh first, after that then help elves.
+
+We will separate code into 4 parts:
+1. semaphores and shared variables
+2. implementation of Santa Claus's work
+3. implementation of reindeer's work
+4. implementation of elves' work
+to solve the problem
+
+For the part 1 (semaphores and shared variables):
+Using UBCpthread to generate semaphores such as santaSem, reindeerSem
+elfTex and mutex.
+Also, we need global variables elves and reindeer to count the number
+of waiting reindeers and elves.
+Value of semaphore elfTex should set to 1 at first, 
+so the first elf can act to find santa (otherwise we will have a deadlock,
+and every elf just wait there forever),
+and we can continually to decide whether let the next elf in (elves<3),
+or wait(elves==3) by if-statement and using P(elfTex) of UBCpthread.
+Value of semaphore mutex should set to 1, 
+so at least 1 thread (reindeer or elf) can reach variables at first time.
+And we can use p(mutex) and v(mutex) to make sure that no more than 1 thread
+can reach the global variables at the same time.
+Value of semaphore santaSem should set to 0 because Santa should not do
+anything at first time. He just sleep(wait) there for any events that
+can awake him. p(santaSem) will let the Santa wait when the value of
+santaSem = 0.
+Value of semaphore reindeerSem will set to 0 at first 
+because reindeers need to wait until all 9 reindeers get back,
+so the last reindeer can awake Santa, and Santa can signal all of
+reindeers to get hitched by V(reindeerSem).
+p(reindeerSem) will let the reindeer wait when the value of
+santaSem = 0.
+variables like reindeer and  elves will set to 0 at first, 
+so we can count how many reindeer come back, or how many elves need help.
+
+For the part 2 (implementation of Santa Claus's work), 
+we first use P(santaSem) to let the Santa wait for being awaken.
+Use P(mutex) to protect reindeer and elves because Santa will read 
+values of them, so we do not want any other threads to write 
+their values at the same time. And then we check the value of reindeer
+first, and if it is bigger or equal to 9 (bigger because more reindeer threads
+may create during this time), Santa need to prepare sleigh (print a message), 
+call V(reindeerSem) 9 times to signal 9 reindeer threads by using while-loop,
+so reindeers can get hitched. Finally, set reindeer back to reindeer - 9,
+and we can get how may reindeer thread is waiting for get hitched, and
+use the value for next reindeer value comparison. 
+We need to check the value of elves in an else-if clause 
+after checking the value of reindeer because we need to make
+sure that Santa will always handle reindeers first if reindeer
+==9 and elves == 3 happen at the same time.
+If elves == 3, Santa should just help elves (print a message).
+
+For the part3, we still need to use mutex to protect variables by
+P(mutex) and V(mutex). In it, we increase the value of reindeer by
+one, and we check whether the value of reindeer is equal to 9.
+If reindeer==9, we wake up Santa by V(santaSem), so Santa 
+wakes up, and he will do things as we designed. 
+After waking up Santa, the reindeer just wait (P(reindeerSem)) 
+for Santa's message (V(reindeerSem)). Since Santa will
+call V(reindeerSem) 9 times to wake up the 9 reindeer threads,
+reindeer will continue move on. Finally, reindeer should 
+call getHitched (print message here)
+
+For part4, we first need to use elfTex to decide whether 
+current elf can move on by P(elfTex). After that, since
+we want to modify elves variable, we still need mutex to
+ensure only one thread can reach this variable this time.
+Increase the value of elves by one. Check if elves==3;
+if true, the elf wake up Santa by V(santaSem), and no
+more elves can 'come in' since we do not release elfTex; otherwise, 
+it should allow more elves to 'come in' by V(elfTex).
+Call getHelp() (we just print message here). After that, we
+need to let elf 'move out' one by one by decreasing the elves's value by
+one (Thus we need mutex here too). 
+After the 3rd elf move out (elves==0), call V(elfTex) to
+let more waiting elves come in.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

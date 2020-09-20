@@ -1,0 +1,43 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<os.h>
+#include<Monitor.h>
+#include<unistd.h>
+#include<sys/time.h>
+#include<standards.h>
+
+
+
+void MonServer(){
+        printf("get into procedure Monserver()");
+}
+
+
+void MonEnter(){
+        printf("get into procedure MonEnter()");
+}
+
+void MonLeave(){
+        printf("get into procedure MonLeave()");
+}
+
+void MonWait(){
+        printf("get into procedure MonWait()");
+}
+
+void MonSignal(){
+        printf("get into procedure MonSignal()");
+}

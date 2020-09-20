@@ -1,0 +1,358 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+*/
+
+/* NAME: Enyu Ma
+   NSID:enm614
+   Student Number:11191666
+*/
+
+xul395@s360-drone8:~/cmpt332A1/group25/lab4> ./santasynch 
+enter how many elves want to have: 
+15
+enter how many reindeer want to have: 
+27
+reindeer number 1
+reindeer number 2
+reindeer number 3
+reindeer number 4
+reindeer number 5
+reindeer number 6
+reindeer number 7
+reindeer number 8
+reindeer number 9
+reindeer number 10
+reindeer number 11
+reindeer number 12
+reindeer number 13
+reindeer number 14
+reindeer number 15
+reindeer number 16
+reindeer number 17
+reindeer number 18
+reindeer number 19
+reindeer number 20
+reindeer number 21
+reindeer number 22
+reindeer number 23
+reindeer number 24
+reindeer number 25
+reindeer number 26
+reindeer number 27
+enter elves
+Prepare sleigh
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- all 9 reindeers hitched
+enter elves
+enter elves
+Prepare sleigh
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- all 9 reindeers hitched
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Prepare sleigh
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- all 9 reindeers hitched
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+^C
+
+
+xul395@s360-drone8:~/cmpt332A1/group25/lab4> ./santasynch 
+enter how many elves want to have: 
+3
+enter how many reindeer want to have: 
+9
+reindeer number 1
+reindeer number 2
+reindeer number 3
+reindeer number 4
+reindeer number 5
+reindeer number 6
+reindeer number 7
+reindeer number 8
+reindeer number 9
+enter elves
+Prepare sleigh
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- all 9 reindeers hitched
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+
+xul395@s360-drone8:~/cmpt332A1/group25/lab4> ./santasynch 
+enter how many elves want to have: 
+45
+enter how many reindeer want to have: 
+45
+reindeer number 1
+reindeer number 2
+reindeer number 3
+reindeer number 4
+reindeer number 5
+reindeer number 6
+reindeer number 7
+reindeer number 8
+reindeer number 9
+reindeer number 10
+reindeer number 11
+reindeer number 12
+reindeer number 13
+reindeer number 14
+reindeer number 15
+reindeer number 16
+reindeer number 17
+reindeer number 18
+reindeer number 19
+reindeer number 20
+reindeer number 21
+reindeer number 22
+reindeer number 23
+reindeer number 24
+reindeer number 25
+reindeer number 26
+reindeer number 27
+reindeer number 28
+reindeer number 29
+reindeer number 30
+reindeer number 31
+reindeer number 32
+reindeer number 33
+reindeer number 34
+reindeer number 35
+reindeer number 36
+reindeer number 37
+reindeer number 38
+reindeer number 39
+reindeer number 40
+reindeer number 41
+reindeer number 42
+reindeer number 43
+reindeer number 44
+reindeer number 45
+enter elves
+Prepare sleigh
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- all 9 reindeers hitched
+enter elves
+enter elves
+Prepare sleigh
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- all 9 reindeers hitched
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Prepare sleigh
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- all 9 reindeers hitched
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Prepare sleigh
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- all 9 reindeers hitched
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Prepare sleigh
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- get a reindeer hitched
+-------------------- all 9 reindeers hitched
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+enter elves
+enter elves
+enter elves
+Help elves
+--------------------  helped elves
+--------------------  helped elves
+--------------------  helped elves
+^C
+

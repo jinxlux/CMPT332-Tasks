@@ -1,0 +1,139 @@
+#include "types.h"
+#include "riscv.h"
+#include "defs.h"
+#include "date.h"
+#include "param.h"
+#include "memlayout.h"
+#include "spinlock.h"
+#include "proc.h"
+
+uint64
+sys_exit(void)
+{
+  exit();
+  return 0;  /* not reached */
+}
+
+uint64
+sys_getpid(void)
+{
+  return myproc()->pid;
+}
+
+uint64
+sys_fork(void)
+{
+  return fork();
+}
+
+uint64
+sys_wait(void)
+{
+  return wait();
+}
+
+uint64
+sys_sbrk(void)
+{
+  int addr;
+  int n;
+
+  if(argint(0, &n) < 0)
+    return -1;
+  addr = myproc()->sz;
+  if(growproc(n) < 0)
+    return -1;
+  return addr;
+}
+
+uint64
+sys_sleep(void)
+{
+  int n;
+  uint ticks0;
+
+  if(argint(0, &n) < 0)
+    return -1;
+  acquire(&tickslock);
+  ticks0 = ticks;
+  while(ticks - ticks0 < n){
+    if(myproc()->killed){
+      release(&tickslock);
+      return -1;
+    }
+    sleep(&ticks, &tickslock);
+  }
+  release(&tickslock);
+  return 0;
+}
+
+uint64
+sys_kill(void)
+{
+  int pid;
+
+  if(argint(0, &pid) < 0)
+    return -1;
+  return kill(pid);
+}
+
+/* return how many clock tick interrupts have occurred */
+/* since start. */
+uint64
+sys_uptime(void)
+{
+  uint xticks;
+
+  acquire(&tickslock);
+  xticks = ticks;
+  release(&tickslock);
+  return xticks;
+}
+/* CMPT 332 GROUP 25 Change, Fall 2019 */
+/* thread create system call */
+uint64
+sys_threadcreate(void)
+{
+  uint64 tmain;
+  uint64 stack;
+  uint64 arg;
+  tmain = 0;
+  stack = 0;
+  arg = 0;
+  argaddr(0,&tmain);
+  argaddr(1,&stack);
+  argaddr(2,&arg);
+
+  return thread_create((void*)tmain,&stack,&arg);
+}
+uint64
+sys_threadjoin(void)
+{
+
+  uint64 stack;
+  stack = 0;
+  argaddr(0,&stack);
+   
+  return thread_join((void**)stack);
+}
+uint64
+sys_mtxcreate(void)
+{
+  uint64 locked;
+  argaddr(0,&locked);
+  return -1;
+}
+uint64
+sys_mtxlock(void)
+{
+  uint64 lock_id;
+  argaddr(0,&lock_id);
+  return -1;
+}
+uint64
+sys_mtxunlock(void)
+{
+  uint64 lock_id;
+  argaddr(0,&lock_id);
+  return -1;
+}

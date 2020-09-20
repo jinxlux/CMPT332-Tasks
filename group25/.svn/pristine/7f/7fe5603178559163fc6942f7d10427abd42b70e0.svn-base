@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+
+int ListCount(LIST *list)
+{
+	printf("Got to procedure ListCount \n");
+	if(list == NULL){
+		printf("Error in ListCount : invalid parameter list = NULL \n");
+		return -1;
+	}
+	return list->size;
+}
+void *ListFirst(LIST *list)
+{
+	printf("Got to procedure ListFirst \n");
+	if(list == NULL){
+		printf("Error in ListFirst : invalid parameter list = NULL \n");
+		return NULL;
+	}
+	if((list->first) == NULL){
+		printf("Error in procedure ListFirst: first item in list is Null \n");
+		return NULL;
+	}	
+	return (list->first) -> data;
+}
+void *ListLast(LIST *list)
+{
+	printf("Got to procedure ListLast \n");
+	if(list == NULL){
+		printf("Error in ListLast : invalid parameter list = NULL \n");
+		return NULL;
+	}
+	if(list->last == NULL){
+		printf("Error in procedure ListLast: last item in list is Null \n");
+		return NULL;
+	}
+	
+	return (list->last) -> data;
+}
+void *ListNext(LIST *list)
+{
+	printf("Got to procedure ListNext \n");
+	if(list == NULL){
+		printf("Error in ListNext : invalid parameter list = NULL \n");
+		return NULL;
+	}
+	if(list->current == NULL){
+		printf("Error in procedure ListNext: current item in list is Null \n");
+		return NULL;
+	}
+	else{
+		if((list -> current -> next)==NULL){
+			printf("Error in procedure ListNext: next item in list is Null \n");
+			return NULL;
+		}
+	}
+	return list -> current -> data;
+}
+void *ListPrev(LIST *list)
+{
+	printf("Got to procedure ListPrev \n");
+	
+	if(list == NULL){
+		printf("Error in ListPrev : invalid parameter list = NULL \n");
+		return NULL;
+	}
+	if(list -> current == NULL){
+		printf("Error in procedure ListPrev: current item in list is Null \n");
+		return NULL;
+	}
+	else{
+		if((list -> current -> prev)==NULL){
+			printf("Error in procedure ListPrev: prev item in list is Null \n");
+			return NULL;
+		}
+	}
+	return list -> current -> data;
+}
+void *ListCurr(LIST *list)
+{
+	printf("Got to procedure ListCurr \n");
+	if(list == NULL){
+		printf("Error in ListCurr : invalid parameter list = NULL \n");
+		return NULL;
+	}
+	if(list -> first == NULL){
+		printf("Error in ListCurr: first item in list is Null \n");
+		return NULL;
+	}
+	return (list -> current) -> data;
+}
+void *ListSearch(LIST *list, int (*comparator)(Item, Item), Item comparisonArg)
+{
+	printf("Got to procedure ListSearch \n");
+	if(list == NULL){
+		printf("Error in ListSearch : invalid parameter list = NULL \n");
+		return NULL;
+	}
+	if(comparator == NULL || comparisonArg ==NULL){
+		printf("Error in ListSearch : invalid parameters\n");
+		return NULL;
+	}	
+
+	return (list -> current) -> data;
+}

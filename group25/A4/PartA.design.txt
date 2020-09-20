@@ -1,0 +1,83 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+We need to change the xv6 to support a doubly-indirect block in each inode
+and make the longest file more than 268 blocks in xv6 system.
+There are the step we need to do:
+1.Modify kernel/param.h to change FSSIZE from 2000 to 200,000
+and then rebuild mkfs to produce a bigger disk by using:
+rm mkfs/mkfs fs.img; make mkfs/mkfs
+
+2.
+Make sure we understand bmap(). Write out a diagram of the relationships 
+between ip->addrs[], the indirect block, the doubly-indirect block and the 
+singly-indirect blocks it points to, and data blocks. Make sure you understand 
+why adding a doubly-indirect block increases the maximum file size 
+by 256*256 blocks 
+
+3.
+go to file.h to understand inode struct and fs.h to understand dinode struct
+
+4. 
+modify the fs.h file,  modify #define NDIRECT 12 to #define NDIRECT 11
+modify uint addrs[NDIRECT+1] to uint addrs[NDIRECT+2],
+modify #define MAXFILE (NDIRECT + NINDIRECT) to 
+#define MAXFILE (NDIRECT + NINDIRECT + NINDIRECT * NINDIRECT)
+
+5. modify bmap() in fs.c file
+Very similar to the original one, just check whether achieve the MAXFILE
+size or not, if not, we will implement doubly-indirect block in the 12 position
+the first 11 is directly block.
+The code should like that:
+if(bn<MAXFILE-NINDIRECT-NDIRECT){
+    if((addr = ip->addrs[NDIRECT+1]) == 0){
+      ip->addrs[NDIRECT+1] = addr = balloc(ip->dev);
+    }
+    bp = bread(ip->dev, addr);
+    a = (uint*)bp->data;
+    if((addr = a[bn/NINDIRECT])==0){
+      a[bn/NINDIRECT] = addr = balloc(ip->dev);
+      
+    }
+    bp2 = bread(ip->dev, addr);
+    a = (uint*)bp2->data;
+    if((addr = a[bn%NINDIRECT]) == 0){
+      a[bn%NINDIRECT] = addr = balloc(ip->dev);
+    
+    }
+
+
+6. modify itrunc() in fs.c file
+Very similar to this function original one and the modification part
+of the bmap() function. Use a double loop(a loop inside a loop) to free
+all doubly-indirect block. The code would like:
+if(ip->addrs[NDIRECT+1]){
+      bp = bread(ip->dev, ip->addrs[NDIRECT]);
+      a = (uint*)bp->data;
+      for loop every blocks{
+        if(a[i] exist){
+          bp2 = bread(ip->dev, ip->addrs[NDIRECT]);
+          temp = (uint*)bp->data;
+          for loop each table{
+            if(temp[j]){
+              bfree(ip->dev,temp[j]);
+            }
+          }
+          brelse(bp2);
+          bfree(ip->dev, a[i]);
+        }
+      }
+    brelse(bp);
+    bfree(ip->dev, ip->addrs[NDIRECT]);
+    ip->addrs[NDIRECT] = 0;
+    }

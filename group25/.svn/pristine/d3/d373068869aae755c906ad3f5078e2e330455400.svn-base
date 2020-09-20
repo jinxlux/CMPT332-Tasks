@@ -1,0 +1,23 @@
+For partB, we did philosopher part.
+
+We just run the read reader-writer-test,
+informations like:
+go to proc xx;
+ServerPid: xx;
+successfully receive xx reply;
+receive msg from xx;
+add xx to xx list;
+release xx from xx list;
+etc
+(xx above are routines' names or lists' names
+This is white box test, these informatios is only for testing.
+So only informations in reader-writer.c and reader-writer-monitor.c will keep after testing
+)
+
+we run philosopher, information will print out same as above;
+also informations like:
+Pholosopher eating
+Pholosopher thinking
+Pholosopher finish eating 
+etc.
+will print out, and these informations will keep (otherwise nothing will print)

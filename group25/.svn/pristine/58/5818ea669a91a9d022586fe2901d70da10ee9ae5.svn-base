@@ -1,0 +1,34 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+For partE, we first run our program. The current working directory 
+should be displayed, and we can continue enter command on our
+shell. We prepare some typical commands for testing out shell:
+cd ..
+cd file
+cd /usr/bin
+cd fileNotExist
+ls
+whereis ls
+ls file
+cat makefile | wc -l
+asdea  
+exit
+
+cd and exit commands are for testing our built-in commands.
+For cd, we will gave relative, absolute and error path.
+These commands should give us same result as we do in the bash shell.
+asdea is an arbitrary error command, so we should have the
+error message as we have in the bash shell.
+Other commands, Pipeline should all give us same results 
+as we use them on the bash shell.

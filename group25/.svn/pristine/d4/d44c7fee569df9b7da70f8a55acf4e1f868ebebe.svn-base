@@ -1,0 +1,81 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+we will edit user.h, usys.pl in the user directory, and we will write an
+test file called test_A3.c in the user directory.
+We will edit defs.h, syscall.h, syscall.c proc.h, proc.c 
+in the kernel directory.
+
+For the files we edited in the user directory, we mainly try
+to make the nice system call work, so the implementation is
+just simply like the other system call.
+In test_A3.c, we will use fork to produce multiple processes, and
+we should user nice system call to change their priorities.
+Processes with high priority should always run before the
+processes with low priority. Thus, we will let processes
+print their messages to verify that order. Also, since we
+will use RR for processes with same priorities, we should
+check whther processes with same priority will switch in
+certain amount of time.
+
+For defs.h, syscall.h and syscall.c we edited in the kernel 
+directory, we should just simply follow implementations 
+of other system calls to make nice system call work.
+In proc.h, we should add uint64 priority in the struct proc
+to make the future implementation of nice and priority scheduler
+work.
+We mainly implement nice in the proc.c. In int nice(uint64 incr),
+We first use myproc to get the current running process.
+We should check whether incr is legal (0<=incr<=4), if
+it is not, we just return -1.Else, we need to add incr to the
+process's priority. If the process's priority is illegal
+then, we need to subtract incr from the priority, and
+-1 should be returned. Otherwise, we just return 0 to indicate
+nice successfully modify the process's priority.
+
+For implementing the advanced scheduler based on processes' priorities,
+we need to implement a simple priority queue first. The queue always 
+put the pointers of processes with higher priorities to the top. 
+The queue is implemented in the proc.c, and we should define it's 
+routines' prtotypes in proc.h.
+We will use a global fixed size array for our queue, and we will 
+use a global variable to count the number of items in the queue.
+It has routines push, pop, peek, empty, newnode, isInside. Newnode just wrap 
+the process pointer in a node struct for saving in the queue. Push will push
+the pointer of the process in the priority queue, and it will 
+always make sure the process is ordered based on their priorities inside. 
+We will use the queue of fixed size 64 bytes for the scheduler.
+Pop will return and delete the item at the top of the queue. Peek just
+check the top item. Empty is for checking whether the queue is empty
+or not. isInside is for checking whether a process is inside the queue.
+
+
+In the scheduler, we will first set init process priority to 0 in allocproc.
+We will check proc[NPROC], and once we find a process
+which has RUNNABLE state, we should check whether is already in the 
+priority queue. If it's not, we put it in the queue. Then, we need 
+to check whether the queue is empty by empty() we difined. If the queue is not
+empty, pop a process out of queue, set the quantum according to the priority
+of it. Then, we set the state of the process poped as RUNNING, and then 
+use swtch to save and load register informationto start running that process.
+scheduler should let it run. After the quantum time passed, we should check
+the process, if process is done(quantum is equal to zero) 
+then we pick next process. If the process is not finished, we should first
+set the process back to state and then use yield() function to give up cpu
+and let scheduler to control cpu again.After that,we should subtract quantum.
+And do above steps as a loop until finish all of process. 
+Once the quantum is equal to zero, scheduler shold run the next
+runnable process in the queue. The quantum should again be setted according
+to the next process's priority.
+
+

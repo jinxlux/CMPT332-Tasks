@@ -1,0 +1,117 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+We will implement a simple chat program let people communicate.
+
+We need 2 lists - sendList and showList
+sendList will work as a buffer to save the information user typed
+and would like to send out by UDP transport.
+showList will keep any information need to shown on the user's screen.
+Thus, all information user typed or received from socket will be in
+showList.
+
+we need 2 semaphores:
+one for the sendList.
+one for the showList.
+semaphores are for protecting this 2 lists, so mutual exclusion can
+be ensured.
+
+We need 4 thread functions for that program:
+(since our threads have same start time and priority and no deadline,
+each function need to use RttSleep for a specific time,
+so no one thread can always occupy CPU here)
+
+1. getMsgFromKeyboard();
+This function will unblocking read the input from keyboard, and save the String
+read in both sendList and showList. If will use loop to keep running and keep
+reading:
+
+	set stdin unblocking
+	for(;;){
+		char* info = malloc(100);
+		while (read(stdin,info)==-1);
+		P
+		ListPrepend(sendList,info);
+		V
+		P
+		ListPrepend(showList,info);
+		V
+		RttSleep(2);
+	}
+
+2. printToScreen()
+This is for the print thread.
+It will keep popping out the information in the showList, and show
+information to the screen:
+	for(;;){
+		P
+		keep getting information out from the showList;
+		V
+		show it on the screen;
+		RttSleep(2);
+	}
+
+3. sendOverNetwork()
+This is a sender thread: keep sending information to the other machine.
+Pop msg from the sendList to the sender thread.
+sender will deliver this to the receiver thread on the other machine.
+
+for(;;){
+P
+while(sendList is not empty);
+msg = ListTrim(sendList);
+listen to the server;
+setting socket type to UDP
+if(get a signal):
+	create(socket)	//create socket to send message
+    	bind(socket)
+	setting socket to be non-blocking
+	Send(message, host IP, host port) //to host and specify port
+end if
+V
+RttSleep(2);
+}
+
+4. receiveNetworkMsg()
+This is a receive thread
+receiver thread
+  Will wait for message from remote machines and once a message is received
+  it will add to the showList. 
+
+for(;;){
+setting socket type to UDP
+listen to the remote sender.
+if(get a signal):
+	create(socket)	//create socket to send message
+    	bind(socket)
+	setting socket to be non-blocking
+	Recieve(message, host IP, host port) //to host and specify port
+	P 
+	ListPrepend(showList,info);
+	V
+end if
+RttSleep(2);
+}
+
+In mainp, we will initialize all variables: Lists, semaphores(value set to 1), 
+host's name, Host's ip, ports, etc.
+We also need to check whether the user gives appropriate ports' numbers 
+and machine name:
+	Checking if amount of arguments are met
+	Checking if arguments are valid
+	checking port range 30001 to 40000
+	Checking if host exists
+	Check if port is available
+Moreover, we need to creat 4 threads here by RttCreate(),
+each thread has same start time and priority and no deadline;
+

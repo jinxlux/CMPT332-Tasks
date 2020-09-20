@@ -1,0 +1,55 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+first we need to add int symlink(char*, char *) to the user.h in user
+We also need to add entry("symlink") to usys.pl in user
+we need to add define O_NOFOLLOW in fcntl.h in kernel, and it is used
+for open system call. We define it as 0x400 to avoid overlap.
+In stat.h in kernel, we add #define T_SYMLINK 4 for our symlink system call.
+In syscall.c in kernel, we should add extern uint64 sys_symlink(void) for 
+the symlink system call.
+In syscall.h, we need to add #define SYS_symlink 23 for the system call.
+We mainly implement symlink in sysfile.c.
+First, we need to create a new inode for our symbolink:
+ip = create(path,T_SYMLINK, 0, 0)) == 0
+Then, we wite the target path in inode by 
+writei(ip,0,(uint64)target, 0, strlen(target));
+Also, we need to use locks for inode modification.
+For open system call, we need to let open handle the symbolic link case,
+and since open use namei, namex to get inodes to open the file, we mainly
+implement changes in these files:
+
+if(ip->type == T_SYMLINK)
+{   
+    if(omode==O_NOFOLLOW){
+        open current symbolic link file
+    }
+    else{
+        find the target path stored inside the inode of symbolic line
+        open file with that path
+        if open files fail(file not exist){
+            return -1;
+        }
+        if(opened file is also a symblic link){
+            if(deepth>=10){
+                return -1;
+            }
+            open(that symblic link,deepth++;)
+        }
+    }    
+    return fp;
+}
+
+
+
+

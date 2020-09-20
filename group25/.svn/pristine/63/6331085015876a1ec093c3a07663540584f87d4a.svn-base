@@ -1,0 +1,122 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+
+#include "list.h"
+#include "rtthreads.h"
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <sys/ioctl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <net/if.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <netdb.h>
+#include <string.h>
+
+/*Header file was not asked for, so defining function prototypes here*/
+RTTTHREAD keyboardThread();
+
+RTTTHREAD printToScreen();
+
+RTTTHREAD receiveNetworkMsg();
+
+RTTTHREAD sendOverNetwork();
+
+LIST* sendBuffer = NULL;
+LIST* showBuffer = NULL;
+
+RttSem *sendSem;
+RttSem *showSem;
+
+/*
+ * Waits for input from keyboard
+ * Once receives inputs, adds the message to a sender qeueue, notifys server thread
+*/
+RTTTHREAD keyboardThread(){
+    printf("keyboardThread function need to be \n");
+    char *input;
+    for(;;){
+        input = (char*)malloc(1024);
+        while(read(0,input,1024) == -1);
+        fcntl(0, F_SETFL, O_NONBLOCK);
+        RttP(*sendSem);
+        ListPrepend(sendBuffer,input);
+        RttV(*sendSem);
+        RttP(*showSem);
+        ListPrepend(showBuffer,input);
+        RttV(*showSem);
+        RttSleep(2);
+    }
+}
+/*
+ * print information to screen when get the signal
+ * 
+*/
+RTTTHREAD printToScreen(){
+    char *temp;
+    for(;;){
+        RttP(*showSem);
+        while(ListCount(showBuffer)!=0){
+            temp = (char *)ListTrim(showBuffer);
+            printf("%s",temp);
+        }
+        RttV(*showSem);
+        RttSleep(2);
+    }
+}
+
+
+/*
+ * Waits for message(s) from machines over the network
+ * 
+*/
+RTTTHREAD receiveNetworkMsg(){
+    printf("receiveNetworkMsg function need to be \n");
+    
+}
+
+/*
+ * Sends message(s) to machines over the network
+ * 
+*/
+RTTTHREAD sendOverNetwork(){
+    printf("sendOverNetwork function need to be \n");
+}
+
+int mainp(int argc, char **argv){
+    int pid;
+    RttThreadId *rtID;
+    RttThreadId *rtID2;
+    RttSchAttr sch;
+    printf("mainp function need to be \n");
+    sendBuffer = ListCreate();
+    showBuffer = ListCreate();
+    rtID = (RttThreadId *)malloc(sizeof(RttThreadId));
+    rtID2 = (RttThreadId *)malloc(sizeof(RttThreadId));
+    sendSem = (RttSem *)malloc(sizeof(RttSem));
+    showSem = (RttSem *)malloc(sizeof(RttSem));
+    RttAllocSem(sendSem, 1, RTTFCFS);
+    RttAllocSem(showSem, 1, RTTFCFS);
+    sch.startingtime = RTTZEROTIME;
+    sch.priority = RTTHIGH;
+    sch.deadline = RTTNODEADLINE;
+    pid = RttCreate(rtID2, (void(*)()) keyboardThread, 16000, "keyboardThread", NULL, sch, RTTUSR);
+    pid = RttCreate(rtID, (void(*)()) printToScreen, 16000, "printToScreen", NULL, sch, RTTUSR);
+
+
+    return 0;
+}

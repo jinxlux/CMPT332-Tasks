@@ -1,0 +1,32 @@
+import turtle as t
+import random as r
+
+# draw_sprial module
+def draw_spiral(num_segments, length):
+    t.pencolor(r.random(), r.random(), r.random())
+    t.up()
+    t.goto(r.randint(-100, 100), r.randint(-100, 100))
+    t.down()
+    for x in range(num_segments):
+        t.pensize(r.randint(1, 6))
+        t.forward(length * (x + 1))
+        t.right(45 - x / 2)
+
+# main function
+# set up the turtle to draw fast
+t.speed(10)
+t.hideturtle()
+t.title('Spiral Art')
+
+#decide the length of the first spiral segment
+number_of_pixels = 2
+
+#number of spirals
+number_of_spirals = 5
+
+for x in range(5):
+    draw_spiral(r.randint(20, 20+x*10),number_of_pixels)
+
+t.done()
+
+

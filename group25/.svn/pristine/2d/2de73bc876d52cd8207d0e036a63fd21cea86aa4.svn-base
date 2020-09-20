@@ -1,0 +1,34 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+/* copy the code from assignment description */
+
+
+
+
+#include "types.h"
+#include "user.h"
+
+int
+main(int argc, char *argv[])
+{
+  int current_runnable;
+
+  current_runnable = numprocs();
+  if (current_runnable < 0){
+    printf(2, "numprocs failed\n");
+    exit();
+  }
+
+
+  exit();
+}

@@ -1,0 +1,218 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+ul395@s360-peon22:~/cmpt332A1/group25/A4> diff -r ~/cmpt332A1/group25/A4/xv6-riscv/  ~/cmpt332A1/group25/A4/xv6-riscv-A4/
+Binary files /student/xul395/cmpt332A1/group25/A4/xv6-riscv/.git/index and /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/.git/index differ
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/kernel/fcntl.h /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/kernel/fcntl.h
+6c6
+< #define O_NOFOLLOW  0x400
+\ No newline at end of file
+---
+> #define O_NOFOLLOW  0x100
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/kernel/fs.c /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/kernel/fs.c
+383,384d382
+<   /* CMPT 332 GROUP 25 Change, Fall 2019 */
+<   struct buf *bp2;
+406,430d403
+<   /* CMPT 332 GROUP 25 Change, Fall 2019 */
+<   // just a copy from the given one
+<   bn -= NINDIRECT;
+<   if(bn<MAXFILE-NINDIRECT-NDIRECT){
+<     // Load indirect block, allocating if necessary.
+<     if((addr = ip->addrs[NDIRECT+1]) == 0){
+<       ip->addrs[NDIRECT+1] = addr = balloc(ip->dev);
+<     }
+<     bp = bread(ip->dev, addr);
+<     a = (uint*)bp->data;
+<     if((addr = a[bn/NINDIRECT])==0){
+<       a[bn/NINDIRECT] = addr = balloc(ip->dev);
+<       log_write(bp);
+<     }
+<     bp2 = bread(ip->dev, addr);
+<     a = (uint*)bp2->data;
+<     if((addr = a[bn%NINDIRECT]) == 0){
+<       a[bn%NINDIRECT] = addr = balloc(ip->dev);
+<       log_write(bp2);
+<     }
+<     brelse(bp);
+<     brelse(bp2);
+<     return addr;
+<   }
+<   
+446,447d418
+<   uint *temp;
+<   struct buf *bp2;
+467,493d437
+<   /* CMPT 332 GROUP 25 Change, Fall 2019 */
+<   // The change is very similar with bmap()
+<   // the NDIRECT position have doubly we need loop to free
+<     if(ip->addrs[NDIRECT+1]){
+<       //array of tables
+<       bp = bread(ip->dev, ip->addrs[NDIRECT]);
+<       a = (uint*)bp->data;
+<       for(i = 0; i < NINDIRECT; i++){
+<         // get into each table 
+<         if(a[i]){
+<           //each table
+<           bp2 = bread(ip->dev, ip->addrs[NDIRECT]);
+<           temp = (uint*)bp->data;
+<           //free each table
+<           for(j = 0; j< NINDIRECT; j++){
+<             if(temp[j]){
+<               bfree(ip->dev,temp[j]);
+<             }
+<           }
+<           brelse(bp2);
+<           bfree(ip->dev, a[i]);
+<         }
+<       }
+<     brelse(bp);
+<     bfree(ip->dev, ip->addrs[NDIRECT]);
+<     ip->addrs[NDIRECT] = 0;
+<     }
+686c630
+< namex(struct inode *rt, char *path, int nameiparent, char *name, int depth)
+---
+> namex(char *path, int nameiparent, char *name)
+689,694d632
+<   char bf[128];
+<   char nName[DIRSIZ];
+< 
+<   if(depth>=10){
+<     return 0;
+<   }
+698,700d635
+<   else if(rt){
+<     ip = idup(rt);
+<   }
+719,733c654
+<     iunlock(ip);
+<     ilock(next);
+<     if(next->type == T_SYMLINK){
+<       if(next->size >= sizeof(bf) || readi(next,0,(uint64)bf,0,next->size)!=next->size){
+<         iunlockput(next);
+<         iput(ip);
+<         return 0;
+<       }
+<       bf[next->size]=0;
+<       iunlockput(next);
+<       next = namex(ip,bf,0,nName,depth+1);
+<     }else{
+<       iunlock(next);
+<     }
+<     iput(ip);
+---
+>     iunlockput(ip);
+747c668
+<   return namex(0,path, 0, name,0);
+---
+>   return namex(path, 0, name);
+753c674
+<   return namex(0, path, 1, name, 0);
+---
+>   return namex(path, 1, name);
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/kernel/fs.h /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/kernel/fs.h
+27,28c27
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< #define NDIRECT 11
+---
+> #define NDIRECT 12
+30c29
+< #define MAXFILE (NDIRECT + NINDIRECT + NINDIRECT * NINDIRECT)
+---
+> #define MAXFILE (NDIRECT + NINDIRECT)
+39,40c38
+<   /* CMPT 332 GROUP 25 Change, Fall 2019 */
+<   uint addrs[NDIRECT+2];   // Data block addresses
+---
+>   uint addrs[NDIRECT+1];   // Data block addresses
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/kernel/param.h /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/kernel/param.h
+12,13c12
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< #define FSSIZE       200000  // size of file system in blocks
+---
+> #define FSSIZE       2000  // size of file system in blocks
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/kernel/stat.h /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/kernel/stat.h
+5c5
+< #define T_SYMLINK 4  
+---
+> #define T_SYMLINK 4   // Add a new file type to represent a symbolic link.
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/kernel/syscall.c /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/kernel/syscall.c
+108d107
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+134d132
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/kernel/syscall.h /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/kernel/syscall.h
+26,27c26
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< #define SYS_symlink   23
+\ No newline at end of file
+---
+> #define SYS_symlink    23
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/kernel/sysfile.c /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/kernel/sysfile.c
+488c488
+< symlink(char* target,char * path)
+---
+> symlink(char* target, char * path)
+490,501c490,491
+<   char* t;
+<   char* p;
+<   t = (char*)target;
+<   p = (char*)path; 
+<   struct inode *ip;
+<   if((ip = create((char*)p,T_SYMLINK, 0, 0)) == 0){
+<      return -1;
+<   }
+<   // ilock(ip);
+<   writei(ip,0,(uint64)t, 0, strlen(t));
+<   // Unlock the inode ip.
+<   iunlockput(ip);
+---
+>   printf("The target is %s\n", target);
+>   printf("The path is %s\n", path);
+503,504c493
+< } 
+< 
+---
+> }
+509d497
+<   char target[1000];
+510a499
+>   char target[1000];
+512c501
+<   if((argstr(0, target, MAXPATH)) < 0 ||(argstr(1, path, MAXPATH)) < 0)
+---
+>   if((argstr(0, target, 1000)) < 0 ||(argstr(1, path, 1000)) < 0)
+516c505
+<   symlink(target,path);
+---
+>   symlink((char*)target, (char*)path);
+518,519c507
+< }
+< 
+---
+> }
+\ No newline at end of file
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/Makefile /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/Makefile
+146c146
+< 	$U/_symlinktest\
+---
+> 	$U/_symlinksimpletest\
+diff -r /student/xul395/cmpt332A1/group25/A4/xv6-riscv/user/usys.pl /student/xul395/cmpt332A1/group25/A4/xv6-riscv-A4/user/usys.pl
+40,41c40,41
+< # /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< entry("symlink");
+\ No newline at end of file
+---
+> #/* CMPT 332 GROUP 25 Change, Fall 2019 */
+> entry("symlink");

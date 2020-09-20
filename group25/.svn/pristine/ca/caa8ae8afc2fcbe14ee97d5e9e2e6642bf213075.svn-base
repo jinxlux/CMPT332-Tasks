@@ -1,0 +1,15 @@
+defs.h
+proc.c
+syscall.c
+syscall.h
+sysproc.c
+
+
+
+
+
+user.h
+usys.pl
+Makefile(133line) use for test same with zombie
+
+add a test file

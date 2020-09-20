@@ -1,0 +1,199 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+
+LIST *lpool = NULL;
+NODE *npool = NULL;
+
+LIST *nextFreeList = NULL;
+NODE *nextFreeNode = NULL;
+
+
+
+/* add the Item after the current item of the list */
+int ListAdd(LIST *list, Item item)
+{	
+	NODE* newNodePoint;
+	NODE* oldNextNodePoint;
+	printf("Got to procedure ListAdd \n");
+	
+	/* list and current pointer cannot be NULL*/
+	if(npool == NULL){
+		printf("Error in ListAdd : node pool is empty \n");
+		return -1;
+	}	
+	if(nextFreeNode == NULL){
+		printf("Error in ListAdd : no nodes can be used\n");
+		return -1;
+	}
+	if(list == NULL){
+		printf("Error in ListAdd : invalid parameter list = NULL \n");
+		return -1;
+	}
+	if(list -> current == NULL){
+		newNodePoint = nextFreeNode;
+		newNodePoint -> data = item;
+		newNodePoint -> next = NULL;
+		newNodePoint -> prev = NULL;
+		newNodePoint -> occupied = 1;
+		list -> size += 1;
+		nextFreeNode = nextFreeNode -> nextFreeNode;
+		list -> current = newNodePoint;
+		list -> first = newNodePoint;
+		list -> last = newNodePoint;
+	}else{
+		newNodePoint = nextFreeNode;
+		newNodePoint -> data = item;
+		newNodePoint -> occupied = 1;
+		list -> size += 1;
+		oldNextNodePoint = list->current->next;
+		list->current->next = newNodePoint;
+		newNodePoint->prev = list->current;
+		newNodePoint->next = oldNextNodePoint;
+		nextFreeNode = nextFreeNode -> nextFreeNode;
+		list -> current = newNodePoint;
+		if(oldNextNodePoint==NULL){
+			list -> last = newNodePoint;
+			return 0;
+		}
+		oldNextNodePoint->prev = newNodePoint;
+	}
+
+	
+	return 0;
+}
+
+/*create a new list and return its pointer*/
+LIST *ListCreate()
+{
+	int i = 0;
+	int j = 0;
+	LIST *newListPoint = NULL; 
+	printf("Got to procedure ListCreate \n");
+	
+	/*list pool creating*/
+	if(lpool == NULL){
+		lpool = (LIST *)calloc(LISTMAXIMUM,sizeof(LIST));
+		if(lpool==NULL){
+			return NULL;
+		}else{
+			nextFreeList = lpool;
+			while(i < LISTMAXIMUM-1){
+				lpool[i].nextFreeList = &lpool[i+1];
+				i++;
+			}
+		}
+	}
+	/*node pool creating*/
+	if(npool == NULL){
+		npool = (NODE *)calloc(NODEMAXIMUM,sizeof(NODE));
+		if(npool==NULL){
+			return NULL;
+		}else{
+			nextFreeNode = npool;
+			while(j < NODEMAXIMUM-1){
+				npool[j].nextFreeNode = &npool[j+1];
+				j++;
+			}
+		}		
+	}
+	
+	if(nextFreeList == NULL){
+		printf("ERROR in ListCreate: need more space for new list\n");
+		return NULL;
+	}
+	
+	/*new empty list created*/
+	newListPoint = nextFreeList;
+	newListPoint->size=0;
+	newListPoint->first=NULL;
+	newListPoint->last=NULL;
+	newListPoint->current=NULL;
+	newListPoint->used = 1;
+	nextFreeList = nextFreeList -> nextFreeList;
+	
+	return newListPoint;
+}
+
+/* add the Item before the current item of the list*/
+int ListInsert(LIST *list, Item item)
+{	
+	/* list and current pointer cannot be NULL*/
+
+	printf("Got to procedure ListInsert \n");
+	if(list == NULL){
+		printf("Error in ListInsert : invalid parameter list = NULL \n");
+		return -1;
+	}
+	else if(list -> current == NULL){
+		printf("Error in procedure ListInsert: current item in list is Null \n");
+		return -1;
+	}
+	if(npool == NULL){
+		printf("Error in ListInsert : node pool is empty \n");
+		return -1;
+	}
+	if(nextFreeNode == NULL){
+		printf("Error in ListInsert : no nodes can be used\n");
+		return -1;
+	}
+	
+
+	return 0;
+}
+
+/*adds item to the end of list*/
+int ListAppend(LIST *list, Item item)
+{
+	printf("Got to procedure ListAppend \n");
+	
+	/* list pointer can not be NULL*/
+	if(list == NULL){
+		printf("Error in ListAppend : invalid parameter list = NULL \n");
+		return -1;
+	}
+	if(npool == NULL){
+		printf("Error in ListAdd : node pool is empty \n");
+		return -1;
+	}
+	return 0;
+}
+
+/*adds item to the front of list*/
+int ListPrepend(LIST *list, Item item)
+{
+	printf("Got to procedure ListPrepend \n");
+	/* list pointer can not be NULL*/
+	if(list == NULL){
+		printf("Error in ListPrepend : invalid parameter list = NULL \n");
+		return -1;
+	}
+	if(npool == NULL){
+		printf("Error in ListAdd : node pool is empty \n");
+		return -1;
+	}	
+
+	return 0;
+}
+
+/*adds list2 to the end of list1*/
+void ListConcat(LIST *list1,LIST *list2)
+{
+	printf("Got to procedure ListConcat \n");
+	
+	/* both lists' pointer can not be NULL*/
+	if(list1 == NULL || list2 == NULL){
+		printf("Error in ListConcat : invalid parameter list = NULL \n");
+	}
+}

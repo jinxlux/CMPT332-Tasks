@@ -1,0 +1,61 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+For testing the code, we have many conditions:
+
+1.
+do not give any port number & machine name:
+messages like:
+usage: yourPort hostMachine hostPort
+Argument(s) is/are null
+shoule be popped out
+
+2.
+give unappropriate port numbers & machine name :
+messges like:
+machine port number wrong
+should be printed out
+
+3.
+Use 2 machines & ports, using 2 terminals
+give appropriate port numbers & machine name :
+successful message should be printed out,
+messages like:
+"unblock the stdin"
+"unblcok the socker" 
+"ready to receive"
+"ready to send"
+"ready to print"
+.etc
+should be printed out
+(just for white test: to show routines are well used.
+Features will be turned off after testing)
+
+After typing messages in from 1 terminal and press "Enter",
+the messages should immediately show on both terminals in 2 machines.
+Imformations like:
+"showList used in xx"
+"sendList used in xx"
+"receive info successfully"
+"send info successfully"
+.etc 
+should be printed out
+(again, for white testing out. This printed information be not be shown
+after testing)
+
+Keep typing more messages to test.
+
+
+
+
+

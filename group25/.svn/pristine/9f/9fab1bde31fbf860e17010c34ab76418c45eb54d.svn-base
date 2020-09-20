@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+
+int main(int argc, char *argv[])
+{
+	LIST list = {0,NULL,NULL,NULL,0,0};
+	LIST list1 = {0,NULL,NULL,NULL,0,0};
+	LIST list2 = {0,NULL,NULL,NULL,0,0};
+	ListCreate();
+	ListCount(list);
+	ListFirst(list);
+	ListLast(list);
+	ListNext(list);
+	ListPrev(list);
+	ListCurr(list);
+	ListAdd(list,NULL);
+	ListInsert(list,NULL);
+	ListAppend(list,NULL);
+	ListPrepend(list,NULL);
+	ListRemove(list);
+ 	ListConcat(list1,list2);
+ 	ListFree(list, NULL);
+	ListTrim(list);
+	ListSearch(list, NULL, NULL);
+
+}

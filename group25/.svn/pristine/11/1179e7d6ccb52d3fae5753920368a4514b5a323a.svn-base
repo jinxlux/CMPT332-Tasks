@@ -1,0 +1,96 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+
+int main(int argc, char *argv[])
+{	
+	int i;
+	int *first;
+	int *current;
+	int testArray[100];
+	
+		
+	/* create lists randomly */
+	LIST* newList1 = ListCreate();
+	LIST* newList2 = ListCreate();
+	LIST* newList3 = ListCreate();
+	LIST* newList4 = ListCreate();
+	
+	/*test whether all lists are created successfully*/
+	if(!(newList1 -> used)){
+		printf("Error in Test: List1 is not created\n");
+		return 0;
+	}
+	if(!(newList2 -> used)){
+		printf("Error in Test: List2 is not created\n");
+		return 0;
+	}
+	if(!(newList3 -> used)){
+		printf("Error in Test: List3 is not created\n");
+		return 0;
+	}
+	if(!(newList4 -> used)){
+		printf("Error in Test: List4 is not created\n");
+		return 0;
+	}
+	
+	
+	for(i=0;i<10;i++){
+		testArray[i] = i;
+		ListAdd(newList1,&testArray[i]);
+	}
+	return 0;
+	
+	first = (int*)ListFirst(newList1);
+	if(*first != 0){
+		printf("Error in Test ListFirst&ListAdd: First item should be zero");
+		return 0;
+	}
+	
+	for(i=1;i<10;i++){
+		current = (int*)ListNext(newList1);
+		if(*current != i){
+			printf("Error in Test ListNext&ListAdd: current item should be %d, but not %d",i,*current);
+			return 0;
+		}
+	}
+	
+	current = (int*)ListNext(newList1);
+	if(current != NULL){
+		printf("Error in Test ListNext: beyond the end; NULL should return");
+		return 0;
+	}
+
+	
+	
+	/* given NULL pointer of list to show Errors. Except ListCreate ,*/
+	/* all should report error*/
+	ListCreate();
+	ListCount(NULL);
+	ListFirst(NULL);
+	ListLast(NULL);
+	ListNext(NULL);
+	ListPrev(NULL);
+	ListCurr(NULL);
+	ListAdd(NULL,NULL);
+	ListInsert(NULL,NULL);
+	ListAppend(NULL,NULL);
+	ListPrepend(NULL,NULL);
+	ListRemove(NULL);
+ 	ListConcat(NULL,NULL);
+ 	ListFree(NULL, NULL);
+	ListTrim(NULL);
+	ListSearch(NULL, NULL, NULL);
+	
+	return 0;
+}

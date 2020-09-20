@@ -1,0 +1,35 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+We finished most parts of this chat program.
+We finished keyboardThread() to get message from user,
+printToScreen() to print the message to screen. Also we finished some
+of the sendOverNetwork() and receiveNetworkMsg(). We have some test results showed below:
+
+// wrong port
+tow087@tux7:~/cmpt332assignment/group25/A2P2> ./s-chat 30001 peon34 39001
+mainp function need to be 
+Could not find host name: peon34
+
+// no args: just stop
+xul395@tux6:~/cmpt332A1/group25/A2P2> ./s-chat 
+usage: yourPort hostMachine hostPort
+EX: 30001 tux1 40000
+Argument(s) is/are null
+
+//
+sorry, we did not have much time to test the appropriate condition
+
+
+
+

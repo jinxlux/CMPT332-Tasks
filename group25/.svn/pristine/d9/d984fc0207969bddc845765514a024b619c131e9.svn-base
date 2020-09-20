@@ -1,0 +1,38 @@
+Tong Wang tow087 11201222
+
+
+A1:
+i = 50
+x = 1274
+y = 648
+arrSize = 50
+iPtr1 = 0x4052c0
+iPtr2 = 0x405370
+numbers = 0x405260
+
+A2:
+(gdb) print (int)(numbers + arrSize)
+$2 = 4215592
+(gdb) print (int)numbers
+$3 = 4215392
+(gdb) print (int)iPtr1
+$4 = 4215488
+(gdb) print (int)iPtr2
+$5 = 4215664
+
+iPtr1 is larger than numbers but smaller than numbers + arrSize, it access inside the array
+iPtr2 is larger than both numbers and numbers + arrSize, it can access out side of this array
+
+A3:
+i = 2
+x = 5
+y = 40
+arrSize = 50
+iPtr1 = 0x405274
+iPtr2 = 0x405350
+numbers = 0x405260
+
+A4:
+#2  0x0000000080001db2 in scheduler () at kernel/proc.c:429
+<file-name>:<line-number> <code>
+kernel/proc.c:429 acquire(&p->lock);

@@ -1,0 +1,45 @@
+lab3
+NAME: xudong li
+NSID: xul395
+Student Number: 11206927
+
+A1
+i = 50
+x = 1274
+y = 648
+arrSize = 50
+iPtr1 = 0x4052c0
+iPtr2 = 0x405370
+numbers = 0x405260
+
+A2
+(gdb) print (int)numbers
+$4 = 4215392
+(gdb) print (int)(numbers+arrSize)
+$5 = 4215592
+(gdb) print (int)iPtr1
+$6 = 4215488
+(gdb) print (int)iPtr2
+$7 = 4215664
+
+iPtr2 access outside of this array. It is larger than numbers + arrSize
+
+A3
+i = 3
+x = 9
+y = 108
+arrSize = 50
+iPtr1 = 0x405284
+iPtr2 = 0x405350
+numbers = 0x405260
+
+A4
+(gdb) frame 2
+#2  0x0000000080001db2 in scheduler () at kernel/proc.c:429
+
+<file-name>:<line-number> <code>
+kernel/proc.c:429 acquire(&p->lock); 
+
+
+
+

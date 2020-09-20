@@ -1,0 +1,158 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+#include <sys/time.h>
+#include "square.h"
+
+/* define variable thread, threadNumber, size, deadline, runnint to see if the thread is running and 
+ an array index is the count of thread
+*/
+struct UBCpthread_threadInfo **UBCthread;
+int threadNumber;
+int size;
+int deadline;
+int running;
+int *countArray;
+/* 
+ implement a getID function base on pthread function MyPid()
+ use this function to get thread and use in square function
+*/
+int getID(){
+    int result;
+    result = MyPid();
+    return result;
+}
+/* 
+ implement a UBCpthreadfuction(void* thread) input parameter is UBCpthread_threadInfo
+ inside the thread we could calculate the time spent and print information
+*/
+void UBCpthreadFunction(void *threadInfo){
+/* 
+declare varibale timestamp, i for for loop using, ubcpthread struct, thread_id, thread_count
+thead_id is the id of thread 
+*/
+    long beginTime, endTime, timeSpent;
+    int i;
+    struct UBCpthread_threadInfo *inputThreadinfo;
+    int thread_id, thread_count;
+    inputThreadinfo = (struct UBCpthread_threadInfo*)threadInfo;
+    thread_id = inputThreadinfo -> threadID;
+    thread_count = inputThreadinfo -> threadCount;
+/* 
+use Time() function to store the begin time in the global UBCthread array, index is thread_count
+*/   
+    UBCthread[thread_count] -> startTime = Time()
+/* 
+*/
+/* 
+set running =1
+*/
+    inputThreadinfo -> running = 1;
+/* 
+call square() function
+*/    
+    for(i = 1; i <= size; i++){
+        Square(i);
+    }
+    /* 
+
+    */
+    /* 
+    store end time and then calulate the time spent
+    */
+    endTime = Time();
+    beginTime = UBCthread[thread_id] -> startTime;
+    timeSpent = endTime - beginTime;
+    printf("This is the number %d thread.The thread's id is %d and it spent time: %ld clock ticks:\nNumber of square() called is %d\n ",
+           thread_count,thread_id, timeSpent, countArray[thread_id]);
+
+
+}
+/* 
+this is the parent thread function, use running to check runnint status, use sleep() to sleep the function
+similar to UBCpthreadFunction just need check 
+*/
+void UBCparent(){
+    int i;
+    int timeSpent;
+    long beginTime, endTime;
+    sleep(deadline);
+    for(int i = 0; i < threadNumber; i++){
+        if(UBCthread[i] -> running == 0){
+            break;
+        }
+        if(Kill(UBCthread[i] -> threadID) == UBCthread[i] -> threadID){
+            endTime = Time();
+            beginTime = UBCthread[thread_id] -> startTime;
+            timeSpent = endTime - beginTime;
+            printf("This is the number %d thread.The thread's id is %d and it spent time: %ld clock ticks:\nNumber of square() called is %d\n ",
+            i,UBCthread[i] -> threadID, timeSpent, countArray[thread_id]);
+        }
+        
+    }
+}
+
+static void parent_main(){
+    int i;
+    long time_micro;
+    sleep(deadline);
+    for(i = 0; i<nThreads; i++){
+        if(threads[i]->running == 0)
+            break;
+        if((Kill(i))==i){
+            long startTime, endTime;
+            endTime = Time();
+            startTime = threads[i]->startTime;
+            time_micro = endTime - startTime;
+            printf("Thread %d elapsed time: %ld clock ticks:\nNumber of square() called is %d\n ",
+            i, time_micro, count[i]);
+
+        }
+    }
+}
+
+int mainp(int argc, char *argv[]){
+    int i;
+    if(argc!=4){
+        printf("Usage: partA2 threads deadline size\n");
+        return -1;
+    }
+    nThreads = atoi(argv[1]);
+    deadline = atoi(argv[2]);
+    size= atoi(argv[3]);
+    threads = (UBCThread_t **)malloc(nThreads * sizeof (UBCThread_t *));
+    if(nThreads<1||deadline<0||size<0){
+        printf("Error in main(): invalid parameter %d\t%d\t%d\n", nThreads,deadline,size);
+        return -1;
+    }
+    count = (int *)malloc(sizeof(int)*nThreads);
+    for (i = 0; i < nThreads; i++) {
+        if(!(threads[i]=(UBCThread_t *)malloc(sizeof(struct UBCThreadInfo)))){
+            printf("malloc error\n");
+            return 0;
+        }
+        threads[i]->count = 0;
+        threads[i]->N = size;
+        threads[i]->threadID = i;
+        if((threads[i]->pid = Create(UBCthreadFunc, 1600000, NULL,(void *)threads[i], NORM, USR))<0){
+            printf("thread created error\n");
+        }
+    }
+    Create(parent_main, 10960000,"main", NULL, NORM,USR);
+    return 0;
+}
+/* 
+*/
+/* 
+*/
+/* 
+*/

@@ -1,0 +1,84 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+We will implement a simple chat program let people communicate.
+
+We need 2 lists - sendList and showList
+sendList will work as a buffer to save the information user typed
+and would like to send out by UDP transport.
+showList will keep any information need to shown on the user's screen.
+Thus, all information user typed or received from socket will be in
+showList.
+
+we need 2 semaphores:
+one for the sendList.
+one for the showList.
+semaphores are for protecting this 2 lists, so mutual exclusion can
+be ensured.
+
+We need 4 thread functions for that program:
+1. getMsgFromKeyboard();
+This function will unblocking read the input from keyboard, and save the String
+read in both sendList and showList. If will use loop to keep running and keep
+reading:
+
+	set stdin unblocking
+	for(;;){
+		char* info = malloc(100);
+		while (read(stdin,info)==-1);
+		P
+		ListPrepend(sendList,info);
+		V
+		P
+		ListPrepend(showList,info);
+		V
+	}
+
+2. printToScreen()
+This is for the print thread.
+It will keep popping out the information in the showList, and show
+information to the screen:
+	for(;;){
+		P
+		keep getting information out from the showList;
+		V
+		show it on the screen;
+	}
+
+3. sendOverNetwork()
+This is a sender thread
+sender thread
+  once the server get msg from the keyboard, it will add the msg to the queue.
+  and then, pop the first msg from the queue to the sender thread.
+  sender will deliver this to the receiver thread on the other machine.
+
+listen to the server;
+if(get a signal):
+	send the msg from the server to the receive.
+	create(socket)	//create socket to send message
+    	bind(socket)
+	Send(message, host IP, host port) //to host and specify port
+end if
+4. receiveNetworkMsg()
+This is a receive thread
+receiver thread
+  Will wait for message from remote machines and once a message is received
+  it will send to the sever. 
+
+listen to the remote sender.
+if(get a signal):
+	create(socket)	//create socket to send message
+    	bind(socket)
+	Recieve(message, host IP, host port) //to host and specify port
+	Send(server, msg)
+end if

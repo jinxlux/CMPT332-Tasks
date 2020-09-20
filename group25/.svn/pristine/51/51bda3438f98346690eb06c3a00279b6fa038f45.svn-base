@@ -1,0 +1,96 @@
+defs.h
+proc.c
+syscall.c
+syscall.h
+sysproc.c
+
+
+
+
+
+user.h
+usys.pl
+Makefile(133line) use for test same with zombie
+
+add a test file
+
+
+Professor new changed file:
+defs.h
+proc.c
+proc.h
+trap.c
+vm.c
+memlayout.h
+
+In proc.c, we mainly implement thread_create, thread_join, 
+mtx_create, mtx_lock and mtx_unlock.
+
+For implementing the thread_create, we first allocate process
+to the new thread by allocproc(). We got the parent process by calling
+myproc(); Since our new thread share the address space with it's parent, 
+we just simply assign it's parent's pagetable to the new thread:
+np->pagetable = p->pagetable; (np is pointer to the new thread, p is pointer
+to the parent process). New thread should have the same size as it's 
+parent, so we let np->sz = p->sz. Then, we set new thread's parent by
+np->parent = p. After that, We copy saved user registers, 
+cause thread_create to return 0 in the child. 
+We need to use uvmmap to copy the trap frame information to the new
+thread, then we set ra(returned address), sp(stack pointer), 
+epc(program counter) of new thread's trap frame. Incrementing reference 
+counts on open file descriptors, setting new thread's name, state, 
+lock are all same as fork(). Finally, we return np->pid.
+
+For implementing the thread_join, we first need to hold p->lock for the 
+whole time to avoid lost wakeups from a child's exit(). Then, we use
+a for-loop to continuely scan through table looking for exited children.
+We check whether the scanned thread is the child by checking its parent
+and pagetable: if(np->parent == p && np->pagetable == p->pagetable).
+We uses np->parent without holding np->lock. 
+acquiring the lock first would cause a deadlock,
+since np might be an ancestor, and we already hold p->lock.
+np->parent can't change between the check and the acquire() because only 
+the parent changes it, and we're the parent.
+If we found the thread is the child, we need to check whether it is terminated
+by checking its state: if(np->state == ZOMBIE). If it is true, it means we
+find one, and we need to free it, release it's lock, unmaps its trap frame 
+by uvmunmaptf, release parent's lock and place a pointer to its stack in stack.
+We then turn it's pid. 
+If we cannot find any children threads after all, we just release parent's 
+lock and return -1.
+Finally, we Wait for a child to exit.
+
+For implementing the mtx_create, we first need to add an array in the proc.c 
+to save the spinlock created, and we need an lock ID to indicate which 
+spinlock is created/locked/unlocked.
+In int mtx_create(int locked), we just initialize a lock at the
+lockID position in the array by the value of locked given:
+initlock(&locks[lockID],"lock")
+locks[lockID]->locked = locked
+Then, we save the current ID, and we should add lockID by one for the future
+mutex lock created.
+Finally we return the current lock ID.
+If lockID is bigger than the size of the array, we just return -1 to show
+the failure of creating the new mutex.
+
+For implementing int mtx_lock(int lock_id), we first check whether the
+lock_id is legal. If it's not, we return -1.
+Then, we should use the lock_id to get the spinlock in the array, 
+and we use acquire(struct spinlock *lk) 
+to acquire the lock. Thread should be blocked here if the mutex's locked
+is 1(true). It will not be blocked if locked is 0(false), and acquire 
+will reset the locked to 1 to block the next thread call this routine by 
+using __sync_lock_test_and_set.
+If everything works well, it should return 0; it will return -1 
+otherwise.
+
+For implementing int mtx_unlock(int lock_id), we first check whether the
+lock_id is legal. If it's not, we return -1.
+Then, we should use the lock_id to get the spinlock in the array, 
+and we use release(struct spinlock *lk)
+to release the lock. (lk->locked should be 0 after) 
+If everything works well, it should return 0; it will return -1 
+otherwise.
+
+
+

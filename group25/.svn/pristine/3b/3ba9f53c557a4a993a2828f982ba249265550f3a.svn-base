@@ -1,0 +1,62 @@
+#  NAME: Xudong Li
+#  NSID:xul395
+#  Student Number:11206927
+
+
+# 	NAME:Tong Wang   
+#   NSID: tow087 
+#   Student Number: 11201222
+#   CMPT 332 Term 1 2019
+
+#   group25
+
+CC = gcc
+CFLAGS = -g
+CPPFLAGS = -std=gnu90 -Wall -pedantic
+ARCH = $(shell uname -sm | tr -d ' ')
+LIBPATH = /student/cmpt332/pthreads/lib/$(ARCH)
+HEADPATH = /student/cmpt332/pthreads
+.PHONY: all clean
+
+#part A1
+
+ifneq (,$(findstring MINGW,$(ARCH)))
+all: allA 
+allA: partA1
+square.o: square.c
+	$(CC) -o square.o -c $(CPPFLAGS) $(CFLAGS)  square.c
+partA1.o: partA1.c
+	$(CC) -o partA1.o -c $(CPPFLAGS) $(CFLAGS) PartA1.c
+partA1: partA1.o square.o
+	$(CC) -o partA1 $(CPPFLAGS) $(CFLAGS) partA1.o square.o
+
+else
+#$TARGET
+all: C A2 
+C: mytestlist
+A2: partA2
+#Part A2
+square.o: square.c
+	$(CC) -o square.o -c $(CPPFLAGS) $(CFLAGS)  square.c
+partA2.o: partA2.c
+	$(CC) -o partA2.o -c $(CPPFLAGS) $(CFLAGS) partA2.c -I$(HEADPATH)
+partA2: partA2.o square.o
+	$(CC) -o partA2 partA2.o square.o -lpthreads -L$(LIBPATH)
+#Part C
+list_adders.o: list_adders.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $^
+list_movers.o: list_movers.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) list_movers.c
+list_removers.o: list_removers.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) list_removers.c
+liblist.a: list_movers.o list_adders.o list_removers.o
+	ar rcs liblist.a list_movers.o list_adders.o list_removers.o
+mytestlist.o: mytestlist.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) mytestlist.c
+mytestlist: mytestlist.o liblist.a
+	$(CC) -o mytestlist $(CFLAGS) $(CPPFLAGS) mytestlist.o -L. -llist
+
+endif
+clean:
+	rm -f *.o *.a mytestlist partA1.exe partA2
+#part C

@@ -1,0 +1,168 @@
+# Tong Wang tow087 11201222
+
+#  NAME: Xudong Li
+#  NSID:xul395
+#  Student Number:11206927
+#  group 25
+
+For part c, we are going to use 4 files to create a list library, 
+and one file for testing. Each file has specific tasks.
+
+(For phase2, we only implement all routines in list_adders.c, and part of
+routines in list_movers.c. We also did part of extra credit portion. 
+We design and implement double-memory for LISTs and NODEs when they are full.
+We did not design and do the shrink part in extra credit portion.
+For any other routines, we have design but not implementation)
+
+In the header file list.h, we use structures to represent NODE and LIST, 
+and we typedef them as NODE and LIST. In the structure for NODE, we have 
+a void* field (data) to point to the item of that node. Also, we have 2 
+NODE* fields (prev,next) which point to the previous node and the following 
+node of the node, and we need an int field (occupied) to help us figure out
+whether this node has been added to any lists. Furthermore, we add a new
+NODE* field (nextFreeNode) to point to the next free NODE in the NODEs' 
+pool. 
+In the structure for LIST, 
+we need an int field called size to represent the number of items are added 
+to the list, and we use 3 NODE* fields (first,current,last) to reference 
+the first NODE, current NODE the last NODE of the list. Also,we need to have 
+an int field to represent whether this list has been activated and used. 
+Furthermore, we add a new LIST* field (nextFreeNode) to point to the 
+next free LIST in the LISTs' pool. 
+Besides LIST and NODE, list.h contains all function prototypes we need.
+We also define the maximum number for nodes and lists as LISTMAXIMUM(1280) 
+and NODEMAXIMUM(1280), and we define the minimum number for nodes 
+and lists for first memory allocation as MIN_LISTS(5) and MIN_NODES(5)
+in list.h. (MIN_LISTS and MIN_NODES are for EXTRA CREDIT)
+
+In the list_adders.c, we implement ListCreate,ListAdd, ListInsert, 
+ListAppend, ListPrepend andListConcat. 
+We also have some variables in list_adders.c:
+lpool is LIST pool;
+npool is NODE pool;
+nextFreeList is an LIST point which points the the first free LIST space;
+nextFreeNode is an NODE point which points the the first free NODE space;
+exponent is an int for calculating how much memory should be reallocated for
+NODE pool;
+listsExponent is an int for calculating how much memory should be 
+reallocated for List pool;
+(exponent and listsExponent are for the bonus mark)
+
+For LIST *ListCreate(), we first define variables we will use in 
+the function. Then, we decided whether the LIST pool(lpool) 
+and NODE pool(npool) are allocated. If lpool == NULL, allocated MIN_LISTS
+memory for LIST pool; if npool == NULL, allocated MIN_NODES 
+memory for NODE pool. After allocation, we let nextFreeNodes and
+nextFreeNodes of NODEs and LISTs in pools point to the NODE and LIST after
+them. We let the global variable nextFreeList point to the first space of
+LIST pools we just created.
+After that, we decide whether we need more space for LISTs. 
+If nextFreeList == NULL, we reallocate 2^(listsExponent) * MIN_LISTS memory 
+for LISTs. If 2^(listsExponent) * MIN_LISTS > LISTMAXIMUM, 
+we do not reallocate, and return NULL. After reallocation, listsExponent+=1.
+(reallocation is for extra credit)
+Finally, we can create new LIST. we let *LIST list = nextFreeList;
+list->size=0, 
+list->first = list->last = list->current = NULL,;list.used = 1;
+nextFreeList = list -> nextFreeList; list -> nextFreeList = NULL. 
+Return list if it's successful, NULL otherwise.
+
+For int ListAdd(list, item), We add the item after the current item to 
+the list. we first decide whether we need more space for
+NODEs. If nextFreeNode == NULL, we reallocate 2^(exponent) * MIN_NODES
+memory for NODEs. If 2^(exponent) * MIN_NODES > NODEMAXIMUM, 
+we do not reallocate, and return NULL. After reallocation, exponent+=1.
+(reallocation is for extra credit).
+We pick an unused NODE from nextFreeNode, and assign the item to the NODE.
+If the list is empty (list->size==0 && list->current==NULL), we let
+node->prev = node->next = NULL, and list -> current = list ->first = 
+list ->first = node, list->size++.
+If the list is not empty, we find the current NODE of the list, 
+and we redirect its next NODE pointer to the new NODE. 
+We also need to redirect the new NODE's previous and
+next NODE's pointers and the previous Node pointer of NODE following the 
+current NODE. Finally, we change the current NODE to the new NODE, let
+nextFreeNode = nextFreeNode->nextFreeNode, and return 0.
+If we can not pick an unused NODE, or any other exceptions happen, 
+the routines shall return -1.
+
+For int ListInsert(list, item), we almost do the same thing as the ListAdd,
+but we just add the item before the current item this time. We also need 
+to redirect the pointers of previous and next NODEs, and we change the 
+current Node of the list as the ListAdd. Return values and their meaning 
+are the same as ListAdd.Reallocation and the way we manipulate nextFreeNode
+are same as the ListAdd.
+
+For int ListAppend(list, item), we add the item to the end of the list, 
+and make the new NODE added as current NODE. Reallocation and the way 
+we manipulate nextFreeNode are same as the ListAdd.Redirections are needed, 
+and Return values are same as previous routines.
+
+For int ListPrepend(list, item), we add the item to the front of the 
+list, and make the list's current NODE pointer points to the new node.
+Redirections are needed, and Return values are same as previous routines.
+Reallocation and the way we manipulate nextFreeNode are same as the ListAdd.
+
+For void ListConcat(list1, list2), if list1 is empty (list1->size == 0 ), 
+copy list2 to list1, delete list2 (set all properties of list2 to 0 or NULL),
+and let list2->nextFreeNode = nextFreeNode; nextFreeNode = list2. 
+If list2 is empty, delete list2 and let list2->nextFreeNode = nextFreeNode; 
+nextFreeNode = list2. Finally, if none of list1 and list2 is empty,
+we let the next NODE pointer of the last NODE of list1 point to the first 
+NODE of list2, and we let the previous NODE pointer of the first NODE of 
+list2 point to the last NODE of list1. 
+Then, we make list2 empty, set all pointers to NULL, and let 
+list2->nextFreeNode = nextFreeNode; nextFreeNode = list2. 
+For all add routines above, we all need to add the size of lists given
+by one. 
+For ListConcat, we change the list1.size to list1.size+list2.size.
+
+In the list_movers.c, we implement ListCount, ListFirst, ListLast, 
+ListNext, ListPrev, ListCurr, and ListSearch.
+For ListCount(list), we just return list.size; if list does not exist(NULL)
+return -1.
+For void *ListFirst(list), we just let list.current = list.first,
+and return list.first -> data. Reture NULL if exceptions happen.
+For void *ListLast(list), we let list.current = list.last, 
+and return list.last -> data. Reture NULL if exceptions happen.
+For void *ListNext(list), we let list.current = list.current -> next
+Return list.current -> data if list.next != NULL; return NULL otherwise.
+For void *ListPrev(list), we let list.current = list.current -> prev
+Return list.current -> data if list.prev != NULL; return NULL otherwise.
+For void *ListCurr(list), we just return list.current -> data.
+Reture NULL if exceptions happen.
+For void *ListSearch(list, comparator, comparisonArg), the comparator 
+is a pointer to a routine which compares comparisonArg and the other item
+given by item's pointer. Comparator should be defined in the test program.
+For ListSearch, we will use while loop to compare items of nodes one by one
+with comparisonArg by using comparator given. It looks like the algorithm 
+below:
+
+while(list.next != NULL){
+	list.current = list.next;
+	if(compare(list.current,comparisonArg)){
+		Found
+		return list.current -> data;
+	}
+}
+return NULL;
+
+In the list_removers.c, we implement ListRemove, ListFree and ListTrim.
+For void *ListRemove(list), we let the current NODE's previous NODE's 
+next pointer point to the next NODE of the current one. We also let the 
+current NODE's next NODE's previous pointer point to the previous NODE of 
+the current one. We need to set prev and next pointer of current 
+node to NULL too. Finally we return list.current -> data.
+For void *ListTrim(list), it is almost same as ListRemove; although we
+delete the last NODE from the list this time. We let 
+list.last = list.last.prev, list.last.next = NULL, and we set original
+last NODE's prev NULL. Return the pointer of the original last NODE's item.
+For void ListFree(list, itemFree), itemFree is a pointer to  a routine
+that frees an item. itemFree Will be defined in the test file. For this 
+routine, we let itemFree free all items in the list first, and we set all
+NODEs in list as empty and unused. Finally, we free list from the LIST array.
+
+Finally, we define some items in the mytestlist.c, and we use the list 
+library to create LISTs, add items to them. Define comparator and itemFree
+routines for testing ListSearch and ListFree. Define display routine for 
+items, so we can test routines for adding items.

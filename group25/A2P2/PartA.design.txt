@@ -1,0 +1,161 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+
+We changed following files to implement partA:
+defs.h
+proc.c
+syscall.c
+syscall.h
+sysproc.c
+user.h
+usys.pl
+Makefile
+
+We should mainly implement most functions in proc.c. In others files, 
+we just add statements same as statements for other system calls
+to make the system call work.
+
+Makefile(133line) use for test same with zombie
+add a test file
+
+In proc.c, we mainly implement thread_create, thread_join, 
+mtx_create, mtx_lock and mtx_unlock.
+
+For implementing the thread_create, we first allocate process
+to the new thread by allocproc(). We got the parent process by calling
+myproc(); Since our new thread share the address space with it's parent, 
+we just simply assign it's parent's pagetable to the new thread:
+np->pagetable = p->pagetable; (np is pointer to the new thread, p is pointer
+to the parent process). New thread should have the same size as it's 
+parent, so we let np->sz = p->sz. Then, we set new thread's parent by
+np->parent = p. After that, We copy saved user registers, 
+cause thread_create to return 0 in the child. 
+We need to use uvmmap to copy the trap frame information to the new
+thread, then we set ra(returned address), sp(stack pointer), 
+epc(program counter) of new thread's trap frame. Incrementing reference 
+counts on open file descriptors, setting new thread's name, state, 
+lock are all same as fork(). Finally, we return np->pid.
+
+For implementing the thread_join, we first need to hold p->lock for the 
+whole time to avoid lost wakeups from a child's exit(). Then, we use
+a for-loop to continuely scan through table looking for exited children.
+We check whether the scanned thread is the child by checking its parent
+and pagetable: if(np->parent == p && np->pagetable == p->pagetable).
+We uses np->parent without holding np->lock. 
+acquiring the lock first would cause a deadlock,
+since np might be an ancestor, and we already hold p->lock.
+np->parent can't change between the check and the acquire() because only 
+the parent changes it, and we're the parent.
+If we found the thread is the child, we need to check whether it is terminated
+by checking its state: if(np->state == ZOMBIE). If it is true, it means we
+find one, and we need to free it, release it's lock, unmaps its trap frame 
+by uvmunmaptf, release parent's lock and place a pointer to its stack in stack.
+We then turn it's pid. 
+If we cannot find any children threads after all, we just release parent's 
+lock and return -1.
+Finally, we Wait for a child to exit.
+
+For implementing the mtx_create, we first need to add an array in the proc.c 
+to save the spinlock created, and we need an lock ID to indicate which 
+spinlock is created/locked/unlocked.
+In int mtx_create(int locked), we just initialize a lock at the
+lockID position in the array by the value of locked given:
+initlock(&locks[lockID],"lock")
+locks[lockID]->locked = locked
+Then, we save the current ID, and we should add lockID by one for the future
+mutex lock created.
+Finally we return the current lock ID.
+If lockID is bigger than the size of the array, we just return -1 to show
+the failure of creating the new mutex.
+
+For implementing int mtx_lock(int lock_id), we first check whether the
+lock_id is legal. If it's not, we return -1.
+Then, we should use the lock_id to get the spinlock in the array, 
+and we use acquire(struct spinlock *lk) 
+to acquire the lock. Thread should be blocked here if the mutex's locked
+is 1(true). It will not be blocked if locked is 0(false), and acquire 
+will reset the locked to 1 to block the next thread call this routine by 
+using __sync_lock_test_and_set.
+If everything works well, it should return 0; it will return -1 
+otherwise.
+
+For implementing int mtx_unlock(int lock_id), we first check whether the
+lock_id is legal. If it's not, we return -1.
+Then, we should use the lock_id to get the spinlock in the array, 
+and we use release(struct spinlock *lk)
+to release the lock. (lk->locked should be 0 after) 
+If everything works well, it should return 0; it will return -1 
+otherwise.
+
+
+
+
+Following is the test implementation (in test_a2.c):
+We test the system calls implemented in a file called test_a2.c.
+We implement a simple producer-consumer problem in this file.
+We won't use an actual array for the buffer, but we will use
+a simple variable to track the position we put 'item' in the
+'buffer'.
+We will implement following routines:
+init()
+producer(void* arg)
+consumer(void* arg)
+createThread()
+
+In init, we initialize all variables and create mutexs by mtx_create
+(thus, we can test mtx_create here)
+we will have 2 mutexs - full and empty.
+Full is initially locked (mtx_create(1)), and empty is initially 
+unlocked(mtx_create(0)).
+
+In producer, we will use a while-loop to keep producing items. We will use 
+mtx_lock(empty) here to protect the 'buffer'.(Thus, mtx_lock tested)
+Then we produce item, and we put the item in the position and add position
+by 1 for next produced item.
+We need to unlock the consumer to get item in the position we just put the 
+item by mtx_unlock(full). (Thus, mtx_unlock tested)
+
+In consumer, we will use a while-loop to keep consuming items. We will use 
+mtx_lock(full) here to protect the 'buffer'.(Thus, mtx_lock tested)
+Then we consume item, and we get the item from the position and subtract 
+position by 1 to show that we have consumed an item.
+
+createThread() just print messages out. We implement this routine is simply 
+for testing  thread_create and thread_join 
+(Since producer and consumer just keep producing stuffs in while-loop, 
+it is hard to let them join back)
+
+In the main, we malloc stacks, create threads we want (thread for producer, 
+consumer and for createThread),use thread join only after the thread for 
+createThread(). We will use sleep() to let the produce and consume 
+work smoothly.
+
+
+When we test in terminal, we should first use command 'make qemu' 
+for xv6. Then, execute producer_consumer problem by './test_a2'.
+Messages like 'thread created successfully','thread joined successfully',
+'produce and put in position X' and 'consume at position X'
+should print out. 
+Producer should produce something first, then the consumer should
+consume that item after.
+
+Xv6 does not work very steadily. Sometimes 'make qemu' may not
+work well. Try to 'make clean', then 'make qemu' again if any
+problems occur. It should works fine after.
+
+
+
+
+
+

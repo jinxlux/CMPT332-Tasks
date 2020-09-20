@@ -1,0 +1,10 @@
+b7233a81c235ca4737da1034da8e97003d9d0d9c		branch 'util' of git://github.com/mit-pdos/xv6-riscv-fall19
+02247fb22b72e8d3851f7834336c319380002117	not-for-merge	branch 'alloc' of git://github.com/mit-pdos/xv6-riscv-fall19
+8d97b119d89ed71051241c78c1bf680df940a7ec	not-for-merge	branch 'cow' of git://github.com/mit-pdos/xv6-riscv-fall19
+03b7721ed03c15038b08d1f80d6d5aefb914dcf1	not-for-merge	branch 'fs' of git://github.com/mit-pdos/xv6-riscv-fall19
+8706c7ad5ad1099bf06c33012f5ef826a2c7aae6	not-for-merge	branch 'lazy' of git://github.com/mit-pdos/xv6-riscv-fall19
+cdfbc0be313aad019bb293c45393301bea21b227	not-for-merge	branch 'lock' of git://github.com/mit-pdos/xv6-riscv-fall19
+2ce91aeeb9011d6897a7b757e8433a094776cbaf	not-for-merge	branch 'mmap' of git://github.com/mit-pdos/xv6-riscv-fall19
+d84809e3a5c8a5bd8f0795c79ec609a8f30fb1ae	not-for-merge	branch 'sh' of git://github.com/mit-pdos/xv6-riscv-fall19
+29413700cc70b5fc43a79b47b4cc7259579c363e	not-for-merge	branch 'syscall' of git://github.com/mit-pdos/xv6-riscv-fall19
+dbb036fc071e6323a7a294c392d158bc36abc91f	not-for-merge	branch 'xv6-riscv-fall19' of git://github.com/mit-pdos/xv6-riscv-fall19

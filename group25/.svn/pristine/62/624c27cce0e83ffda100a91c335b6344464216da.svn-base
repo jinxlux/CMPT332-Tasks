@@ -1,0 +1,121 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+
+
+
+hart 0 starting
+hart 1 starting
+hart 2 starting
+init: starting sh
+$ ./test_a2
+thread create test
+thread create OK
+thread join test
+thread join OK
+Test all five system call by producer-consumer
+produce a data and put in position 1
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+remove a data from position 1
+produce a data and put in position 1
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+remove a data from position 1
+produce a data and put in position 1
+produce a data and put in position 2
+remove a data from position 2
+remove a data from position 1
+produce a data and put in position 1
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+remove a data from position 1
+produce a data and put in position 1
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+remove a data from position 1
+produce a data and put in position 1
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+remove a data from position 1
+produce a data and put in position 1
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+remove a data from position 1
+produce a data and put in position 1
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2
+produce a data and put in position 2
+remove a data from position 2

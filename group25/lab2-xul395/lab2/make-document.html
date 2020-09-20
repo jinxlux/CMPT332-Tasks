@@ -1,0 +1,39 @@
+<body>
+<h4 id="MTiaR">Multiple Targets in a Rule</h4>
+   <p>This is useful in two cases.
+
+   You want just prerequisites, no recipe.
+
+   Similar recipes work for all the targets. The recipes do not need to be
+   absolutely identical, since the automatic variable ‘$@’ can be used to
+   substitute the particular target to be remade into the commands (see
+   Automatic Variables). For example:
+   <br>
+   <br>
+   <code>
+   bigoutput littleoutput : text.g
+   <br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generate text.g -$(subst output,,$@) > $@
+   </code>
+   <br>
+   <br>
+   is equivalent to
+   <br>
+   <br>
+   <code>
+   bigoutput : text.g
+   <br>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generate text.g -big > bigoutput
+   <br>
+   <br>
+   littleoutput : text.g
+   <br>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generate text.g -little > littleoutput
+   </code>
+   <br>
+   <br>
+   Suppose you would like to vary the prerequisites according to the target,
+   much as the variable ‘$@’ allows you to vary the recipe. You cannot do this
+   with multiple targets in an ordinary rule, but you can do it with a static
+   pattern rule.</p>
+</body>

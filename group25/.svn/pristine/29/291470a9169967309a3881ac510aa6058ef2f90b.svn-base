@@ -1,0 +1,307 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+
+
+/*
+~/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold 
+is the original xv6 dictionary from A1 also add some supplement file from professor;
+~/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv 
+is the changed xv6 for Assignment2 partA
+
+we use diff -r to show difference
+*/
+
+
+tow087@s360-drone8:~/cmpt332assignment/group25/A2P2/xv6test> diff -r ~/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv ~/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold
+diff -r /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/kernel/defs.h /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold/kernel/defs.h
+106,112d105
+< int             numprocs(void);
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< int             threadcreate(void (*tmain)(void *), void *stack, void *arg);
+< int             threadjoin(void **stack);
+< int             mtxcreate(int locked);
+< int             mtxlock(int lock_id);
+< int             mtxunlock(int lock_id);
+diff -r /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/kernel/proc.c /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold/kernel/proc.c
+15,17d14
+< struct spinlock locks[1024];
+< int lockID = 0;
+< 
+661,817d657
+< /* Get access to process table. */
+< /* check process state equals to RUNNABLE */
+< /* */
+< int
+< numprocs(void){
+<   int pcount;
+<   pcount = 0;
+<   struct proc *p;
+< 
+<   for(p = proc; p < &proc[NPROC]; p++) {
+<     acquire(&p->lock); 
+<     if(p->state == RUNNABLE) {
+<       pcount++;
+<     } 
+<     release(&p->lock); 
+<   }
+< 
+<   return pcount;
+< }
+< 
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< /* This creates a new thread that starts execution at the function tmain, 
+< which is called with the argument arg. 
+< The caller is responsible for allocating (using malloc, given in the file "umalloc.c") 
+< a new user stack before calling thread_create and passing the address of the 
+< top of this memory region in as the stack argument. 
+< Returns the thread ID (which is really just a process ID) of the new thread. */
+< /* Its implementation will closely mimic that of fork, except that the newly 
+< created process will share the address space of 
+< its parent and will therefore have automatic access to all of its parent's code 
+< and data segments. */
+< int
+< threadcreate(void (*tmain)(void *), void *stack, void *arg)
+< {
+<   int i, pid;
+<   struct proc *np;
+<   struct proc *p = myproc();
+< 
+<   /* Allocate process. */
+<   if((np = allocproc()) == 0){
+<     return -1;
+<   }
+< 
+<   /*no need new empty page table and copy memory;
+<   just make new thread's page table as parent's page table */
+<   np->sz = p->sz;
+<   np->pagetable = p->pagetable;
+<   np->parent = p;
+<   /* Set ra, sp, epc */
+<   np->tf->a0 = (uint64)arg;
+<   np->tf->sp = (uint64)stack;
+<   np->tf->epc = (uint64)tmain;
+<   np->tf->ra = 0xFFFFFFFF;
+<   /* use uvmmap to copy the trap frame information */
+<   np->vtf = uvmmaptf(np->pagetable,np->tf);
+<   /* increment reference counts on open file descriptors. */
+<   for(i = 0; i < NOFILE; i++)
+<     if(p->ofile[i])
+<       np->ofile[i] = filedup(p->ofile[i]);
+<   np->cwd = idup(p->cwd);
+< 
+<   safestrcpy(np->name, p->name, sizeof(p->name));
+< 
+<   pid = np->pid;
+< 
+<   np->state = RUNNABLE;
+< 
+<   release(&np->lock);
+< 
+<   return pid;
+< }
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< /*This will cause the caller to block until a child thread has terminated, 
+< upon which its ID will be returned and a pointer to its stack placed in stack 
+< (so that the latter can be freed). If the caller does not have any child threads, 
+< it will return immediately with -1.*/
+< int
+< threadjoin(void **stack)
+< {
+<   struct proc *np;
+<   int havekids, pid;
+<   struct proc *p = myproc();
+< 
+<   /* hold p->lock for the whole time to avoid lost */
+<   /* wakeups from a child's exit(). */
+<   acquire(&p->lock);
+< 
+<   for(;;){
+<     /* Scan through table looking for exited children. */
+<     havekids = 0;
+<     for(np = proc; np < &proc[NPROC]; np++){
+<       /* this code uses np->parent without holding np->lock. */
+<       /* acquiring the lock first would cause a deadlock, */
+<       /* since np might be an ancestor, and we already hold p->lock. */
+<       if(np->parent == p && np->pagetable == p->pagetable){
+<         /* np->parent can't change between the check and the acquire() */
+<         /* because only the parent changes it, and we're the parent. */
+<         acquire(&np->lock);
+<         havekids = 1;
+<         if(np->state == ZOMBIE){
+<           /* Found one. */
+<           pid = np->pid;
+<           uvmunmaptf(np->pagetable, np->vtf);
+<           /* free np but do not free pagetable */
+<           np->pagetable = 0;
+<           freeproc(np);
+<           release(&np->lock);
+<           release(&p->lock);
+<           /* return caller's ID and a pointer to its stack. */
+<           /* place this pointer in stack. */
+<           // stack = p->tf->sp;
+<           return pid;
+<         }
+<         release(&np->lock);
+<       }
+<       
+<     }
+< 
+<     /* if no child thread return -1 */
+<     /* No point waiting if we don't have any children. */
+<     if(!havekids || p->killed){
+<       release(&p->lock);
+<       return -1;
+<     }
+<     
+<     /* Wait for a child to exit. */
+<     sleep(p, &p->lock);  /*DOC: wait-sleep */
+<   }
+< }
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< int mtxcreate(int locked){
+<   if(lockID >= 1024){
+<     return -1;
+<   }
+<   int tempID;
+<   initlock(&locks[lockID],"lock");
+<   locks[lockID].locked = locked;
+<   tempID = lockID;
+<   lockID++;
+<   return tempID;
+< }
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< int mtxlock(int lock_id){
+<   if(lockID >= 1024 || lockID < 0){
+<     return -1;
+<   }
+<   acquire(&locks[lock_id]);
+<   return 0;
+< }
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< int mtxunlock(int lock_id){
+<   if(lockID >= 1024 || lockID < 0){
+<     return -1;
+<   }
+<   release(&locks[lock_id]);
+<   return 0;
+< }
+\ No newline at end of file
+diff -r /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/kernel/syscall.c /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold/kernel/syscall.c
+128,133d127
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< extern uint64 sys_threadcreate(void);
+< extern uint64 sys_threadjoin(void);
+< extern uint64 sys_mtxcreate(void);
+< extern uint64 sys_mtxlock(void);
+< extern uint64 sys_mtxunlock(void);
+158,163d151
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< [SYS_threadcreate]   sys_threadcreate,
+< [SYS_threadjoin]   sys_threadjoin,
+< [SYS_mtxcreate]   sys_mtxcreate,
+< [SYS_mtxlock]   sys_mtxlock,
+< [SYS_mtxunlock]   sys_mtxunlock,
+diff -r /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/kernel/syscall.h /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold/kernel/syscall.h
+39,45c39
+< #define SYS_numprocs  22
+< /* CMPT 332 GROUP XX Change, Fall 2019 */
+< #define SYS_threadcreate 23
+< #define SYS_threadjoin  24
+< #define SYS_mtxcreate 25
+< #define SYS_mtxlock  26
+< #define SYS_mtxunlock  27
+\ No newline at end of file
+---
+> #define SYS_numprocs  22
+\ No newline at end of file
+diff -r /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/kernel/sysproc.c /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold/kernel/sysproc.c
+116,164d115
+< }
+< 
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< /* thread create system call */
+< uint64
+< sys_threadcreate(void)
+< {
+<   uint64 tmain;
+<   uint64 stack;
+<   uint64 arg;
+<   argaddr(0,&tmain);
+<   argaddr(1,&stack);
+<   argaddr(2,&arg);
+< 
+<   return threadcreate((void*)tmain,(void*)stack,(void*)arg);
+< }
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< uint64
+< sys_threadjoin(void)
+< {
+<   
+<   uint64 stack;
+<   argaddr(0,&stack);
+< 
+<   return threadjoin((void **)stack);
+< }
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< uint64
+< sys_mtxcreate(void)
+< {
+<   uint64 locked;
+<   argaddr(0,&locked);
+<   return mtxcreate(locked);
+< }
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< uint64
+< sys_mtxlock(void)
+< {
+<   uint64 lock_id;
+<   argaddr(0,&lock_id);
+<   return mtxlock(lock_id);
+< }
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< uint64
+< sys_mtxunlock(void)
+< {
+<   uint64 lock_id;
+<   argaddr(0,&lock_id);
+<   return mtxunlock(lock_id);
+diff -r /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/Makefile /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold/Makefile
+134c134
+< 	$U/_test_a2\
+---
+> 	$U/_test_numprocs\
+Only in /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/user: .Rhistory
+Only in /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/user: test_a2.c
+Only in /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold/user: test_numprocs.c
+diff -r /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/user/user.h /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold/user/user.h
+43,48d42
+< /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< int threadcreate(void (*tmain)(void *), void *stack, void *arg);
+< int threadjoin(void **stack);
+< int mtxcreate(int locked);
+< int mtxlock(int lock_id);
+< int mtxunlock(int lock_id);
+diff -r /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscv/user/usys.pl /student/tow087/cmpt332assignment/group25/A2P2/xv6test/xv6-riscvold/user/usys.pl
+51,57c51
+< entry("numprocs"); 
+< # /* CMPT 332 GROUP 25 Change, Fall 2019 */
+< entry("threadcreate"); 
+< entry("threadjoin");
+< entry("mtxcreate"); 
+< entry("mtxlock");
+< entry("mtxunlock"); 
+\ No newline at end of file
+---
+> entry("numprocs"); 
+\ No newline at end of file

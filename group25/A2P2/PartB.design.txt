@@ -1,0 +1,129 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+We are going to implement Monitors in partB. 
+(We also implement the Philosopher problem for extra credit, makefile will 
+create a executable file called philosopher 
+)
+we will need lists implmented before for this part. Besides the files given
+(reader-writer.c and reader-writer-monitor.c) and files for implementing lists,
+we have 3 files for implementing the monitor:
+Monitor.h
+Monitor.c
+reader_writer_monitor.h
+
+In Monitor.h, we give prototypes of all routines we need:
+void MonEnter();
+void MonLeave();
+void MonWait(int cv);
+void MonSignal(int cv);
+void MonInit(int numOfCv);
+
+In reader_writer_monitor.h, we will give prototypes of routines deduced
+from reader-writer-monitor.c:
+void Initialize(void)
+void StartRead()
+void StopRead()
+void StartWrite()
+void StopWrite()
+
+In Monitor.c, we will implement MonServer and these routines shown in
+Monitor.h.
+Since we will implement the monitor with IPC approach, we need a message 
+structure for the message needed by send, receive and reply routines.
+In the message struct, we have one int msgType for indicating message types
+(0-enter,1-leave,etc.), and the other one cvType for indicating which 
+condition variables(CV) the MonWait or MonSignal try to reach. 
+Globally, we need a PID variable for saving the server process's pid, 
+a int variable for saving the number of CVs we should have, a pointer to
+the list of lists for saving CV lists, and we also need lists for entering 
+processes and signaler processes. We should have an int variable to indicate
+whether the monitor is occupied by a process, and we need an int for the
+fixed length of message struct.
+In MonInit, we initizlize all global variables. Thus, we will allocate memory
+for the list of lists by numOfCv given, and all other lists needed by 
+ListCreate. Also, we will create a server process here, and we save it's pid
+and print the pid out (for debugging purpose).
+In MonServer, we initialize variables for receiving messages, pids and lengths.
+Then, we just let the server wait there for receiving messages from other 
+processes. When the server receives a message, it will check which 
+routines invoke Send. 
+If the MonEnter invoke Send, the server should check 
+whether there is already one process in the monitor. If the monitor is 
+occupied, the server should save sender's PID into the enterWaitingList.
+Since the Send routine is already blocked the sender, and we haven't replyed
+anything back yet, we do not need to implement anything else to 
+block the process. If the monitor is free, the server invoke Reply to the
+sender process immediately to let it run continually in the monitor, and
+it should set occupied to 1 to indicate the monitor is occupied now.
+If the MonLeave invoke Send, the server should first Reply immediately to 
+let the leaving process leave, and the server need to check whether the 
+urgentList is empty. If it is not, the server take the first PID out 
+of that queue, and the server should Reply to the process which has this PID
+to let in continually run in the monitor. Otherwise, the server need to check
+if the enterWaitingList is empty. If it is not, we take the first PID out, and
+we unblock the process the PID belongs to by using Reply. If these 2 queues 
+are all empty, we set the occupied to 0 to indicate the monitor is free.
+If the MonWait invoke Send, the server read the CV index, and put the sender
+process's PID into the corresponding CV list. Since we won't immediately reply
+after, the process can be blocked. Then, check the urgentList and
+enterWaitingList , unblock process or set the occupied to 0, 
+it is just like the MonLeave case.
+If the MonSignal invoke Send, the server read the CV index, and it need to 
+check whether the corresponding CV list is empty. If it is not, it shoud
+put the sender process's PID into the urgentList, so we make sure the 
+signaled process can come into the monitor. The server then will take the 
+first PID out of the corresponding CV list. Reply to the process with 
+that PID to unblock that process, so the signaled process can run in the
+monitor. If the CV list is empty, the server simply reply to the sender
+to let it continually run in the monitor.
+
+Since MonServer will do most jobs, other routines just simply send messages
+to the server to identify themselves, request and the sender's PIDs.
+
+We will use many print in the implementation for debugging purpose.
+
+For Philosopher problem, we have 3 files:
+Philosopher.c
+PhilosopherMonitor.c
+PhilosopherMonitor.h
+
+
+In PhilosopherMonitor.h, we define the prototypes of routines 
+PhilosopherMonitor needs to use:
+void Initialize(void);
+void pickUp(long i);
+void putDown(long i);
+void test(long i);
+
+pickUp to let the philosopher pick up both forks.
+putDown to let the philosopher put down forks.
+test is for testing whether the philosopher is ok to eat.
+
+In PhilosopherMonitor.c, we implement these routines.
+Initialize simply called MonInit in Monitor.c
+pickUp will set the current philosopher's state to eat, and use
+test to check if it is ok to eat. If it is not, wait in the
+CV for that philosopher; otherwise, it should leave the monitor.
+putDown will set the current philosopher's state to think, and use
+test to check if philosophers next to the current one are ok to eat.
+Then, it should leave the Monitor.
+Test will check if the current philosopher's left and right philosophers
+are not eating, and current philosopher's state is hungry. If it is true,
+the current philosopher can eat. Thus, it should set the current philosopher's
+state to eat, and signal the corresponding cv list to unblock that philosopher
+if it is blocked.
+
+
+
+

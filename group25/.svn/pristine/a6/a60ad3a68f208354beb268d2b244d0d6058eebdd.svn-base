@@ -1,0 +1,62 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+
+$ ./test_A3
+sys_numprocs test begin 
+Begin the scheduler test
+call nice function in the 0,3,6,9 and so on child
+This is number 0 forked process
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+call nice function in the 0,3,6,9 and so on child
+This is number 3 forked process
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+call nice function in the 0,3,6,9 and so on child
+This is number 6 forked process
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+fork to test schduler because call nice function, should have some child square after that sentence
+call nice function in the 0,3,6,9 and so on child
+This is number 0 forked process
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+call nice function in the 0,3,6,9 and so on child
+This is number 3 forked process
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+call nice function in the 0,3,6,9 and so on child
+This is number 6 forked process
+In every child call square function to check and then print the square number
+
+
+
+$ ./test_A3
+sys_numprocs test begin 
+Begin the scheduler test
+call nice function in the 0,3,6,9 and so on child
+This is number 0 forked process
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+fork to test schduler because call nice function, should have some child square after that sentence
+call nice function in the 0,3,6,9 and so on child
+This is number 0 forked process
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number
+In every child call square function to check and then print the square number

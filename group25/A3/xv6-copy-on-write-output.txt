@@ -1,0 +1,18 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+
+PartB we only finish part of them, so we changed some codes in vm.c,
+,defsh.h ,proc.c and so on. As a result, we can't make the given
+test file work but you can find the code under the comment
+ /* CMPT 332 GROUP 25 Change, Fall 2019 */ 

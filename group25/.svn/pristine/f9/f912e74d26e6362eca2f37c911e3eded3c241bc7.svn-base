@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+
+int ListCount(LIST list)
+{
+	printf("Got to procedure ListCount \n");
+
+	return list.size;
+}
+void *ListFirst(LIST list)
+{
+	printf("Got to procedure ListFirst \n");
+	if(list.first == NULL){
+		printf("Error: first item in list is Null \n");
+		return NULL;
+	}	
+	return (list.first) -> data;
+}
+void *ListLast(LIST list)
+{
+	printf("Got to procedure ListLast \n");
+	if(list.last == NULL){
+		printf("Error: last item in list is Null \n");
+		return NULL;
+	}
+	
+	return (list.last) -> data;
+}
+void *ListNext(LIST list)
+{
+	printf("Got to procedure ListNext \n");
+	
+	return NULL;
+}
+void *ListPrev(LIST list)
+{
+	printf("Got to procedure ListPrev \n");
+
+	return NULL;
+}
+void *ListCurr(LIST list)
+{
+	printf("Got to procedure ListCurr \n");
+	if(list.first == NULL){
+		printf("Error: first item in list is Null \n");
+		return NULL;
+	}
+	return (list.current) -> data;
+}
+void *ListSearch(LIST list, int (*comparator)(Item, Item), Item comparisonArg)
+{
+	printf("Got to procedure ListSearch \n");
+	if(comparator == NULL || comparisonArg ==NULL){
+		printf("Error: invalid parameter\n");
+		return NULL;
+	}	
+
+	return NULL;
+}

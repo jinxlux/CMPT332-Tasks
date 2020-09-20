@@ -1,0 +1,62 @@
+For part c, we are going to use 5 files to implement our list. Each file has 
+specific tasks.
+
+In the header file list.h, we use structures to represent NODE and LIST, 
+and we typedef them as NODE and LIST. In the structure for NODE, we have 
+a void* field (data) to point to the item of that node. Also, we have 2 
+NODE* fields (prev,next) which point to the previous node and the following 
+node of the node, and we need an int field (occupied) to help us figure out
+whether this node has been added to any lists. In the structure for LIST, 
+we need an int field called size to represent the number of items are added 
+to the list, and we use 3 NODE* fields (first,current,last) to reference 
+the first NODE, current NODE the last NODE of the list. Also,we need to have 
+an int field to represent whether this list has been activated and used. 
+Besides LIST and NODE, list.h contains all function prototypes we need.
+
+In the list_adders.c, we implement ListCreate,ListAdd, ListInsert, 
+ListAppend, ListPrepend andListConcat. Also, we define 2 static 
+memory blocks by using arrays, and we define the maximum number of 
+LISTs and NODEs. One array for LISTs and one for the NODEs. We initialise 
+the array of NODES with empty NODES as NODES pool.
+For LIST *ListCreate(), initialize a LIST list with list.size =0, 
+list.first = list.last = list.current = NULL, list.used = 1. 
+Add the new created list to the array of LISTs. Return pointer of the
+list if it's successful, NULL otherwise.
+For int ListAdd(list, item), we add the item after the current item to 
+the list. we pick an unused NODE, and assign the item to the NODE. Then, 
+we find the current NODE of the list, and we redirect its next NODE pointer 
+to the new NODE. We also need to redirect the new NODE's previous and
+next NODE pointers and the previous Node pointer of NODE following the 
+current NODE. Finally, we change the current NODE to the new NODE, and 
+return 0. If we can not pick an unused NODE, or any other exceptions happen, 
+the routines shall return -1.
+For int ListInsert(list, item), we almost do the same thing as the ListAdd,
+but we just add the item before the current item this time. We also need 
+to redirect the pointers of previous and next NODEs, and we change the 
+current Node of the list as the ListAdd. Return values and their meaning 
+are the same as ListAdd.
+For int ListAppend(list, item), we add the item to the end of the list, 
+and make the new NODE added as current NODE. Redirections are needed, 
+and Return values are same as previous routines.
+For int ListPrepend(list, item), we add the item to the front of the 
+list, and make the list's current NODE pointer points to the new node.
+Redirections are needed, and Return values are same as previous routines.
+For void ListConcat(list1, list2), we let the next NODE pointer of the 
+last NODE of list1 point to the first NODE of list2, and we let the previous 
+NODE pointer of the first NODE of list2 point to the last NODE of list1. 
+Then, we make list2 empty, set all points to NULL, and free it from the array.
+For all add routines above, we all need to add the size of lists given
+by one. 
+For ListConcat, we change the list1.size to list1.size+list2.size.
+
+In the list_movers.c, we implement ListCount, ListFirst, ListLast, 
+ListNext, ListPrev, ListCurr, and ListSearch.
+For ListCount(list), we just return list.size .
+For void *ListFirst(list), we just let list.current = list.first,
+and return list.first -> data.
+For void *ListLast(list), we let list.current = list.last, 
+and return list.last -> data.
+For void *ListNext(list), we let list.current = list.current -> next
+Return list.current if list.next != NULL; return NULL otherwise.
+
+In the list_removers.c, we implement ListRemove, ListFree and ListTrim.

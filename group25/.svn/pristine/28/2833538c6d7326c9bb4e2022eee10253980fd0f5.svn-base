@@ -1,0 +1,55 @@
+# xudong li, xul395, 11206927
+
+UNAME := $(shell uname)
+UNAMES := $(shell uname -s)
+UNAMEM := $(shell uname -m)
+LIBRARY_PATH := /student/cmpt332/pthreads/lib/$(UNAMES)$(UNAMEM)
+HEADER_PATH := /student/cmpt332/pthreads
+CROSS_COMPILE=arm-linux-gnueabi-
+CC = gcc
+CFLAGS = -g
+CPPFLAGS = -std=gnu90 -Wall -pedantic
+
+.PHONY: all clean
+
+ifneq (,$(findstring MINGW, $(UNAME)))
+all: allA
+allA: wthread.exe 
+wthread.o: wthread.c
+	$(CC) -o wthread.o -c $(CFLAGS) $(CPPFLAGS) wthread.c
+thread_windows.o: thread.c
+	$(CC) -o thread_windows.o -c $(CFLAGS) $(CPPFLAGS) thread.c
+wthread.exe: wthread.o thread_windows.o
+	$(CC) -o wthread.exe wthread.o thread_windows.o	
+endif
+
+ifeq ($(UNAME), Linux)
+all: allB 
+allB: sample-linux raspi-sample app
+sample-linux.o: sample-linux.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $^ -I.
+linux-lib.o: linux-lib.c
+	$(CC) -o linux-lib.o -c $(CFLAGS) $(CPPFLAGS) linux-lib.c -I.
+liblin.a: linux-lib.o
+	ar rcs liblin.a linux-lib.o
+sample-linux: sample-linux.o liblin.a
+	$(CC) -o sample-linux sample-linux.o -L. -llin
+app.o: app.c 
+	$(CC) -o app.o -c $(CFLAGS) $(CPPFLAGS) app.c -I$(HEADER_PATH) 
+app: app.o 
+	$(CC) -o app app.o -lpthreads -L$(LIBRARY_PATH)
+sample-raspi.o: sample-linux.c
+	$(CROSS_COMPILE)$(CC) -o sample-raspi.o -c  $(CFLAGS) $(CPPFLAGS) sample-linux.c -I.
+raspi-lib.o: linux-lib.c
+	$(CROSS_COMPILE)$(CC) -o raspi-lib.o -c  $(CFLAGS) $(CPPFLAGS) linux-lib.c -I.
+libraspi.a: raspi-lib.o
+	$(CROSS_COMPILE)ar rcs libraspi.a raspi-lib.o
+raspi-sample: sample-raspi.o libraspi.a
+	$(CROSS_COMPILE)$(CC) -o raspi-sample sample-raspi.o -L. -lraspi
+endif
+
+clean:
+	rm -f *.o *.a sample-linux wthread.exe app raspi-sample
+
+	
+

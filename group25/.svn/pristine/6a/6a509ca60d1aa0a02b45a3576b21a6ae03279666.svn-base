@@ -1,0 +1,112 @@
+#  NAME: Xudong Li
+#  NSID:xul395
+#  Student Number:11206927
+
+
+# 	NAME:Tong Wang   
+#   NSID: tow087 
+#   Student Number: 11201222
+#   CMPT 332 Term 1 2019
+
+#   group25
+
+PartA1 code is finished, PartA2 is 95% finished
+PartA3 and PartA4 only have some basic functions
+Test PartA1 and PartA2 by printf
+For PartA1:
+In bash file we need check the input first: must be 3 postive input
+input parameter
+Using isNumber() function to check the parameter's range 
+and type to make sure it is validate:
+
+   if(isNumber(argv[1]) && isNumber(argv[2]) &&isNumber(argv[3])){
+	   threadNumber = atoi(argv[1]);
+	   sizeNumber = atoi(argv[3]);
+	   deadLine = atoi(argv[2]);
+	   printf("validate input go to the next procedure!\n");
+   else{
+	   printf("Invalidate input!\n");
+   }
+Using input to input different thread number, deadline time and square size to 
+test, those three parameter should include big and small.
+	/*print the result of the thread id, count of square and the elasped time */
+	printf("We have %d threads to run\nNumber %d thread's id is %d 
+	and the count of Square() is %d \nThe elasped time of this thread 
+	is %f seconds\n", threadNumber, index, idIndexArray[index - 1], 
+	squareCountArray[index - 1], timeIndexArray[index - 1]);
+And for the threads result use printf to print their results:
+elasped time(use seconds);
+PID
+thread number 
+Square count
+We will use below input to test and get the results:
+threadNumber deadlineTime sizeNumber
+1 1 1
+3 3 5000
+4 8 12000
+8 8 9000
+20 6 15
+1 5 25000
+7 3 800
+3 3 1500
+Using those results to check code working well or not and the results
+are showing in PartA.testresults.txt
+For PartA2:
+First we should make sure the parameter is 3 postive integer
+In bash file we need check the input first: must be 3 postive input
+input parameter
+In code,it should like that to check:
+if(argc!=4){
+        printf("Please enter like that partA2 threadCount deadline size\n");
+        return -1;
+    }
+    nThreads = atoi(argv[1]);
+    deadline = atoi(argv[2]);
+    size= atoi(argv[3]);
+    threads = (UBCpthread_threadInfo **)malloc(nThreads * sizeof (UBCpthread_threadInfo *));
+    if(nThreads<1||deadline<0||size<0){
+        printf("Error in mainp(): invalid parameter %d\t%d\t%d\n", nThreads,deadline,size);
+        return -1;
+    } 
+If it is not validate, it will print some error messages like that:
+
+"Please enter like that partA2 threadCount deadline size"
+"Error in mainp(): invalid parameter %d\t%d\t%d\n""
+
+If create fuction is faild, it will print "thread created error"
+Also, if we didn't allocate memory correct, it will print "malloc error"
+
+Then we use three input parameter: thread number, deadline time and square size to 
+test, those three parameter should include big, small and many different cases 
+printf("This is the number %d thread.The thread's id is %d and it spent time: 
+%ld clock ticks:\nNumber of square() called is %d\n ",
+
+And for the threads result use printf to print their results:
+elasped time(use clock ticks);
+PID
+thread number 
+Square count
+1 1 1
+3 3 5000
+4 8 12000
+8 8 9000
+20 6 15
+1 5 25000
+7 3 800
+3 3 1500
+Using those results to check code working well or not and the results
+are showing in PartA.testresults.txt
+
+For PartA3:
+Only have some dummy function and basic function design. Will also check 
+the input value and print output information in the future. Will update details
+in future
+Using those results to check code working well or not and the results
+are showing in PartA.testresults.txt
+
+For PartA4:
+Only have some dummy function and basic function design. Will also check 
+the input value and print output information in the future. Will update details
+in future
+Using those results to check code working well or not and the results
+are showing in PartA.testresults.txt

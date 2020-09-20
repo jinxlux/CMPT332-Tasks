@@ -1,0 +1,79 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+we will edit user.h, usys.pl in the user directory, and we will use an
+test file called cowtest.c in the user directory.
+We will edit defs.h, syscall.h, syscall.c, proc.c 
+in the kernel directory for getNumFreePages() system call.
+
+For the files we edited in the user directory, we mainly try
+to make the nice system call work, so the implementation is
+just simply like the other system call.
+
+For defs.h, syscall.h and syscall.c we edited in the kernel 
+directory, we should just simply follow implementations 
+of other system calls to make getNumFreePages system call work.
+
+We mainly implement getNumFreePages in the proc.c. 
+We should get the freeList defined in kalloc.c, and
+we can traverse it to count the number of free pages.
+
+We should add an int in struct run to track the reference, and reallocate
+the definition of struct run in defs.h
+We then should add a data structure page_ref_count to keep track of the 
+number of pages' references (how many processes point to each page).
+The data structure should contain an pointer to a page (struct run*), 
+and it should contain a spinlock like kmem in kalloc.c.
+(the strucutre can be defined in defs.h)
+We will need routines addPageRefCount(struct run*) and 
+minPageRefCount(struct run*) to modify the page_ref_count. 
+addPageRefCount(struct run*) just simply increment the count
+inside the struct. (It should do like struct run->count++).
+minPageRefCount(struct run*) just simply decrement the count
+inside the struct. (It should do like struct run->count--).
+In kalloc in kalloc.c, we cast pointer to the page allocated
+to struct run, and we need to set count in struct run* 
+to 1 to initialize it for the new page allocated.
+We need to set that back to 0 when we free that page in kfree.
+In any routines that make a page refered by any other processes,
+we use the addPageRefCount(struct run*).
+In any routines that make a page unrefered by any other processes,
+we use the minPageRefCount(struct run*).
+And like the kmem, we need to delete the node of page_ref_count
+in kfree.
+
+We need to modify uvmcopy in vm.c to make cow work.
+Since we need to let page tables of parent and child all refer to 
+same page, we only need to copy the page table here but not
+physical memory. Also, call addPageRefCount here for
+each pages shared. We just need: (((struct run*) pa)->pageReferenceCount--.
+Also we need to set pages as read-only here.
+We could write the other function called mcopy() to copy memory specifically.
+
+We need to write a routine called pageFaultHandler in vm.c 
+to handle page fault.
+We need to get the r_stval() to get faulting virtual address.
+Now, we need to decide it's range, if the address is out of the 
+range for the legal address, we should use panic to print error message, and we
+call kill() to kill the process. If it's legal, but the page fault generated 
+because of the read-only, we need to use mcopy() defined above to copy pages,
+and the first process(parent or child) try yo write it should get thr new
+memory. The handler should use page_ref_count as we defined above to figure
+out whether this is the first time page fault occurs because of the read-only
+problem. If it is not the first time, we remove the read_only restriction.
+
+Finally, we use the cowtest given to test our program.
+
+
+
+

@@ -1,0 +1,47 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+	group: 25
+*/
+
+// test with n = 12, 5, 20; For first 3, 
+// we test with 3 CPUs (original set of system); For last 3, we change
+// the makefile of xv6 to let it run in only 1 
+
+
+sys_numprocs test begin 
+fork test
+fork create OK
+Have 10 RUNNABLE
+
+sys_numprocs test begin 
+fork test
+fork create OK
+Have 3 RUNNABLE
+
+sys_numprocs test begin 
+fork test
+fork create OK
+Have 18 RUNNABLE
+
+sys_numprocs test begin 
+fork test
+fork create OK
+Have 12 RUNNABLE
+
+sys_numprocs test begin 
+fork test
+fork create OK
+Have 5 RUNNABLE
+
+sys_numprocs test begin 
+fork test
+fork create OK
+Have 20 RUNNABLE

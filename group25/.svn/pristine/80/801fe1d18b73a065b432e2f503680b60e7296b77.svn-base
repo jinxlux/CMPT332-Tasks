@@ -1,0 +1,72 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+	group: 25
+*/
+
+
+We mainly test routines in list_adders.c for this phase.
+First, we decide to create an array for saving items to be added to lists.
+We will use int as our item's type because it is easy to show and compare.
+We are going to test the ListCreate() because we need list for next tests.
+we randomly create 4 lists at first, and test whether the 4 lists created 
+are marked as 'used'. If they are all 'used', successful message should show;
+otherwise, error message should show, and the program end.
+After creating lists, we continually add 10 ints to one list by using 
+ListAdd; Message "Space is not enough. double the space" should be reported
+since we only allocated 5 nodes space at first time (we do the extra credit).
+Then, we check the size, first item, last item, and all items inside of the
+list by moving 'current' pointer. If every item is saved properly, 
+"test ListAdd: test successfully" should show up, error message otherwise.
+Since we use ListNext() to move the 'current' pointer, and we have moved 
+the pointer to the end of the list in testing ListAdd(), we are easy to
+test whether ListNext() will return NULL when it go beyond the end.
+"test ListNext successfully" should show up if it returns NULL, error message
+show up otherwise. 
+Since we used ListAdd to add items from the end of list above 
+(list->current->next == NULL), we will use ListAdd() to add items
+under list->current->next != NULL condition. After adding ints under 
+this condition, check whether size, 'current' pointer, list->current->prev,
+list->current->next, the next pointer of the previous item and the
+prev pointer of the next item are all correct. If they are all correct,
+successful message should print out; otherwise, we will have error message, and
+the program end.
+For testing the ListInsert, we have almost the same step as ListAdd(). We
+insert item separately from the start and end of the list. Then we check the
+correctness of pointers(first,current,next,prev..) and size.
+If they are all correct, successful message should print out; 
+otherwise, we will have error message, and the program end. 
+For testing the ListAppend, we append an item to the end of the list,and
+we check pointers(current, last, current->prev,current->prev->next) and size
+of the list. If they are all correct, successful message should print out; 
+otherwise, we will have error message, and the program end. 
+For testing the ListPrepend, we append an item to the front of the list,and
+we check pointers(current, first, current->next,current->next->prev) and size
+of the list. If they are all correct, successful message should print out; 
+otherwise, we will have error message, and the program end. 
+For testing the ListConcat(list1, list2), we have 3 conditions:
+list1 is empty, lit2 is not;
+list2 is empty, list1 is not;
+list1 and list2 are all non-empty.
+(the condition that they are all empty is actually same as list2 is empty:
+we only need to keep list1 exists)
+we test all pointers, size under these 3 conditions. Also, since the list2 
+is delete, the space of list2 should now be pointed by nextFreeNode. 
+We will create a new list, and the new list should have the same address as 
+the list2. 
+If everything above is correct, successful message should print out; 
+otherwise, we will have error message, and the program end.
+
+Since we do the extra credit, we keep adding items to a list by the listInset,
+listAppend and listPrepend. They all should report meesage as 
+"Space is not enough. double the space".
+
+Finally, we give inappropriate arguments(NULL) to all routines, error message 
+should all report.

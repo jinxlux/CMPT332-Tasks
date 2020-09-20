@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+
+int ListAdd(LIST list, Item item)
+{
+	printf("Got to procedure ListAdd \n");
+	return -1;
+}
+
+LIST *ListCreate()
+{
+	printf("Got to procedure ListCreate \n");
+
+	return NULL;
+}
+
+int ListInsert(LIST list, Item item)
+{
+	printf("Got to procedure ListInsert \n");
+
+	return -1;
+}
+
+int ListAppend(LIST list, Item item)
+{
+	printf("Got to procedure ListAppend \n");
+
+	return -1;
+}
+int ListPrepend(LIST list, Item item)
+{
+	printf("Got to procedure ListPrepend \n");
+
+	return -1;
+}
+void ListConcat(LIST list1,LIST list2)
+{
+	printf("Got to procedure ListConcat \n");
+	
+}

@@ -1,0 +1,103 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+For partE, we will have 2 files : partE.h and partE.c
+
+In partE.h, we will include following head files:
+ <unistd.h>
+ <stdlib.h>
+ <stdio.h>
+ <string.h>
+ <fcntl.h> 
+ <errno.h>
+ <pwd.h>
+ <signal.h>
+ <sys/wait.h>
+ <sys/types.h>
+ <sys/stat.h> 
+We will define 3 variables in the header file:
+char *inputBuffer will work as input saving buffer;
+struct checkPipeInfo checkInfo will work as struct for checkPipeline function;
+struct passwd *myinfoPwd will work as struct for getpwuid() function in <pwd.h>
+and it will use for username;
+We also define the structure called checkPipeInfo, so we can define the
+variable checkInfo, and it is for checkPipeline function.
+In struct checkPipeInfo, we have an int checkPoint, char *commandAfterPipe
+and char **parameterAfterPipe.
+We will have 6 function prototypes in the header filer:
+void commandPrompt(char *promptInfo) will display information. 	
+It will display username, hostname and the current path in terminal.
+int readCommand(char *promptInfo, char **command, char **parameter) will
+get the input command into a buffer
+int builtInCommand(char *command, char **parameter) will build the builtin 
+command for cd and exit command and the cd command should display error
+message if necessary.
+void checkPipline(char **parameter, int parameterNumber, 
+struct checkPipeInfo *checkInfo) will check if the command contain 
+a pipline or not.
+void checkInfoAssign(struct checkPipeInfo *checkInfo) will 
+initialize the information of checkInfo.
+void execMyself(char* command, char **parameter) is my own exec function
+use getenv() to get the path and then call execve() inside.
+
+In partE.c, we will define FALSE as 0, TRUE as 1. we will define
+MAX_PATH_LEN as 1024, MAX_NAME_LEN as 256 and MAXLEN as 4096.
+(MAX_PATH_LEN is maximum path length allowed;
+MAX_NAME_LEN is maximum length of file name allowed;
+MAXLEN is maximum length of input allowed)
+We will implements the function prototypes of the header file here.
+
+commandPrompt fuction display information. Information can be achieved
+by following routines:
+username use getpwuid(getuid())
+hostname use gethostname()
+path use getcwd()
+the display should like what bash display:
+username@hostname:path$(change $ to # if root)
+
+readCommand will use fgets() function to get the input command into a buffer.
+The entered command string must be tokenized into an array of 
+strings by removing the space delimiters. 
+Also delimiters consisting of more than one space must be handled correctly.
+Return value is the number of paramaeters.
+0 represents only command without any paramaeters.
+-1 represents wrong input.
+
+builtInCommand will build the builtin command for
+cd and exit command and the cd command should display error message 
+if necessary. Use strcmp() function compare with the command check 
+it is exit or cd
+if it is exit or quit just exit(0);
+if it is cd, use chdir() function.
+
+In checkPipline, we will initialized the checkInfo, and we use for loop
+to continually check the the pipeline symbol "|".  We will 
+save command after Pipe and parameter after Pipe.
+
+checkInfoAssign will initialize the information of checkInfo.
+It sets
+checkInfo->checkPoint = 0;
+checkInfo->commandAfterPipe = NULL;
+checkInfo->parameterAfterPipe = NULL;
+
+execMyself use use getenv() to get the path and then call execve() inside.
+
+shellprogram is a routine where we start the whole program, and it 
+continually ask for user command input.
+It uses checkPipline to set pointer to check whetehr the
+command has pipeline or not.
+Use close(), fork() function to run the shell.
+
+
+
+

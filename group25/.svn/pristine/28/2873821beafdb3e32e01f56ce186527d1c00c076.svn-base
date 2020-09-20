@@ -1,0 +1,33 @@
+#include "kernel/param.h"
+#include "kernel/types.h"
+#include "kernel/stat.h"
+#include "kernel/riscv.h"
+#include "kernel/fcntl.h"
+#include "kernel/spinlock.h"
+#include "kernel/sleeplock.h"
+#include "kernel/fs.h"
+#include "kernel/file.h"
+#include "user/user.h"
+
+static void testsymlink(void);
+int
+main(int argc, char *argv[])
+{
+  testsymlink();
+  return 0;
+}
+
+static void
+testsymlink(void)
+{
+    int succ;
+    char path[1] = "a";
+    char target[1] = "b";
+    printf("Start: simply test symlinks\n");
+    printf(" 'a' and 'b' should be printed out below\n");
+    succ = symlink((char*)target, (char*)path);
+    if(succ<0){
+        printf("Error: 0 should be returned\n");
+        exit(1);
+    }
+}

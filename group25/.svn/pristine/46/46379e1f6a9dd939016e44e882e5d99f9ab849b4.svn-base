@@ -1,0 +1,196 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+	group: 25
+*/
+
+/*
+cmpt332-xv6/xv6-riscv is the original xv6 dictionary;
+cmpt332A1/group25/A1P3/xv6-riscv is the changed xv6 for partD
+
+we use diff -r to show difference
+*/
+
+xul395@s360-drone32:~> diff -r cmpt332-xv6/xv6-riscv cmpt332A1/group25/A1P3/xv6-riscv
+diff -r cmpt332-xv6/xv6-riscv/kernel/defs.h cmpt332A1/group25/A1P3/xv6-riscv/kernel/defs.h
+0a1,16
+> /* NAME: Xudong Li
+>    NSID:xul395
+>    Student Number:11206927
+> */
+> 
+> /* NAME:Tong Wang   
+>    NSID: tow087 
+>    Student Number: 11201222
+>    CMPT 332 Term 1 2019
+>    
+>     group: 25
+> */
+> 
+> /* declare new function sys_numprocs */
+> 
+> 
+105a122
+> int             numprocs(void);
+diff -r cmpt332-xv6/xv6-riscv/kernel/proc.c cmpt332A1/group25/A1P3/xv6-riscv/kernel/proc.c
+0a1,15
+> /* NAME: Xudong Li
+>    NSID:xul395
+>    Student Number:11206927
+> */
+> 
+> /* NAME:Tong Wang   
+>    NSID: tow087 
+>    Student Number: 11201222
+>    CMPT 332 Term 1 2019
+>    
+>     group: 25
+> */
+> 
+> /* add new function numprocs */
+> 
+646a662,680
+> }
+> /* Get access to process table. */
+> /* check process state equals to RUNNABLE */
+> /* */
+> int
+> numprocs(void){
+>   int pcount;
+>   pcount = 0;
+>   struct proc *p;
+> 
+>   for(p = proc; p < &proc[NPROC]; p++) {
+>     /* acquire(&p->lock); */
+>     if(p->state == RUNNABLE) {
+>       pcount++;
+>     } 
+>     /* release(&p->lock); */
+>   }
+> 
+>   return pcount;
+diff -r cmpt332-xv6/xv6-riscv/kernel/syscall.c cmpt332A1/group25/A1P3/xv6-riscv/kernel/syscall.c
+0a1,19
+> /* NAME: Xudong Li
+>    NSID:xul395
+>    Student Number:11206927
+> */
+> 
+> /* NAME:Tong Wang   
+>    NSID: tow087 
+>    Student Number: 11201222
+>    CMPT 332 Term 1 2019
+>    
+>     group: 25
+> */
+> /* Add extern the function for utc time and array pointer for that function
+>    the index of the array pointer should have same name in syscall.h file.
+>    extern the function: extern uint64 sys_numprocs(void);
+>    add new pointer [SYS_numprocs]   sys_numprocs in to array pointer tatic uint64 (*syscalls[])(void),
+> */
+> 
+> 
+107a127
+> extern uint64 sys_numprocs(void);
+130a151
+> [SYS_numprocs] sys_numprocs,
+diff -r cmpt332-xv6/xv6-riscv/kernel/syscall.h cmpt332A1/group25/A1P3/xv6-riscv/kernel/syscall.h
+0a1,16
+> /* NAME: Xudong Li
+>    NSID:xul395
+>    Student Number:11206927
+> */
+> 
+> /* NAME:Tong Wang   
+>    NSID: tow087 
+>    Student Number: 11201222
+>    CMPT 332 Term 1 2019
+>    
+>     group: 25
+> */
+> /* Add a new line for System call numbers 
+>    #define SYS_numprocs  22
+> */
+> 
+22a39
+> #define SYS_numprocs  22
+\ No newline at end of file
+diff -r cmpt332-xv6/xv6-riscv/kernel/sysproc.c cmpt332A1/group25/A1P3/xv6-riscv/kernel/sysproc.c
+0a1,16
+> /* NAME: Xudong Li
+>    NSID:xul395
+>    Student Number:11206927
+> */
+> 
+> /* NAME:Tong Wang   
+>    NSID: tow087 
+>    Student Number: 11201222
+>    CMPT 332 Term 1 2019
+>    
+>     group: 25
+> */
+> 
+> /* add new function sys_numprocs */
+> 
+> 
+9a26
+> 
+91a109,116
+> 
+> /* return how many numbers of runnable processes */
+> /* currently */
+> uint64
+> sys_numprocs(void)
+> {
+>   return numprocs(); 
+> }
+\ No newline at end of file
+diff -r cmpt332-xv6/xv6-riscv/Makefile cmpt332A1/group25/A1P3/xv6-riscv/Makefile
+133a134
+> 	$U/_test_numprocs\
+Only in cmpt332A1/group25/A1P3/xv6-riscv/user: test_numprocs.c
+diff -r cmpt332-xv6/xv6-riscv/user/user.h cmpt332A1/group25/A1P3/xv6-riscv/user/user.h
+0a1,16
+> /* NAME: Xudong Li
+>    NSID:xul395
+>    Student Number:11206927
+> */
+> 
+> /* NAME:Tong Wang   
+>    NSID: tow087 
+>    Student Number: 11201222
+>    CMPT 332 Term 1 2019
+>    
+>     group: 25
+> */
+> /* add new system calls
+>    int numprocs(void);
+> */
+> 
+25a42
+> int numprocs(void);
+diff -r cmpt332-xv6/xv6-riscv/user/usys.pl cmpt332A1/group25/A1P3/xv6-riscv/user/usys.pl
+0a1,12
+> #   NAME: Xudong Li
+> #   NSID:xul395
+> #   Student Number:11206927
+> #   NAME:Tong Wang   
+> #   NSID: tow087 
+> #   Student Number: 11201222
+> #   CMPT 332 Term 1 2019
+> #   group: 25
+> 
+> #   Add entry("numprocs"); 
+> 
+> 
+38a51
+> entry("numprocs"); 
+\ No newline at end of file
+

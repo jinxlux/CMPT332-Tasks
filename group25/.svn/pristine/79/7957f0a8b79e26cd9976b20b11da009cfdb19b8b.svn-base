@@ -1,0 +1,21 @@
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+*/
+#include "square.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+extern int* count;
+
+int square(int N){
+	int threadID = getID();
+	count[threadID]++;
+    if(N < 0){
+        return -1;
+    }
+    if( N == 0 )
+        return 0;
+    return square(N-1) + 2 * N - 1;
+}

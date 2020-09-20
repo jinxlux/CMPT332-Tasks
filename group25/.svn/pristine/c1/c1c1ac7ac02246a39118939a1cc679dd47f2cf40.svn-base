@@ -1,0 +1,59 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+This is the simple design for skeleton codes for part B of phase 1
+We are going to implement Monitors in partB. 
+we will need lists implmented before for this part. Besides the files given
+(reader-writer.c and reader-writer-monitor.c) and files for implementing lists,
+we have 3 files for implementing the monitor:
+Monitor.h
+Monitor.c
+reader_writer_monitor.h
+
+In Monitor.h, we give prototypes of all routines we need:
+void MonServer()
+void MonEnter()
+void MonLeave()
+void MonWait()
+void MonSignal()
+
+In reader_writer_monitor.h, we will give prototypes of routines deduced
+from reader-writer-monitor.c:
+void Initialize(void)
+void StartRead()
+void StopRead()
+void StartWrite()
+void StopWrite()
+
+For "void Initialize(void)", we just comment it out from 
+reader-writer-monitor.c because it is not used for
+any test or routines in this phase. Leave it there where let makefile
+report warning.
+
+In Monitor.c, we will implement these routines, but for this phase, we just
+print something like "go to procedure routine name".
+Thus, the executable should continually print "go to procedure xxx"
+
+(Following statements is what we design, we won't implement them in phase 1)
+we will use list as the queue for implementing condition variables to let
+waiting processes waiting there, so it will not prevent other processes
+entering monitor.
+we will use send, receive and reply operations to implement these routines.
+MonWait() will let the entering process wait in the queue;
+MonSignal() will pop the top process out of queue and reactive it;
+MonEnter() is the start routine for monitor procedure
+MonLeave() is the last routine before monitor procedure returning
+
+
+
+

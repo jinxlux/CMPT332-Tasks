@@ -1,0 +1,76 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+   group: 25
+*/
+
+We will implement a simple chat program let people communicate.
+Currently, we only have a basic thinking of our program.
+As a result, this is a basic design and will be completed in future.
+We need many thread functions for that program:
+
+1. getMsgFromKeyboard();
+This function will read the input from keyboard and send the message
+to server. In RTT thread, it also need a return value
+2. printToScreen()
+This is the print thread
+printer thread
+  It will wait for a signal from the server thread and get the msg from the server. and then print the message to screen.
+
+listen to the server;
+if(get a signal):
+	print the msg from the server to the screen.
+end if
+3. sendOverNetwork()
+This is a sender thread
+sender thread
+  once the server get msg from the keyboard, it will add the msg to the queue.
+  and then, pop the first msg from the queue to the sender thread.
+  sender will deliver this to the receiver thread on the other machine.
+
+listen to the server;
+if(get a signal):
+	send the msg from the server to the receive.
+	create(socket)	//create socket to send message
+    	bind(socket)
+	Send(message, host IP, host port) //to host and specify port
+end if
+4. receiveNetworkMsg()
+This is a receive thread
+receiver thread
+  Will wait for message from remote machines and once a message is received
+  it will send to the sever. 
+
+listen to the remote sender.
+if(get a signal):
+	create(socket)	//create socket to send message
+    	bind(socket)
+	Recieve(message, host IP, host port) //to host and specify port
+	Send(server, msg)
+end if
+5. serverThread()
+This is server thread
+server thread
+  Acts an server, threads cannot directly communicate with other threads except server.
+  if get a msg from keyboard -> send it to the sender
+  if get a msg from the receiver -> send it to the printer
+
+create other 4 threads;
+while(1){
+	sleep(5);
+
+	receive msg from keyboard.
+	send msg to sender.
+
+
+	receive msg from receiver.
+	send msg to printer.
+
+}

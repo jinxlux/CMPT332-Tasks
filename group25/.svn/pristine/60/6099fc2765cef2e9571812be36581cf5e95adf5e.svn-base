@@ -1,0 +1,5 @@
+
+
+int Square(int N);
+int GetID();
+

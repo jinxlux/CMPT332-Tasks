@@ -1,0 +1,194 @@
+/* NAME: Xudong Li
+   NSID:xul395
+   Student Number:11206927
+*/
+
+/* NAME:Tong Wang   
+   NSID: tow087 
+   Student Number: 11201222
+   CMPT 332 Term 1 2019
+   
+    group: 25
+*/
+
+/*eixt result will not print here. But terminal close as we expect*/
+/*
+command run in bash shell
+*/
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> ./partE
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:cd file
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3/file$:cd ..
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:cd /usr/bin
+[cmptShell]xul395@s360-drone32:/usr/bin$:cd ~
+[cmptShell]xul395@s360-drone32:~$:cd cmpt332A1/group25/A1P3
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:cd fileNotE
+wrong path!
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:ls    
+file		 mytestlist.c	     PartA.testresults.txt  PartE.design.txt
+liblist.a	 mytestlist.o	     partB.bash		    partE.h
+list_adders.c	 partA1.c	     PartB.design.txt	    partE.o
+list_adders.o	 partA2		     PartC.design.txt	    PartE.testplan.txt
+list.h		 partA2.c	     PartC.testplan.txt     square.c
+list_movers.c	 partA2.h	     PartC.testresults.txt  square.h
+list_movers.o	 partA2.o	     partD.design.txt	    square.o
+list_removers.c  partA3.c	     PartD.testplan.txt     testlist.c
+list_removers.o  partA4.c	     PartD.testresults.txt  xv6-diff.txt
+Makefile	 PartA.design.txt    partE		    xv6-riscv
+mytestlist	 PartA.testplan.txt  partE.c
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:ls -al
+total 604
+drwxr-xr-x  4 xul395 student   4096 Oct  3 19:29 .
+drwxr-x--- 13 xul395 student   4096 Sep 26 16:42 ..
+drwxr-xr-x  2 xul395 student   4096 Oct  3 18:59 file
+-rw-r-----  1 xul395 student  43986 Oct  3 19:29 liblist.a
+-rwxr-x---  1 xul395 student  13141 Sep 23 18:59 list_adders.c
+-rw-r-----  1 xul395 student  22552 Oct  3 19:29 list_adders.o
+-rwxr-x---  1 xul395 student   1337 Sep 23 18:59 list.h
+-rwxr-x---  1 xul395 student   4083 Oct  2 13:50 list_movers.c
+-rw-r-----  1 xul395 student  10808 Oct  3 19:29 list_movers.o
+-rwxr-x---  1 xul395 student   3515 Oct  2 13:50 list_removers.c
+-rw-r-----  1 xul395 student  10064 Oct  3 19:29 list_removers.o
+-rw-r-----  1 xul395 student   1925 Oct  3 18:39 Makefile
+-rwxr-x---  1 xul395 student  58952 Oct  3 19:29 mytestlist
+-rwxr-x---  1 xul395 student  21359 Oct  2 13:50 mytestlist.c
+-rw-r-----  1 xul395 student  34840 Oct  3 19:29 mytestlist.o
+-rw-r-----  1 xul395 student   4807 Sep 25 14:36 partA1.c
+-rwxr-x---  1 xul395 student 118208 Oct  3 19:29 partA2
+-rw-r-----  1 xul395 student   4178 Sep 25 14:36 partA2.c
+-rw-r-----  1 xul395 student    729 Sep 25 14:36 partA2.h
+-rw-r-----  1 xul395 student  12360 Oct  3 19:29 partA2.o
+-rw-r-----  1 xul395 student   3198 Oct  3 18:39 partA3.c
+-rw-r-----  1 xul395 student    165 Sep 23 10:46 partA4.c
+-rw-r-----  1 xul395 student   5703 Oct  3 18:39 PartA.design.txt
+-rw-r-----  1 xul395 student   3796 Oct  3 18:39 PartA.testplan.txt
+-rw-r-----  1 xul395 student  17317 Sep 25 14:36 PartA.testresults.txt
+-rw-r-----  1 xul395 student   3682 Sep 25 14:36 partB.bash
+-rw-r-----  1 xul395 student    168 Oct  3 19:26 PartB.design.txt
+-rw-r-----  1 xul395 student  10143 Oct  2 13:50 PartC.design.txt
+-rw-r-----  1 xul395 student   8264 Oct  2 13:50 PartC.testplan.txt
+-rw-r-----  1 xul395 student   3809 Oct  2 13:50 PartC.testresults.txt
+-rw-r-----  1 xul395 student   1731 Oct  3 19:26 partD.design.txt
+-rw-r-----  1 xul395 student   1432 Oct  3 16:57 PartD.testplan.txt
+-rw-r-----  1 xul395 student    742 Oct  3 15:49 PartD.testresults.txt
+-rwxr-x---  1 xul395 student  29776 Oct  3 19:29 partE
+-rw-r-----  1 xul395 student  11536 Oct  3 19:26 partE.c
+-rw-r-----  1 xul395 student   3724 Oct  3 11:18 PartE.design.txt
+-rw-r-----  1 xul395 student   1993 Oct  3 11:18 partE.h
+-rw-r-----  1 xul395 student  19048 Oct  3 19:29 partE.o
+-rw-r-----  1 xul395 student    966 Oct  3 19:07 PartE.testplan.txt
+-rw-r-----  1 xul395 student    535 Sep 25 14:36 square.c
+-rw-r-----  1 xul395 student    203 Sep 23 19:11 square.h
+-rw-r-----  1 xul395 student   5952 Oct  3 19:29 square.o
+-rw-r-----  1 xul395 student   3868 Oct  2 19:30 testlist.c
+-rw-r--r--  1 xul395 student   4163 Oct  3 15:07 xv6-diff.txt
+drwxr-x---  5 xul395 student   4096 Oct  3 18:21 xv6-riscv
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:ps
+  PID TTY          TIME CMD
+18321 pts/0    00:00:00 bash
+19212 pts/0    00:00:00 partE
+19246 pts/0    00:00:00 ps
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:whereis ls
+ls: /usr/bin/ls /usr/share/man/man1/ls.1.gz /usr/share/man/man1p/ls.1p.gz
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:which ls
+/bin/ls
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:ls file
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:ps aux | wc -l
+332
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:cat Makefile | wc -l
+74
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:ls -l | head -3
+total 596
+drwxr-xr-x 2 xul395 student   4096 Oct  3 18:59 file
+-rw-r----- 1 xul395 student  43986 Oct  3 19:29 liblist.a
+[cmptShell]xul395@s360-drone32:~/cmpt332A1/group25/A1P3$:asdea
+wrong input command
+
+/*
+command run in our shell
+*/
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> cd file
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3/file> cd ..
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> cd /usr/bin
+xul395@s360-drone32:/usr/bin> cd ~
+xul395@s360-drone32:~> !974
+cd cmpt332A1/group25/A1P3
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> cd fileNOtE
+bash: cd: fileNOtE: No such file or directory
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> ls
+file/		  mytestlist.c*       PartA.testresults.txt  PartE.design.txt
+liblist.a	  mytestlist.o	      partB.bash	     partE.h
+list_adders.c*	  partA1.c	      PartB.design.txt	     partE.o
+list_adders.o	  partA2*	      PartC.design.txt	     PartE.testplan.txt
+list.h*		  partA2.c	      PartC.testplan.txt     square.c
+list_movers.c*	  partA2.h	      PartC.testresults.txt  square.h
+list_movers.o	  partA2.o	      partD.design.txt	     square.o
+list_removers.c*  partA3.c	      PartD.testplan.txt     testlist.c
+list_removers.o   partA4.c	      PartD.testresults.txt  xv6-diff.txt
+Makefile	  PartA.design.txt    partE*		     xv6-riscv/
+mytestlist*	  PartA.testplan.txt  partE.c
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> ls -al
+total 604
+drwxr-xr-x  4 xul395 student   4096 Oct  3 19:29 ./
+drwxr-x--- 13 xul395 student   4096 Sep 26 16:42 ../
+drwxr-xr-x  2 xul395 student   4096 Oct  3 18:59 file/
+-rw-r-----  1 xul395 student  43986 Oct  3 19:29 liblist.a
+-rwxr-x---  1 xul395 student  13141 Sep 23 18:59 list_adders.c*
+-rw-r-----  1 xul395 student  22552 Oct  3 19:29 list_adders.o
+-rwxr-x---  1 xul395 student   1337 Sep 23 18:59 list.h*
+-rwxr-x---  1 xul395 student   4083 Oct  2 13:50 list_movers.c*
+-rw-r-----  1 xul395 student  10808 Oct  3 19:29 list_movers.o
+-rwxr-x---  1 xul395 student   3515 Oct  2 13:50 list_removers.c*
+-rw-r-----  1 xul395 student  10064 Oct  3 19:29 list_removers.o
+-rw-r-----  1 xul395 student   1925 Oct  3 18:39 Makefile
+-rwxr-x---  1 xul395 student  58952 Oct  3 19:29 mytestlist*
+-rwxr-x---  1 xul395 student  21359 Oct  2 13:50 mytestlist.c*
+-rw-r-----  1 xul395 student  34840 Oct  3 19:29 mytestlist.o
+-rw-r-----  1 xul395 student   4807 Sep 25 14:36 partA1.c
+-rwxr-x---  1 xul395 student 118208 Oct  3 19:29 partA2*
+-rw-r-----  1 xul395 student   4178 Sep 25 14:36 partA2.c
+-rw-r-----  1 xul395 student    729 Sep 25 14:36 partA2.h
+-rw-r-----  1 xul395 student  12360 Oct  3 19:29 partA2.o
+-rw-r-----  1 xul395 student   3198 Oct  3 18:39 partA3.c
+-rw-r-----  1 xul395 student    165 Sep 23 10:46 partA4.c
+-rw-r-----  1 xul395 student   5703 Oct  3 18:39 PartA.design.txt
+-rw-r-----  1 xul395 student   3796 Oct  3 18:39 PartA.testplan.txt
+-rw-r-----  1 xul395 student  17317 Sep 25 14:36 PartA.testresults.txt
+-rw-r-----  1 xul395 student   3682 Sep 25 14:36 partB.bash
+-rw-r-----  1 xul395 student    168 Oct  3 19:26 PartB.design.txt
+-rw-r-----  1 xul395 student  10143 Oct  2 13:50 PartC.design.txt
+-rw-r-----  1 xul395 student   8264 Oct  2 13:50 PartC.testplan.txt
+-rw-r-----  1 xul395 student   3809 Oct  2 13:50 PartC.testresults.txt
+-rw-r-----  1 xul395 student   1731 Oct  3 19:26 partD.design.txt
+-rw-r-----  1 xul395 student   1432 Oct  3 16:57 PartD.testplan.txt
+-rw-r-----  1 xul395 student    742 Oct  3 15:49 PartD.testresults.txt
+-rwxr-x---  1 xul395 student  29776 Oct  3 19:29 partE*
+-rw-r-----  1 xul395 student  11536 Oct  3 19:26 partE.c
+-rw-r-----  1 xul395 student   3724 Oct  3 11:18 PartE.design.txt
+-rw-r-----  1 xul395 student   1993 Oct  3 11:18 partE.h
+-rw-r-----  1 xul395 student  19048 Oct  3 19:29 partE.o
+-rw-r-----  1 xul395 student    966 Oct  3 19:07 PartE.testplan.txt
+-rw-r-----  1 xul395 student    535 Sep 25 14:36 square.c
+-rw-r-----  1 xul395 student    203 Sep 23 19:11 square.h
+-rw-r-----  1 xul395 student   5952 Oct  3 19:29 square.o
+-rw-r-----  1 xul395 student   3868 Oct  2 19:30 testlist.c
+-rw-r--r--  1 xul395 student   4163 Oct  3 15:07 xv6-diff.txt
+drwxr-x---  5 xul395 student   4096 Oct  3 18:21 xv6-riscv/
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> ps
+  PID TTY          TIME CMD
+18321 pts/0    00:00:00 bash
+18571 pts/0    00:00:00 ps
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> whereis ls
+ls: /usr/bin/ls /usr/share/man/man1/ls.1.gz /usr/share/man/man1p/ls.1p.gz
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> which ls
+/bin/ls
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> ls file
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> ps aux | wc -l
+345
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> cat Makefile | wc -l
+74
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> ls -l | head -3
+total 596
+drwxr-xr-x 2 xul395 student   4096 Oct  3 18:59 file/
+-rw-r----- 1 xul395 student  43986 Oct  3 19:29 liblist.a
+xul395@s360-drone32:~/cmpt332A1/group25/A1P3> asdea
+bash: asdea: command not found

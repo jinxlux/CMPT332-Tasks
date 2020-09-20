@@ -1,0 +1,50 @@
+Pseudocode for monitors with semaphores.
+Lab 5 CMPT 332 
+Fall 2018
+
+Global data:
+semaphores for enterQ, urgentQ, and mutex.
+semaphores for each condition variable.
+global variable to indicate if monitor occupied.
+Lists for each CV and an enterQ and an urgentQ
+
+MonEnter()
+  acquire(mutex)
+  if the monitor is occupied then add to waiting queue, release mutex 
+     and wait on enterSem
+  else set monBusy to true and release mutex
+
+MonLeave()
+  acquire mutex
+  if urgentq not empty, take item off urgentq, V the urgentq and release
+  the mutex
+  else if enterq not empty, take item off emptyq, V the emptyq and release
+  the mutex
+  else monBusy to false and  release mutex
+
+MonWait (int cv)
+  acquire mutex
+  add to waiting list
+  if urgentq not empty, take item off urgentq, V the urgentq
+  else if enterq not empty, take item off emptyq, V the emptyq
+  else set monBusy to false
+
+  release the mutex
+  wait on the semaphore for the CV
+
+MonSignal(int cv)
+  acquire mutex
+  if there is non-empty cvlist,  take first item off the CVlist, add
+     myself to the urgentq, release mutex, wakeup the first item on
+     CVlist, block on the urgentQ
+  else
+     release mutex
+
+MonInit
+
+  create semaphores and lists;
+
+  
+
+
+  

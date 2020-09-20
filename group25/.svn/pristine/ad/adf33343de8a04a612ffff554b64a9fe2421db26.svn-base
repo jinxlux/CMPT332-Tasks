@@ -1,0 +1,702 @@
+xul395@tux6:~/cmpt332A1/group25/A2P2> ./reader-writer-test 
+go to proc MonInit
+ServerPid: 0
+Reader and Writer processes created
+go to proc MonServer: wait for require
+1000 start read
+go to procedure MonEnter()
+MonEnter: myPid:1
+500 start write
+go to procedure MonEnter()
+MonEnter: myPid:2
+1001 start read
+go to procedure MonEnter()
+MonEnter: myPid:3
+1002 start read
+go to procedure MonEnter()
+MonEnter: myPid:4
+501 start write
+go to procedure MonEnter()
+MonEnter: myPid:5
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+starting value of numReaders = 1
+go to procedure MonSignal()
+server receiv pid 2
+receive msg from Enter
+add 2 to enter waiting list
+server receiv pid 3
+receive msg from Enter
+add 3 to enter waiting list
+server receiv pid 4
+receive msg from Enter
+add 4 to enter waiting list
+server receiv pid 5
+receive msg from Enter
+add 5 to enter waiting list
+server receiv pid 1
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 Reading
+Process with PID 2 is going to be relased from enterL.
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 2
+receive msg from wait
+add 2 to a wait Q with index 1.
+Process with PID 3 is going to be relased from enterL.
+successfully receive enterMsg reply
+starting value of numReaders = 2
+go to procedure MonSignal()
+server receiv pid 3
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 3
+receive msg from leave
+successfully receive leaveMsg reply
+1001 Reading
+Process with PID 4 is going to be relased from enterL.
+successfully receive enterMsg reply
+starting value of numReaders = 3
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+1002 Reading
+Process with PID 5 is going to be relased from enterL.
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 5
+receive msg from wait
+add 5 to a wait Q with index 1.
+go to procedure MonEnter()
+MonEnter: myPid:1
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 2
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 stop read
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 4
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 1
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+1002 stop read
+go to procedure MonEnter()
+MonEnter: myPid:3
+server receiv pid 3
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 0
+go to procedure MonSignal()
+server receiv pid 3
+receive msg from signal
+add 3 to the urgentList.
+Process with PID 2 is going to be relased from wait q with index 1
+successfully receive waitMsg reply
+go to procedure MonLeave()
+server receiv pid 2
+receive msg from leave
+successfully receive leaveMsg reply
+500 writing
+Process with PID 3 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 3
+receive msg from leave
+successfully receive leaveMsg reply
+1001 stop read
+1001 start read
+go to procedure MonEnter()
+MonEnter: myPid:3
+server receiv pid 3
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 3
+receive msg from wait
+add 3 to a wait Q with index 0.
+1000 start read
+go to procedure MonEnter()
+MonEnter: myPid:1
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 1
+receive msg from wait
+add 1 to a wait Q with index 0.
+1002 start read
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 4
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from wait
+add 4 to a wait Q with index 0.
+go to procedure MonEnter()
+MonEnter: myPid:2
+server receiv pid 2
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 2
+receive msg from signal
+add 2 to the urgentList.
+Process with PID 3 is going to be relased from wait q with index 0
+successfully receive waitMsg reply
+starting value of numReaders = 1
+go to procedure MonSignal()
+server receiv pid 3
+receive msg from signal
+add 3 to the urgentList.
+Process with PID 1 is going to be relased from wait q with index 0
+successfully receive waitMsg reply
+starting value of numReaders = 2
+go to procedure MonSignal()
+server receiv pid 1
+receive msg from signal
+add 1 to the urgentList.
+Process with PID 4 is going to be relased from wait q with index 0
+successfully receive waitMsg reply
+starting value of numReaders = 3
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+1002 Reading
+Process with PID 2 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 2
+receive msg from leave
+successfully receive leaveMsg reply
+500 stop write
+Process with PID 3 is going to be relased from urgent.
+500 start write
+go to procedure MonEnter()
+MonEnter: myPid:2
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 2
+receive msg from Enter
+add 2 to enter waiting list
+server receiv pid 3
+receive msg from leave
+successfully receive leaveMsg reply
+1001 Reading
+Process with PID 1 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 Reading
+Process with PID 2 is going to be relased from enterL.
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 2
+receive msg from wait
+add 2 to a wait Q with index 1.
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 4
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 2
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+1002 stop read
+go to procedure MonEnter()
+MonEnter: myPid:1
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 1
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 stop read
+1000 start read
+go to procedure MonEnter()
+MonEnter: myPid:1
+1002 start read
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+starting value of numReaders = 2
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from Enter
+add 4 to enter waiting list
+server receiv pid 1
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 Reading
+Process with PID 4 is going to be relased from enterL.
+successfully receive enterMsg reply
+starting value of numReaders = 3
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+1002 Reading
+go to procedure MonEnter()
+MonEnter: myPid:1
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 2
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 stop read
+go to procedure MonEnter()
+MonEnter: myPid:3
+server receiv pid 3
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 1
+go to procedure MonLeave()
+server receiv pid 3
+receive msg from leave
+successfully receive leaveMsg reply
+1001 stop read
+1001 start read
+go to procedure MonEnter()
+MonEnter: myPid:3
+server receiv pid 3
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+starting value of numReaders = 2
+go to procedure MonSignal()
+server receiv pid 3
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 3
+receive msg from leave
+successfully receive leaveMsg reply
+1001 Reading
+1000 start read
+go to procedure MonEnter()
+MonEnter: myPid:1
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+starting value of numReaders = 3
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from Enter
+add 4 to enter waiting list
+server receiv pid 1
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 Reading
+Process with PID 4 is going to be relased from enterL.
+successfully receive enterMsg reply
+stopping value of numReaders = 2
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+1002 stop read
+go to procedure MonEnter()
+MonEnter: myPid:3
+server receiv pid 3
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 1
+go to procedure MonLeave()
+server receiv pid 3
+receive msg from leave
+successfully receive leaveMsg reply
+1001 stop read
+go to procedure MonEnter()
+MonEnter: myPid:1
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 0
+go to procedure MonSignal()
+server receiv pid 1
+receive msg from signal
+add 1 to the urgentList.
+Process with PID 5 is going to be relased from wait q with index 1
+successfully receive waitMsg reply
+go to procedure MonLeave()
+server receiv pid 5
+receive msg from leave
+successfully receive leaveMsg reply
+501 writing
+Process with PID 1 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 stop read
+1000 start read
+go to procedure MonEnter()
+MonEnter: myPid:1
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 1
+receive msg from wait
+add 1 to a wait Q with index 0.
+1002 start read
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 4
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from wait
+add 4 to a wait Q with index 0.
+1001 start read
+go to procedure MonEnter()
+MonEnter: myPid:3
+server receiv pid 3
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 3
+receive msg from wait
+add 3 to a wait Q with index 0.
+go to procedure MonEnter()
+MonEnter: myPid:5
+server receiv pid 5
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 5
+receive msg from signal
+add 5 to the urgentList.
+Process with PID 1 is going to be relased from wait q with index 0
+successfully receive waitMsg reply
+starting value of numReaders = 1
+go to procedure MonSignal()
+server receiv pid 1
+receive msg from signal
+add 1 to the urgentList.
+Process with PID 4 is going to be relased from wait q with index 0
+successfully receive waitMsg reply
+starting value of numReaders = 2
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from signal
+add 4 to the urgentList.
+Process with PID 3 is going to be relased from wait q with index 0
+successfully receive waitMsg reply
+starting value of numReaders = 3
+go to procedure MonSignal()
+server receiv pid 3
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 3
+receive msg from leave
+successfully receive leaveMsg reply
+1001 Reading
+Process with PID 5 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 5
+receive msg from leave
+successfully receive leaveMsg reply
+501 stop write
+Process with PID 1 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 Reading
+Process with PID 4 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+1002 Reading
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 4
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 2
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+1002 stop read
+go to procedure MonEnter()
+MonEnter: myPid:1
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 1
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+1000 stop read
+go to procedure MonEnter()
+MonEnter: myPid:3
+server receiv pid 3
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+stopping value of numReaders = 0
+go to procedure MonSignal()
+server receiv pid 3
+receive msg from signal
+add 3 to the urgentList.
+Process with PID 2 is going to be relased from wait q with index 1
+successfully receive waitMsg reply
+go to procedure MonLeave()
+server receiv pid 2
+receive msg from leave
+successfully receive leaveMsg reply
+500 writing
+Process with PID 3 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 3
+receive msg from leave
+successfully receive leaveMsg reply
+1001 stop read
+1002 start read
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 4
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from wait
+add 4 to a wait Q with index 0.
+^C
+
+
+xul395@tux6:~/cmpt332A1/group25/A2P2> ./philosopher 
+go to proc MonInit
+ServerPid: 0
+philosopher processes created
+go to proc MonServer: wait for require
+Pholosopher 1 start think
+Pholosopher 1 thinking
+Pholosopher 2 start think
+Pholosopher 2 thinking
+Pholosopher 3 start think
+Pholosopher 3 thinking
+Pholosopher 4 start think
+Pholosopher 4 thinking
+Pholosopher 5 start think
+Pholosopher 5 thinking
+go to procedure MonEnter()
+MonEnter: myPid:1
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 1
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+Pholosopher 1 eating
+go to procedure MonEnter()
+MonEnter: myPid:5
+server receiv pid 5
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 5
+receive msg from wait
+add 5 to a wait Q with index 4.
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 4
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from signal
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+Pholosopher 4 eating
+go to procedure MonEnter()
+MonEnter: myPid:3
+server receiv pid 3
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 3
+receive msg from wait
+add 3 to a wait Q with index 2.
+go to procedure MonEnter()
+MonEnter: myPid:2
+server receiv pid 2
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 2
+receive msg from wait
+add 2 to a wait Q with index 1.
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 4
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+Pholosopher 4 finished eating
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from signal
+add 4 to the urgentList.
+Process with PID 3 is going to be relased from wait q with index 2
+successfully receive waitMsg reply
+go to procedure MonLeave()
+server receiv pid 3
+receive msg from leave
+successfully receive leaveMsg reply
+Pholosopher 3 eating
+Process with PID 4 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 4
+receive msg from leave
+successfully receive leaveMsg reply
+Pholosopher 4 start think
+Pholosopher 4 thinking
+go to procedure MonEnter()
+MonEnter: myPid:1
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+Pholosopher 1 finished eating
+go to procedure MonSignal()
+server receiv pid 1
+receive msg from signal
+add 1 to the urgentList.
+Process with PID 5 is going to be relased from wait q with index 4
+successfully receive waitMsg reply
+go to procedure MonLeave()
+server receiv pid 5
+receive msg from leave
+successfully receive leaveMsg reply
+Pholosopher 5 eating
+Process with PID 1 is going to be relased from urgent.
+successfully receive signalMsg reply
+go to procedure MonLeave()
+server receiv pid 1
+receive msg from leave
+successfully receive leaveMsg reply
+Pholosopher 1 start think
+Pholosopher 1 thinking
+go to procedure MonEnter()
+MonEnter: myPid:1
+go to procedure MonEnter()
+MonEnter: myPid:4
+server receiv pid 1
+receive msg from Enter
+first enter: not to add to enter list
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from Enter
+add 4 to enter waiting list
+server receiv pid 1
+receive msg from wait
+add 1 to a wait Q with index 0.
+Process with PID 4 is going to be relased from enterL.
+successfully receive enterMsg reply
+go to procedure MonSignal()
+server receiv pid 4
+receive msg from wait
+add 4 to a wait Q with index 3.
+^C

@@ -1,0 +1,11 @@
+The thing I like:
+    1. It has a title to show what the codes for and tell me the structure
+    of the code at the begining.
+    2. It gives me some code examples to show me how does the program run.
+    3. It tells me the things need to be attention when I run the code.
+The thing I don't like:
+    1. Its variable name is really bad. Variable name should be more reasonable
+
+For this document, the description, prerequisites, things need to be attention
+and the way to run the code is clear. I think it unfairly assumed that user would like to vary 
+the prerequisites according to the target.  
